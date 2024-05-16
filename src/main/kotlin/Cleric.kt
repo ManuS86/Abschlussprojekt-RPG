@@ -6,7 +6,7 @@ class Cleric(name: String, hp: Int) : Hero(name, hp) {
     }
 
     fun dispel(target: Hero) {
-
+    target.cursed = false
     }
 
     fun shield(target: Hero) {

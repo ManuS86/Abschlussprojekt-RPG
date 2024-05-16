@@ -12,8 +12,8 @@ class Necromancer(name: String, hp: Int) : Enemy(name, hp) {
 
     }
 
-    fun curse() {
-
+    fun curse(target: Hero) {
+    target.cursed = true
     }
 
     fun bite() {
