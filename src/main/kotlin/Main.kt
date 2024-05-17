@@ -7,4 +7,6 @@ fun main() {
     val boss = Necromancer("Acheron")
     val golem = Golem("Golem")
     val enemies: MutableList<Enemy> = mutableListOf(boss)
+
+    println("The hero party of ${heroes[0].name}, ${heroes[1].name}, ${heroes[2].name} is fighting the Necoramancer boss ${boss.name}.")
 }
