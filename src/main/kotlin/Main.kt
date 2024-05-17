@@ -1,8 +1,10 @@
 fun main() {
-    val hero1 = Cleric("Elara", 80)
-    val hero2 = Mage("Keros", 70)
-    val hero3 = Warrior("Harkon", 100)
+    val hero1 = Cleric("Elara")
+    val hero2 = Mage("Keros")
+    val hero3 = Warrior("Harkon")
+    val heroes = mutableListOf(hero1, hero2, hero3)
 
-    val boss = Necromancer("Acheron", 200)
-    val golem = Golem("Golem", 100)
+    val boss = Necromancer("Acheron")
+    val golem = Golem("Golem")
+    val enemies: MutableList<Enemy> = mutableListOf(boss)
 }
