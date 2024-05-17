@@ -1,12 +1,12 @@
 class Mage(name: String, hp: Int = 70) : Hero(name, hp) {
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.currentHp -= 40 }
-        println("$name deals 40 damage with Fireball to each enemy.")
+        println("$name deals 40 damage to each enemy with Fireball.")
     }
 
     fun lightningBolt(target: Enemy) {
         target.currentHp -= 60
-        println("$name deals 60 damage with Lightning Bolt to ${target.name}.")
+        println("$name deals 60 damage to ${target.name} with Lightning Bolt.")
     }
 
     fun magicMissile(targets: MutableList<Enemy>) {
