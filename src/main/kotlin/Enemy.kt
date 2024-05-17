@@ -1,3 +1,4 @@
-open class Enemy(var name: String, var hp: Int) {
+open class Enemy(var name: String, val hp: Int) {
+    var currentHp = hp
     var damageModifier = 1.0
 }
