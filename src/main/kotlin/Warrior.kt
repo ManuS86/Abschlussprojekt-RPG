@@ -1,6 +1,7 @@
-class Warrior(name: String, hp: Int) : Hero(name, hp) {
+class Warrior(name: String, hp: Int = 100) : Hero(name, hp) {
     fun slam(target: Enemy) {
-
+        target.currentHp -= 50
+        println("$name deals 50 damage to ${target.name} with Slam.")
     }
 
     fun shieldBlock() {
@@ -12,6 +13,7 @@ class Warrior(name: String, hp: Int) : Hero(name, hp) {
     }
 
     fun battleShout() {
-
+        damageModifier += 0.1
+        println("$name buffed himself with Battleshout.")
     }
 }
