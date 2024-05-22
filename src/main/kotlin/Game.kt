@@ -94,6 +94,21 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                 warrior.battleShout()
             }
 
+            "5" -> {
+                when (attackSelect()) {
+                    "1" -> {
+                        if (!inventory.tryUseHealthPotion(heroes[readln().toInt()])) {
+                            warriorAttack()
+                        }
+                    }
+
+                    "2" -> {
+                        if (!inventory.tryUseElixir(heroes[readln().toInt()])) {
+                            warriorAttack()
+                        }
+                    }
+                }
+            }
             else -> {
                 println("Invalid selection. Please select a valid attack:")
                 warriorAttack()
@@ -129,7 +144,21 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                 mage.burn(enemies[readln().toInt()])
             }
 
-            else -> {
+            "5" -> {
+                when (attackSelect()) {
+                    "1" -> {
+                        if (!inventory.tryUseHealthPotion(heroes[readln().toInt()])) {
+                            mageAttack()
+                        }
+                    }
+
+                    "2" -> {
+                        if (!inventory.tryUseElixir(heroes[readln().toInt()])) {
+                            mageAttack()
+                        }
+                    }
+                }
+            } else -> {
                 println("Invalid selection. Please select a valid attack:")
                 mageAttack()
             }
@@ -164,7 +193,21 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                 cleric.cripple(enemies[readln().toInt()])
             }
 
-            else -> {
+            "5" -> {
+                when (attackSelect()) {
+                    "1" -> {
+                        if (!inventory.tryUseHealthPotion(heroes[readln().toInt()])) {
+                            clericAttack()
+                        }
+                    }
+
+                    "2" -> {
+                        if (!inventory.tryUseElixir(heroes[readln().toInt()])) {
+                            clericAttack()
+                        }
+                    }
+                }
+            } else -> {
                 println("Invalid selection. Please select a valid attack:")
                 clericAttack()
             }
