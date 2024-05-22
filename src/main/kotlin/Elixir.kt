@@ -1,5 +1,5 @@
 class Elixir : Potion() {
-    fun useElixir(target: Hero) {
+    override fun use(target: Hero) {
         target.damageModifier += 0.1
     }
 }
