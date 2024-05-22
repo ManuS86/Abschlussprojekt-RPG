@@ -68,13 +68,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun warriorAttack() {
         println(
-            """
-            Choose which ability to use for $warrior:
-            1. Slam (Deal 50 damage to an enemy.)
-            2. Shield Block ()
-            3. Taunt ()
-            4. Battle Shout (Increase your damage by 10%.)
-            """.trimIndent()
+        """
+        1. Slam (Deal 50 damage to an enemy.)
+        2. Shield Block ()
+        3. Taunt ()
+        4. Battle Shout (Increase your damage by 10%.)
+        Choose which ability to use for $warrior:
+        """.trimIndent()
         )
 
         when (attackSelect()) {
@@ -118,13 +118,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun mageAttack() {
         println(
-            """
-                    Choose which ability to use for $mage:
-                    1. Fireball (Deal 40 damage to each enemy.)
-                    2. Lightning Bolt (Deal 60 damage to an enemy.)
-                    3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
-                    4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
-                    """.trimIndent()
+        """
+        1. Fireball (Deal 40 damage to each enemy.)
+        2. Lightning Bolt (Deal 60 damage to an enemy.)
+        3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
+        4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
+        Choose which ability to use for $mage:
+                """.trimIndent()
         )
 
         when (attackSelect()) {
@@ -167,13 +167,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun clericAttack() {
         println(
-            """
-            Choose which ability to use for ${cleric}:
-            1. Healing Hands (Heal an ally for 30-40hp.)
-            2. Healing Wave (Heal each ally for 20-30hp.)
-            3. Dispel (Dispel a debuff.)
-            4. Cripple (Reduce an enemies damage dealt by 10%.)
-            """.trimIndent()
+        """
+        1. Healing Hands (Heal an ally for 30-40hp.)
+        2. Healing Wave (Heal each ally for 20-30hp.)
+        3. Dispel (Dispel a debuff.)
+        4. Cripple (Reduce an enemies damage dealt by 10%.)
+        Choose which ability to use for ${cleric}:
+        """.trimIndent()
         )
 
         when (attackSelect()) {
