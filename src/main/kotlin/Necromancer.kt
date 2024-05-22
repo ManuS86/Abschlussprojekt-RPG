@@ -1,8 +1,8 @@
 import kotlin.math.roundToInt
 
 class Necromancer(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
-    fun firebreath() {
-
+    fun deathWave(heroes: List<Hero>) {
+    heroes.forEach { it.hp -= 30 }
     }
 
     fun tailswipe() {

@@ -174,7 +174,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
     private fun bossAttack() {
         when ((1..6).random()) {
             1 -> {
-                boss.(heroes[(0..2).random()])
+                boss.deathWave(heroes)
             }
 
             2 -> {
