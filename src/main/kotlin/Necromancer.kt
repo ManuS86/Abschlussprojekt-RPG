@@ -21,6 +21,7 @@ class Necromancer(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
         if (hp > (maxHp * 0.2)) {
             hp -= (maxHp * 0.1).roundToInt()
             target.cursed = true
+            println("$target is cursed and loses 10% of their max. health.")
         }
     }
 

@@ -8,7 +8,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
 
     }
 
-    fun taunt(target: Enemy) {
+    fun taunt() {
 
     }
 

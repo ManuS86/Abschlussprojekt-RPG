@@ -4,7 +4,7 @@ class Golem(name: String, maxHp: Int = 100) : Enemy(name, maxHp) {
         println("$name deals 50 damage to ${target.name} with Smash.")
     }
 
-    fun groundSlam(targets: MutableList<Hero>) {
+    fun groundSlam(targets: List<Hero>) {
         targets.forEach { it.hp -= 30 }
         println("$name deals 30 damage to each hero with Ground Slam.")
     }
