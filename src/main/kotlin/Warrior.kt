@@ -1,6 +1,6 @@
 class Warrior(name: String, hp: Int = 100) : Hero(name, hp) {
     fun slam(target: Enemy) {
-        target.currentHp -= 50
+        target.hp -= 50
         println("$name deals 50 damage to ${target.name} with Slam.")
     }
 

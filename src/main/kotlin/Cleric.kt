@@ -1,13 +1,13 @@
 class Cleric(name: String, hp: Int = 80) : Hero(name, hp) {
     fun heal(target: Hero) {
         val heal = (30..40).random()
-        target.currentHp += heal
+        target.hp += heal
         println("$name heals ${target.name} for $heal")
     }
 
     fun healingWave(targets: MutableList<Hero>) {
         val heal = (20..30).random()
-        targets.forEach { it.currentHp += heal }
+        targets.forEach { it.hp += heal }
         println("$name heals the entire party for $heal with Healing Wave.")
     }
 
