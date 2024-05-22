@@ -24,6 +24,6 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "Cleric ${name} with ${maxHp} HP"
+        return "${name} (Cleric) with ${hp} HP"
     }
 }

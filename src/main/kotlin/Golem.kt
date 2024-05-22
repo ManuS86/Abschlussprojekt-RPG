@@ -13,6 +13,6 @@ class Golem(name: String, maxHp: Int = 100) : Enemy(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "a Golem with ${maxHp} HP"
+        return "a Golem with ${hp} HP"
     }
 }

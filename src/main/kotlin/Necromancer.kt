@@ -35,6 +35,6 @@ class Necromancer(name: String, maxHp: Int = 200) : Enemy(name, maxHp) {
             println("${name} has summoned $golem.")
     }
     override fun toString(): String {
-        return "Necromancer boss ${name} with ${maxHp} HP"
+        return "${name} (Necromancer boss) with ${hp} HP"
     }
 }

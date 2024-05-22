@@ -18,6 +18,6 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "Warrior ${name} with ${maxHp} HP"
+        return "${name} (Warrior) with ${hp} HP"
     }
 }
