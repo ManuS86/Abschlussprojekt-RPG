@@ -4,8 +4,8 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
     val cleric: Cleric = heroes[0] as Cleric
     val mage: Mage = heroes[1] as Mage
     val warrior: Warrior = heroes[2] as Warrior
-
     var cursedHero: Hero? = null
+    var burningEnemies: MutableList<Enemy> = mutableListOf()
 
     fun gameLoop() {
         println("The heroes $cleric, $mage and $warrior} are fighting the boss $boss.")
@@ -31,22 +31,21 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             boss.curse(cursedHero!!)
         }
 
-        var burningEnemy = enemies.find { it.burning }
-        if (burningEnemy != null) {
-            burningEnemy.hp -= 10
-            println("$burningEnemy is burning and takes 10 damage.")
+        if (burningEnemies.isNotEmpty()) {
+            burningEnemies.forEach { it.hp -= 10 }
+            println("${burningEnemies.forEach { it.name}} is burning and takes 10 damage.")
         }
 
-        println("It's your turn to attack $boss.")
+        println("It's your party's turn to attack $boss and his minions.")
         clericAttack()
         mageAttack()
         warriorAttack()
 
-        println("It's ${boss.name} turn to attack your party.")
+        println("It's ${boss.name}'s turn to attack your party.")
         bossAttack()
 
         if (enemies.size > 1) {
-            println("It's ${enemies[1]} turn to attack your party.")
+            println("It's the ${golem}'s turn to attack your party.")
             golemAttack()
         }
     }
@@ -212,4 +211,5 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
 private fun attackSelect(): String {
     return readln()
+}
 }
