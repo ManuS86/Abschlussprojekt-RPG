@@ -1,167 +1,215 @@
 class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventory: Inventory) {
-    val boss = enemies.find { it is Necromancer }!!
+    val boss: Necromancer = enemies[0] as Necromancer
+    var golem: Golem? = null
+    val cleric: Cleric = heroes[0] as Cleric
+    val mage: Mage = heroes[1] as Mage
+    val warrior: Warrior = heroes[2] as Warrior
+
+    var cursedHero: Hero? = null
 
     fun gameLoop() {
-        println("The heroes ${heroes[0]}, ${heroes[1]} and ${heroes[2]} are fighting the boss $boss.")
+        println("The heroes $cleric, $mage and $warrior} are fighting the boss $boss.")
+
+        while (!isGameOver()) {
+            round()
+        }
+
+        println("Game Over")
+        if (heroes.all { it.hp <= 0 }) {
+            println("All your heroes are dead. You lost!")
+        } else {
+            println("All enemies are dead. You won!")
+        }
     }
 
-    fun round() {
-        //if (heroes.find { it is Hero is cursed } != null)
+    private fun isGameOver(): Boolean {
+        return enemies.all { it.hp <= 0 } || heroes.all { it.hp <= 0 }
+    }
+
+    private fun round() {
+        if (cursedHero != null) {
+            boss.curse(cursedHero!!)
+        }
+
+        var burningEnemy = enemies.find { it.burning }
+        if (burningEnemy != null) {
+            burningEnemy.hp -= 10
+            println("$burningEnemy is burning and takes 10 damage.")
+        }
+
         println("It's your turn to attack $boss.")
-        println(
-            """
-                Choose which ability to use for ${heroes[0]}:
-                1. Healing Hands (Heal an ally for 30-40hp.)
-                2. Healing Wave (Heal each ally for 20-30hp.)
-                3. Dispel (Dispel a debuff.)
-                4. Cripple (Reduce an enemies damage dealt by 10%.)
-                """.trimIndent()
-        )
+        clericAttack()
+        mageAttack()
+        warriorAttack()
 
-        when (attackSelect()) {
-            "1" -> {
-                heroes[0].healingHands(heroes[readln()])
-            }
-
-            "2" -> {
-                heroes[0].healingWave(heroes)
-            }
-
-            "3" -> {
-                heroes[0].dispel(heroes[readln()])
-            }
-
-            "4" -> {
-                heroes[0].cripple(enemies[readln()])
-            }
-
-            else -> {
-                println("Invalid selection. Please select a valid attack:")
-                attackSelect()
-            }
-        }
-
-        println(
-            """
-                Choose which ability to use for ${heroes[1]}:
-                1. Fireball (Deal 40 damage to each enemy.)
-                2. Lightning Bolt (Deal 60 damage to an enemy.)
-                3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
-                4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
-                """.trimIndent()
-        )
-
-        when (attackSelect()) {
-            "1" -> {
-                heroes[1].fireball(enemies)
-            }
-
-            "2" -> {
-                heroes[1].lightningBolt(enemies[readln()])
-            }
-
-            "3" -> {
-                heroes[1].magicMissile(enemies)
-            }
-
-            "4" -> {
-                heroes[1].burn(enemies[readln()])
-            }
-
-            else -> {
-                println("Invalid selection. Please select a valid attack:")
-                attackSelect()
-            }
-        }
-
-        println(
-            """
-                Choose which ability to use for ${heroes[2]}:
-                1. Slam (Deal 50 damage to an enemy.)
-                2. Shield Block ()
-                3. Taunt ()
-                4. Battle Shout (Increase your damage by 10%.)
-                """.trimIndent()
-        )
-
-        when (attackSelect()) {
-            "1" -> {
-                heroes[2].slam(enemies[readln()])
-            }
-
-            "2" -> {
-                heroes[2].shieldBlock()
-            }
-
-            "3" -> {
-                heroes[2].taunt()
-            }
-
-            "4" -> {
-                heroes[2].battleShout()
-            }
-
-            else -> {
-                println("Invalid selection. Please select a valid attack:")
-                attackSelect()
-            }
-        }
-
-        println("It's ${enemies[0]} turn to attack your party.")
+        println("It's ${boss.name} turn to attack your party.")
         bossAttack()
 
         if (enemies.size > 1) {
             println("It's ${enemies[1]} turn to attack your party.")
+            golemAttack()
+        }
+    }
 
-            when ((1..6).random().toString()) {
-                "1" -> {
-                    enemies[0].(heroes[(0..2).random()])
-                }
+    private fun golemAttack() {
+        when ((1..3).random()) {
+            1 -> {
+                golem!!.smash(heroes[(0..2).random()])
+            }
 
-                "2" -> {
-                    enemies[0].(heroes)
-                }
+            2 -> {
+                golem!!.groundSlam(heroes)
+            }
 
-                "3" -> {
-                    enemies[0].()
-                }
+            3 -> {
+                golem!!.taunt()
             }
         }
     }
 
-    fun bossAttack() {
-        when ((1..6).random().toString()) {
+    private fun warriorAttack() {
+        println(
+            """
+            Choose which ability to use for $warrior:
+            1. Slam (Deal 50 damage to an enemy.)
+            2. Shield Block ()
+            3. Taunt ()
+            4. Battle Shout (Increase your damage by 10%.)
+            """.trimIndent()
+        )
+
+        when (attackSelect()) {
             "1" -> {
-                enemies[0].(heroes[(0..2).random()])
+                warrior.slam(enemies[readln().toInt()])
             }
 
             "2" -> {
-                enemies[0].(heroes[(0..2).random()])
+                warrior.shieldBlock()
             }
 
             "3" -> {
-                enemies[0].(heroes[(0..2).random()])
+                warrior.taunt()
             }
 
             "4" -> {
-                enemies[0].(heroes[(0..2).random()])
+                warrior.battleShout()
             }
 
-            "5" -> {
-                if (!enemies[].curseActive) {
-                    enemies[0].(heroes[(0..2).random()])
+            else -> {
+                println("Invalid selection. Please select a valid attack:")
+                warriorAttack()
+            }
+        }
+    }
+
+    private fun mageAttack() {
+        println(
+            """
+                    Choose which ability to use for $mage:
+                    1. Fireball (Deal 40 damage to each enemy.)
+                    2. Lightning Bolt (Deal 60 damage to an enemy.)
+                    3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
+                    4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
+                    """.trimIndent()
+        )
+
+        when (attackSelect()) {
+            "1" -> {
+                mage.fireball(enemies)
+            }
+
+            "2" -> {
+                mage.lightningBolt(enemies[readln().toInt()])
+            }
+
+            "3" -> {
+                mage.magicMissile(enemies)
+            }
+
+            "4" -> {
+                mage.burn(enemies[readln().toInt()])
+            }
+
+            else -> {
+                println("Invalid selection. Please select a valid attack:")
+                mageAttack()
+            }
+        }
+    }
+
+    private fun clericAttack() {
+        println(
+            """
+            Choose which ability to use for ${cleric}:
+            1. Healing Hands (Heal an ally for 30-40hp.)
+            2. Healing Wave (Heal each ally for 20-30hp.)
+            3. Dispel (Dispel a debuff.)
+            4. Cripple (Reduce an enemies damage dealt by 10%.)
+            """.trimIndent()
+        )
+
+        when (attackSelect()) {
+            "1" -> {
+                cleric.healingHands(heroes[readln().toInt()])
+            }
+
+            "2" -> {
+                cleric.healingWave(heroes)
+            }
+
+            "3" -> {
+                cleric.dispel(heroes[readln().toInt()])
+            }
+
+            "4" -> {
+                cleric.cripple(enemies[readln().toInt()])
+            }
+
+            else -> {
+                println("Invalid selection. Please select a valid attack:")
+                clericAttack()
+            }
+        }
+    }
+
+    private fun bossAttack() {
+        when ((1..6).random()) {
+            1 -> {
+                boss.(heroes[(0..2).random()])
+            }
+
+            2 -> {
+                boss.(heroes[(0..2).random()])
+            }
+
+            3 -> {
+                boss.(heroes[(0..2).random()])
+            }
+
+            4 -> {
+                boss.(heroes[(0..2).random()])
+            }
+
+            5 -> {
+                if (cursedHero == null) {
+                    cursedHero = heroes[(0..2).random()]
+                    boss.curse(cursedHero!!)
                 } else {
                     bossAttack()
                 }
             }
 
-            "6" -> {
-                    enemies[0].()
-            }
+            6 -> {
+                if (golem == null && boss.hp <= boss.maxHp * 0.5) {
+                    boss.summonGolem(enemies)
+                    golem = enemies[1] as Golem
+                } else {
+                    bossAttack()
+                }
         }
     }
 }
 
-fun attackSelect(): String {
+private fun attackSelect(): String {
     return readln()
 }
