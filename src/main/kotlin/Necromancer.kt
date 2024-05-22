@@ -28,10 +28,10 @@ class Necromancer(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     fun summonGolem(enemies: MutableList<Enemy>) {
         val golem = Golem("Golem")
         enemies.add(golem)
-        println("${name} has summoned $golem.")
+        println("$name has summoned $golem.")
     }
 
     override fun toString(): String {
-        return "${name} (Necromancer, ${hp}hp)"
+        return "$name (Necromancer, ${hp}hp)"
     }
 }

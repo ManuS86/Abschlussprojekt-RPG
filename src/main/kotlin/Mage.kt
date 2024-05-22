@@ -28,6 +28,6 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "${name} (Mage, ${hp}hp)"
+        return "$name (Mage, ${hp}hp)"
     }
 }
