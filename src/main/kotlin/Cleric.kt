@@ -5,7 +5,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         println("$name heals ${target.name} for $heal")
     }
 
-    fun healingWave(targets: MutableList<Hero>) {
+    fun healingWave(targets: List<Hero>) {
         val heal = (20..30).random()
         targets.forEach { it.hp += heal }
         println("$name heals each ally for $heal with Healing Wave.")
