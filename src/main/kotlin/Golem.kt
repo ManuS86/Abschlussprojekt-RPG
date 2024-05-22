@@ -1,4 +1,4 @@
-class Golem(name: String, hp: Int = 100) : Enemy(name, hp) {
+class Golem(name: String, maxHp: Int = 100) : Enemy(name, maxHp) {
     fun smash(target: Hero) {
         target.hp -= 50
         println("$name deals 50 damage to ${target.name} with Smash.")
@@ -10,5 +10,9 @@ class Golem(name: String, hp: Int = 100) : Enemy(name, hp) {
     }
 
     fun taunt() {
+    }
+
+    override fun toString(): String {
+        return "a Golem with ${maxHp} HP"
     }
 }

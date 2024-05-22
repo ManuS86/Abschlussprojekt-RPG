@@ -1,6 +1,8 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, hp: Int = 200) : Enemy(name, hp) {
+class Necromancer(name: String, maxHp: Int = 200) : Enemy(name, maxHp) {
+    var curseActive = false
+
     fun firebreath() {
 
     }
@@ -17,20 +19,22 @@ class Necromancer(name: String, hp: Int = 200) : Enemy(name, hp) {
 
     }
 
-    fun curse(target: Hero, heroes: MutableList<Hero>) {
-        val cursedCheck =
-            if (hp > maxHp * 0.2 &&) {
-                hp -= (maxHp * 0.1).roundToInt()
-                target.cursed = true
-            } else {
-                // redo action
-            }
+    fun curse(target: Hero): Boolean {
+        if (curseActive) return false
+        if (hp > maxHp * 0.2) {
+            hp -= (maxHp * 0.1).roundToInt()
+            target.cursed = true
+            curseActive = true
+        }
+        return true
     }
 
-    fun summonGolem(enemies: MutableList<Enemy>, golem: Golem) {
-        if (enemies.size < 2) {
+    fun summonGolem(enemies: MutableList<Enemy>) {
+        val golem = Golem("Golem")
             enemies.add(golem)
-            println("${name} has summoned a Golem with ${golem.maxHp}.")
-        }
+            println("${name} has summoned $golem.")
+    }
+    override fun toString(): String {
+        return "Necromancer boss ${name} with ${maxHp} HP"
     }
 }
