@@ -1,4 +1,4 @@
-class Mage(name: String, hp: Int = 70) : Hero(name, hp) {
+class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= 40 }
         println("$name deals 40 damage to each enemy with Fireball.")
@@ -24,5 +24,9 @@ class Mage(name: String, hp: Int = 70) : Hero(name, hp) {
             target.hp -= 20
             target.burning = true
         }
+    }
+
+    override fun toString(): String {
+        return "Mage ${name} with ${maxHp} HP"
     }
 }

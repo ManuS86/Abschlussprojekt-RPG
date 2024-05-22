@@ -1,4 +1,4 @@
-class Cleric(name: String, hp: Int = 80) : Hero(name, hp) {
+class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     fun heal(target: Hero) {
         val heal = (30..40).random()
         target.hp += heal
@@ -21,5 +21,9 @@ class Cleric(name: String, hp: Int = 80) : Hero(name, hp) {
             target.damageModifier -= 0.1
         }
         println("$name crippled ${target.name}")
+    }
+
+    override fun toString(): String {
+        return "Cleric ${name} with ${maxHp} HP"
     }
 }
