@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, maxHp: Int = 200) : Enemy(name, maxHp) {
+class Necromancer(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     var curseActive = false
 
     fun firebreath() {

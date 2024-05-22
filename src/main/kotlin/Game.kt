@@ -2,7 +2,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
     val boss = enemies.find { it is Necromancer }!!
 
     fun gameLoop() {
-        println("The heroes ${heroes[0]}, ${heroes[1]}, ${heroes[2]} are fighting the boss ${boss}.")
+        println("The heroes ${heroes[0]}, ${heroes[1]} and ${heroes[2]} are fighting the boss ${boss}.")
     }
 
     fun round() {
