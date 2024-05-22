@@ -33,7 +33,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
         if (burningEnemies.isNotEmpty()) {
             burningEnemies.forEach { it.hp -= 10 }
-            println("${burningEnemies.forEach { it.name}} is burning and takes 10 damage.")
+            println("${burningEnemies.forEach { it.name }} is burning and takes 10 damage.")
         }
 
         println("It's your party's turn to attack $boss and his minions.")
@@ -68,13 +68,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun warriorAttack() {
         println(
-        """
-        1. Slam (Deal 50 damage to an enemy.)
-        2. Shield Block ()
-        3. Taunt ()
-        4. Battle Shout (Increase your damage by 10%.)
-        Choose which ability to use for $warrior:
-        """.trimIndent()
+            """
+            1. Slam (Deal 50 damage to an enemy.)
+            2. Shield Block ()
+            3. Taunt ()
+            4. Battle Shout (Increase your damage by 10%.)
+            Choose which ability to use for $warrior:
+            """.trimIndent()
         )
 
         when (attackSelect()) {
@@ -109,6 +109,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                     }
                 }
             }
+
             else -> {
                 println("Invalid selection. Please select a valid attack:")
                 warriorAttack()
@@ -118,13 +119,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun mageAttack() {
         println(
-        """
-        1. Fireball (Deal 40 damage to each enemy.)
-        2. Lightning Bolt (Deal 60 damage to an enemy.)
-        3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
-        4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
-        Choose which ability to use for $mage:
-                """.trimIndent()
+            """
+            1. Fireball (Deal 40 damage to each enemy.)
+            2. Lightning Bolt (Deal 60 damage to an enemy.)
+            3. Magic Missile (Deal 20-30 damage to a random enemy then repeat this.)
+            4. Burn (Set target enemy on fire dealing 20 damage and burning them for 10 each turn.)
+            Choose which ability to use for $mage:
+            """.trimIndent()
         )
 
         when (attackSelect()) {
@@ -158,7 +159,9 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                         }
                     }
                 }
-            } else -> {
+            }
+
+            else -> {
                 println("Invalid selection. Please select a valid attack:")
                 mageAttack()
             }
@@ -167,13 +170,13 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
 
     private fun clericAttack() {
         println(
-        """
-        1. Healing Hands (Heal an ally for 30-40hp.)
-        2. Healing Wave (Heal each ally for 20-30hp.)
-        3. Dispel (Dispel a debuff.)
-        4. Cripple (Reduce an enemies damage dealt by 10%.)
-        Choose which ability to use for ${cleric}:
-        """.trimIndent()
+            """
+            1. Healing Hands (Heal an ally for 30-40hp.)
+            2. Healing Wave (Heal each ally for 20-30hp.)
+            3. Dispel (Dispel a debuff.)
+            4. Cripple (Reduce an enemies damage dealt by 10%.)
+            Choose which ability to use for ${cleric}:
+            """.trimIndent()
         )
 
         when (attackSelect()) {
@@ -207,7 +210,9 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                         }
                     }
                 }
-            } else -> {
+            }
+
+            else -> {
                 println("Invalid selection. Please select a valid attack:")
                 clericAttack()
             }
@@ -248,11 +253,11 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                 } else {
                     bossAttack()
                 }
+            }
         }
     }
-}
 
-private fun attackSelect(): String {
-    return readln()
-}
+    private fun attackSelect(): String {
+        return readln()
+    }
 }
