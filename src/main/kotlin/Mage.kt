@@ -23,6 +23,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
         if (!target.burning) {
             target.hp -= 20
             target.burning = true
+            println("$name deals 20 damage to ${target.name} with Burn and sets it on fire.")
         }
     }
 
