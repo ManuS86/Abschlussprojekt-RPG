@@ -1,29 +1,35 @@
+import kotlin.math.roundToInt
+
 class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
-        targets.forEach { it.hp -= 40 }
-        println("$name deals 40 damage to each enemy with Fireball.")
+        targets.forEach { it.hp -= (40 * dmgModifier).roundToInt() }
+        println("$name deals ${(40 * dmgModifier).roundToInt()} dmg to each enemy with Fireball.")
     }
 
     fun lightningBolt(target: Enemy) {
-        target.hp -= 60
-        println("$name deals 60 damage to ${target.name} with Lightning Bolt.")
+        val dmgAmount = (60 * dmgModifier).roundToInt()
+        target.hp -= dmgAmount
+        println("$name deals $dmgAmount dmg to ${target.name} with Lightning Bolt.")
     }
 
     fun magicMissile(targets: MutableList<Enemy>) {
         val missile1 = (20..45).random()
+        val dmgAmount1 = (missile1 * dmgModifier).roundToInt()
         val target1 = targets.random()
-        target1.hp -= missile1
+        target1.hp -= dmgAmount1
         val missile2 = (20..45).random()
+        val dmgAmount2 = (missile2 * dmgModifier).roundToInt()
         val target2 = targets.random()
-        target2.hp -= missile2
-        println("$name deals $missile1 to ${target1.name} and $missile2 to ${target2.name} with Magic Missile.")
+        target2.hp -= dmgAmount2
+        println("$name deals $dmgAmount1 to ${target1.name} and $dmgAmount2 to ${target2.name} with Magic Missile.")
     }
 
     fun burn(target: Enemy) {
         if (!target.burning) {
-            target.hp -= 20
+            val dmgAmount = (20 * dmgModifier).roundToInt()
+            target.hp -= dmgAmount
             target.burning = true
-            println("$name deals 20 damage to ${target.name} with Burn and sets it on fire.")
+            println("$name deals $dmgAmount dmg to ${target.name} with Burn and sets it on fire.")
         }
     }
 

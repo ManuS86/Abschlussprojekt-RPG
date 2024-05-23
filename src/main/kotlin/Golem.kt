@@ -1,12 +1,15 @@
+import kotlin.math.roundToInt
+
 class Golem(name: String, maxHp: Int = 100) : Enemy(name, maxHp) {
     fun smash(target: Hero) {
-        target.hp -= 50
-        println("$name deals 50 damage to ${target.name} with Smash.")
+        val dmgAmount = (40 * dmgModifier / target.durability).roundToInt()
+        target.hp -= dmgAmount
+        println("$name deals $dmgAmount dmg to ${target.name} with Smash.")
     }
 
     fun groundSlam(targets: List<Hero>) {
-        targets.forEach { it.hp -= 30 }
-        println("$name deals 30 damage to each hero with Ground Slam.")
+        targets.forEach { it.hp -= (20 * dmgModifier / it.durability).roundToInt() }
+        println("$name deals ${targets.forEach { (20 * dmgModifier / it.durability).roundToInt() }} dmg to each hero with Ground Slam.")
     }
 
     fun taunt() {
