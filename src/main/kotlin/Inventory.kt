@@ -23,4 +23,8 @@ class Inventory(
     fun size(): Int {
         return content.size
     }
+
+    override fun toString(): String {
+        return "Inventory: $content"
+    }
 }

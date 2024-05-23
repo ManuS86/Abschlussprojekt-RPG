@@ -3,4 +3,8 @@ class Elixir : Potion() {
         target.dmgMod += 0.1
         println("${target.name} drinks an Elixir to increase their dmg by +10%")
     }
+
+    override fun toString(): String {
+        return "Elixir"
+    }
 }
