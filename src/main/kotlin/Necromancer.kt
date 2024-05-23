@@ -7,18 +7,18 @@ class Necromancer(name: String, maxHp: Int = 300) : Enemy(name, maxHp) {
     }
 
     fun blight(target: Hero) {
-        val dmgAmount = (50 * dmgMod / target.durability).roundToInt()
-        target.hp -= dmgAmount
-        println("$name deals $dmgAmount dmg to ${target.name} with Blight.")
+        val dmgAmnt = (50 * dmgMod / target.durability).roundToInt()
+        target.hp -= dmgAmnt
+        println("$name deals $dmgAmnt dmg to ${target.name} with Blight.")
     }
 
     fun vampiricTouch(target: Hero) {
-        val dmgAmount = (30 * dmgMod / target.durability).roundToInt()
-        target.hp -= dmgAmount
+        val dmgAmnt = (30 * dmgMod / target.durability).roundToInt()
+        target.hp -= dmgAmnt
         val preHealHp = hp
-        heal((30 * dmgMod / target.durability).roundToInt())
-        val amountHealed = hp - preHealHp
-        println("$name drains ${target.name} for $dmgAmount dmg and heals himself for $amountHealed with Vampiric Touch.")
+        heal(dmgAmnt)
+        val amntHealed = hp - preHealHp
+        println("$name drains ${target.name} for $dmgAmnt dmg and heals himself for $amntHealed with Vampiric Touch.")
     }
 
     fun bite() {

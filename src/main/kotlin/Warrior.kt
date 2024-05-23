@@ -2,9 +2,9 @@ import kotlin.math.roundToInt
 
 class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     fun slam(target: Enemy) {
-        val dmgAmount = (50 * dmgMod).roundToInt()
-        target.hp -= dmgAmount
-        println("$name deals $dmgAmount dmg to ${target.name} with Slam.")
+        val dmgAmnt = (50 * dmgMod).roundToInt()
+        target.hp -= dmgAmnt
+        println("$name deals $dmgAmnt dmg to ${target.name} with Slam.")
     }
 
     fun swordSwipe(enemies: List<Enemy>) {
