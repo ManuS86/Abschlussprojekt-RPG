@@ -1,11 +1,15 @@
+import kotlin.math.roundToInt
+
 class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     fun slam(target: Enemy) {
-        target.hp -= 50
-        println("$name deals 50 damage to ${target.name} with Slam.")
+        val dmgAmount = (50 * dmgModifier).roundToInt()
+        target.hp -= dmgAmount
+        println("$name deals $dmgAmount dmg to ${target.name} with Slam.")
     }
 
-    fun shieldBlock() {
-
+    fun swordSwipe(enemies: List<Enemy>) {
+        enemies.forEach { it.hp -= (30 * dmgModifier).roundToInt() }
+        println("$name deals ${(30 * dmgModifier).roundToInt()} dmg to all enemies with Death Wave.")
     }
 
     fun taunt() {
@@ -13,8 +17,8 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     }
 
     fun battleShout() {
-        damageModifier += 0.1
-        println("$name buffed himself with Battleshout.")
+        durability += 0.1
+        println("$name made himself more durable (x10% dmg reduction) with Battle Shout.")
     }
 
     override fun toString(): String {
