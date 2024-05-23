@@ -12,4 +12,8 @@ class Inventory(val content: MutableList<Potion> = mutableListOf(HealthPotion(),
         content.remove(elixir)
         return true
     }
+
+    fun size(): Int {
+        return content.size
+    }
 }
