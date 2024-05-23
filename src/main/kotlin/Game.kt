@@ -1,13 +1,13 @@
 import kotlin.math.roundToInt
 
-class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventory: Inventory) {
-    val boss: Necromancer = enemies[0] as Necromancer
-    var golem: Golem? = null
-    val cleric: Cleric = heroes[0] as Cleric
-    val mage: Mage = heroes[1] as Mage
-    val warrior: Warrior = heroes[2] as Warrior
-    var cursedHero: Hero? = null
-    var burningEnemies: MutableList<Enemy> = mutableListOf()
+class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enemy>, private val inventory: Inventory) {
+    private val boss: Necromancer = enemies[0] as Necromancer
+    private var golem: Golem? = null
+    private val cleric: Cleric = heroes[0] as Cleric
+    private val mage: Mage = heroes[1] as Mage
+    private val warrior: Warrior = heroes[2] as Warrior
+    private var cursedHero: Hero? = null
+    private var burningEnemies: MutableList<Enemy> = mutableListOf()
 
     fun gameLoop() {
         println("The heroes $cleric, $mage and $warrior} are fighting the boss $boss.")
