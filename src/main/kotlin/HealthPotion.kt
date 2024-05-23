@@ -2,8 +2,10 @@ import kotlin.math.roundToInt
 
 class HealthPotion : Potion() {
     override fun use(target: Hero) {
-        val heal = (target.maxHp * 0.5).roundToInt()
-        target.heal(heal)
-        println("${target.name} drank a Health Potion to heal for $heal")
+        val healAmount = (target.maxHp * 0.5).roundToInt()
+        val preHealHp = target.hp
+        target.heal(healAmount)
+        val amountHealed = target.hp - preHealHp
+        println("${target.name} drinks a Health Potion to heal for $amountHealed")
     }
 }
