@@ -2,14 +2,14 @@ import kotlin.math.roundToInt
 
 class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     fun slam(target: Enemy) {
-        val dmgAmount = (50 * dmgModifier).roundToInt()
+        val dmgAmount = (50 * dmgMod).roundToInt()
         target.hp -= dmgAmount
         println("$name deals $dmgAmount dmg to ${target.name} with Slam.")
     }
 
     fun swordSwipe(enemies: List<Enemy>) {
-        enemies.forEach { it.hp -= (30 * dmgModifier).roundToInt() }
-        println("$name deals ${(30 * dmgModifier).roundToInt()} dmg to all enemies with Death Wave.")
+        enemies.forEach { it.hp -= (30 * dmgMod).roundToInt() }
+        println("$name deals ${(30 * dmgMod).roundToInt()} dmg to all enemies with Death Wave.")
     }
 
     fun taunt() {
