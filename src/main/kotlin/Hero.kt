@@ -1,4 +1,3 @@
-import kotlin.math.max
 import kotlin.math.min
 
 open class Hero(val name: String, val maxHp: Int) {
@@ -10,4 +9,4 @@ open class Hero(val name: String, val maxHp: Int) {
     fun heal(healAmount: Int) {
         hp = min(hp + healAmount, maxHp)
     }
-    }
+}
