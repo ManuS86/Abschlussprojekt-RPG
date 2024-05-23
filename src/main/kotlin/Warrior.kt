@@ -9,11 +9,10 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
 
     fun swordSwipe(enemies: List<Enemy>) {
         enemies.forEach { it.hp -= (30 * dmgMod).roundToInt() }
-        println("$name deals ${(30 * dmgMod).roundToInt()} dmg to all enemies with Death Wave.")
+        println("$name deals ${(30 * dmgMod).roundToInt()} dmg to each enemy with Sword Swipe.")
     }
 
     fun taunt() {
-
     }
 
     fun battleShout() {
