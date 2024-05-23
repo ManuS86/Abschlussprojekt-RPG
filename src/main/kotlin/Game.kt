@@ -97,17 +97,20 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             """.trimIndent()
         val errMsg = "Invalid selection. Please select a valid attack:"
 
-        print(">")
         when (select(prompt, errMsg, 5)) {
             1 -> {
-                val prompt =
-                    """
+                if (enemies.size > 1) {
+                    val prompt =
+                        """
                     $enemies
                     Select a target 1, 2, ...:
                     """.trimIndent()
-                val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, enemies.size)
-                warrior.slam(enemies[selection - 1])
+                    val errMsg = "Please select a valid target:"
+                    val selection = select(prompt, errMsg, enemies.size)
+                    warrior.slam(enemies[selection - 1])
+                } else {
+                    warrior.slam(enemies[0])
+                }
             }
 
             2 -> {
@@ -139,7 +142,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
                             println("You are out of Health Potions. Try using another action.")
                             warriorAttack()
@@ -153,7 +156,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseElixir(heroes[selection - 1])) {
                             println("You are out of Elixirs. Try using another action.")
                             warriorAttack()
@@ -175,7 +178,6 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             5. Use Item
             """.trimIndent()
         val errMsg = "Invalid selection. Please select a valid attack:"
-        print(">")
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -183,14 +185,18 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             }
 
             2 -> {
-                val prompt =
-                    """
+                if (enemies.size > 1) {
+                    val prompt =
+                        """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, enemies.size)
-                mage.lightningBolt(enemies[selection - 1])
+                    val errMsg = "Please select a valid target:"
+                    val selection = select(prompt, errMsg, enemies.size)
+                    mage.lightningBolt(enemies[selection - 1])
+                } else {
+                    mage.lightningBolt(enemies[0])
+                }
             }
 
             3 -> {
@@ -198,14 +204,18 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             }
 
             4 -> {
-                val prompt =
-                    """
+                if (enemies.size > 1) {
+                    val prompt =
+                        """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, enemies.size)
-                mage.burn(enemies[selection - 1])
+                    val errMsg = "Please select a valid target:"
+                    val selection = select(prompt, errMsg, enemies.size)
+                    mage.burn(enemies[selection - 1])
+                } else {
+                    mage.burn(enemies[0])
+                }
             }
 
             5 -> {
@@ -225,7 +235,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
                             println("You are out of Health Potions. Try using another action.")
                             mageAttack()
@@ -239,7 +249,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Please select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseElixir(heroes[selection - 1])) {
                             println("You are out of Elixirs. Try using another action.")
                             mageAttack()
@@ -262,7 +272,6 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             """.trimIndent()
         val errMsg = "Please select a valid attack:"
 
-        print(">")
         when (select(prompt, errMsg, 5)) {
             1 -> {
                 val prompt =
@@ -291,14 +300,18 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             }
 
             4 -> {
-                val prompt =
-                    """
+                if (enemies.size > 1) {
+                    val prompt =
+                        """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, enemies.size)
-                cleric.cripple(enemies[selection - 1])
+                    val errMsg = "Please select a valid target:"
+                    val selection = select(prompt, errMsg, enemies.size)
+                    cleric.cripple(enemies[selection - 1])
+                } else {
+                    cleric.cripple(enemies[0])
+                }
             }
 
             5 -> {
@@ -318,7 +331,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
                             println("You are out of Health Potions. Try using another action.")
                             clericAttack()
@@ -332,7 +345,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
+                        val selection = select(prompt, errMsg, heroes.size)
                         if (!inventory.tryUseElixir(heroes[selection - 1])) {
                             println("You are out of Elixirs. Try using another action.")
                             clericAttack()
@@ -358,8 +371,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
             }
 
             4 -> {
-//                boss.(heroes.filter { it.hp > 0 }.random())
-                println("selected 4")
+                boss.(heroes.filter { it.hp > 0 }.random())
             }
 
             5 -> {
@@ -386,6 +398,7 @@ class Game(val heroes: List<Hero>, val enemies: MutableList<Enemy>, val inventor
         println()
         println(prompt)
         while (true) {
+            print("> ")
             val input = readln().toIntOrNull()
             if (input != null && input in (1..max)) {
                 return input
