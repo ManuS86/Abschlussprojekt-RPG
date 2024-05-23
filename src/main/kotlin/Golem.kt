@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Golem(name: String, maxHp: Int = 100) : Enemy(name, maxHp) {
+class Golem(name: String, maxHp: Int = 150) : Enemy(name, maxHp) {
     fun smash(target: Hero) {
         val dmgAmount = (40 * dmgMod / target.durability).roundToInt()
         target.hp -= dmgAmount
