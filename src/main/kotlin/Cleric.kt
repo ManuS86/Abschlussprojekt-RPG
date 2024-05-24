@@ -24,7 +24,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("$name crippled ${target.name} (reducing their damage by -10%)")
+        println("$name crippled ${target.name} (reducing their damage by 10%)")
     }
 
     override fun toString(): String {
