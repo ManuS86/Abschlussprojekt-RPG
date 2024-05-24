@@ -2,23 +2,21 @@ import kotlin.math.roundToInt
 
 class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
-        targets.forEach { it.hp -= (40 * dmgMod).roundToInt() }
+        targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
         println("$name deals ${(40 * dmgMod).roundToInt()} dmg to each enemy with Fireball.")
     }
 
     fun lightningBolt(target: Enemy) {
-        val dmgAmnt = (60 * dmgMod).roundToInt()
+        val dmgAmnt = ((50..60).random() * dmgMod).roundToInt()
         target.hp -= dmgAmnt
         println("$name deals $dmgAmnt dmg to ${target.name} with Lightning Bolt.")
     }
 
     fun magicMissile(targets: MutableList<Enemy>) {
-        val missile1 = (20..45).random()
-        val dmgAmnt1 = (missile1 * dmgMod).roundToInt()
+        val dmgAmnt1 = ((20..35).random() * dmgMod).roundToInt()
         val target1 = targets.random()
         target1.hp -= dmgAmnt1
-        val missile2 = (20..45).random()
-        val dmgAmnt2 = (missile2 * dmgMod).roundToInt()
+        val dmgAmnt2 = ((20..35).random() * dmgMod).roundToInt()
         val target2 = targets.random()
         target2.hp -= dmgAmnt2
         println("$name deals $dmgAmnt1 to ${target1.name} and $dmgAmnt2 to ${target2.name} with Magic Missile.")
