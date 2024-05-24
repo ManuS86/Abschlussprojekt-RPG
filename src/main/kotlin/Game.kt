@@ -1,5 +1,6 @@
 import kotlin.math.roundToInt
 
+@Suppress("NAME_SHADOWING")
 class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enemy>, private val inventory: Inventory) {
     private val boss: Necromancer = enemies[0] as Necromancer
     private var golem: Golem? = null
@@ -11,9 +12,11 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     fun gameLoop() {
         println("The heroes $cleric, $mage and $warrior} are fighting the boss $boss.")
+        var round = 1
 
         while (!isGameOver()) {
-            round()
+            round(round)
+            round++
         }
 
         println("Game Over")
@@ -30,7 +33,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         return enemies.all { it.hp <= 0 } || heroes.all { it.hp <= 0 }
     }
 
-    private fun round() {
+    private fun round(round: Int) {
+        println("-----Combat round ${round}-----")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero!!.cursed = false
