@@ -27,7 +27,6 @@ class Necromancer(name: String, maxHp: Int = 300) : Enemy(name, maxHp) {
     fun bestowCurse(target: Hero) {
         if (hp > (maxHp * 0.2)) {
             hp -= (maxHp * 0.1).roundToInt()
-            target.cursed = true
             println("$name casts Bestow Curse on $target and they lose 10% of their max. health.")
         }
     }

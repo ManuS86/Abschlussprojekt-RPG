@@ -1,7 +1,7 @@
 import kotlin.math.roundToInt
 
 class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
-    var taunting = false
+    var isTaunting = false
     var tauntTimer = 0
 
     fun slam(target: Enemy) {
@@ -16,7 +16,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     }
 
     fun taunt() {
-        taunting = true
+        isTaunting = true
         tauntTimer = 3
         println("$name is taunting the enemies forcing them to attack him for the next 3 turns.")
     }

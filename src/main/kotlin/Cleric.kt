@@ -17,7 +17,6 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     }
 
     fun dispel(target: Hero) {
-        target.cursed = false
         println("$name dispelled ${target.name}'s curse.")
     }
 
