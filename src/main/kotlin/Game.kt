@@ -54,12 +54,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println("Your party of $heroes attacks $enemies.")
         if (cleric.hp > 0) {
+            println()
             clericAttack()
         }
         if (mage.hp > 0) {
+            println()
             mageAttack()
         }
         if (warrior.hp > 0) {
+            println()
             warriorAttack()
         }
 
@@ -177,7 +180,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-            Choose which ability to use for $warrior:
+            It's $warrior's turn.
+            
+            Choose which ability to use:
             1. Slam (Deal 50 dmg to an enemy.)
             2. Sword Swipe (Deal 30 dmg to all enemies.)
             3. Taunt (Force enemies to target ${warrior.name} for 3 turns.)
@@ -265,7 +270,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-            Choose which ability to use for $mage:
+            It's $mage's turn.
+            
+            Choose which ability to use:
             1. Fireball (Deal 35-45 dmg to each enemy.)
             2. Lightning Bolt (Deal 50-60 dmg to an enemy.)
             3. Magic Missile (Deal 20-35 dmg to a random enemy then repeat this.)
@@ -373,7 +380,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-            Choose which ability to use for ${cleric}:
+            It's $cleric's turn.
+            
+            Choose which ability to use:
             1. Healing Hands (Heal an ally for 30-40hp.)
             2. Healing Wave (Heal each ally for 20-30hp.)
             3. Dispel (Dispel a debuff.)
