@@ -1,4 +1,5 @@
 import kotlin.math.roundToInt
+import kotlin.system.exitProcess
 
 class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enemy>, private val inventory: Inventory) {
     private val necro: Necromancer = enemies[0] as Necromancer
@@ -26,6 +27,22 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         } else {
             println()
             println("All enemies are defeated. You won!")
+        }
+        newGame()
+    }
+
+    private fun newGame() {
+        println()
+        println("Do you want to play again?")
+        var input: String? = null
+        while (input != "no" || input != "yes") {
+            print("> ")
+            input = readln().lowercase()
+            when (input) {
+                "yes" -> main()
+                "no" -> exitProcess(0)
+                else -> println("Invalid Input. Please try again.")
+            }
         }
     }
 
@@ -56,26 +73,46 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         if (cleric.hp > 0) {
             println()
             clericAttack()
+            if (gameOver()) {
+                println()
+                return
+            }
         }
         if (mage.hp > 0) {
             println()
             mageAttack()
+            if (gameOver()) {
+                println()
+                return
+            }
         }
         if (warrior.hp > 0) {
             println()
             warriorAttack()
+            if (gameOver()) {
+                println()
+                return
+            }
         }
 
         if (necro.hp > 0) {
             println()
             println("${necro.name} attacks your party of $heroes.")
             necroAttack()
+            if (gameOver()) {
+                println()
+                return
+            }
         }
 
         if (golem != null && golem!!.hp > 0) {
             println()
             println("The ${golem?.name} attacks your party of $heroes.")
             golemAttack()
+            if (gameOver()) {
+                println()
+                return
+            }
         }
 
         if (warrior.isTaunting) {
