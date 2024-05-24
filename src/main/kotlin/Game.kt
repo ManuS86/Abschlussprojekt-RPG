@@ -188,7 +188,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             4 -> {
-                necro.grievousWound(heroes.filter { it.hp > 0 }.random())
+                necro.grievousWounds(heroes.filter { it.hp > 0 }.random())
             }
 
             5 -> {
