@@ -1,5 +1,5 @@
 class Inventory(
-    val content: MutableList<Potion> = mutableListOf(
+    private val content: MutableList<Potion> = mutableListOf(
         HealthPotion(),
         HealthPotion(),
         HealthPotion(),
@@ -7,14 +7,26 @@ class Inventory(
     )
 ) {
     fun tryUseHealthPotion(target: Hero): Boolean {
-        val healthPotion = content.find { it is HealthPotion } ?: return false
+        val healthPotion = content.find { it is HealthPotion }
+        if (healthPotion == null) {
+            println("You are out of Health Potions. Try using another action.")
+            return false
+        }
+        if (target.cantHeal) {
+            println("You are grievously wounded and can't heal currently. Try another action.")
+            return false
+        }
         healthPotion.use(target)
         content.remove(healthPotion)
         return true
     }
 
     fun tryUseElixir(target: Hero): Boolean {
-        val elixir = content.find { it is Elixir } ?: return false
+        val elixir = content.find { it is Elixir }
+        if (elixir == null) {
+            println("You are out of Elixirs. Try using another action.")
+            return false
+        }
         elixir.use(target)
         content.remove(elixir)
         return true
