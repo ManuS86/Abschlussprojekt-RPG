@@ -9,7 +9,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private var cursedHero: Hero? = null
 
     fun gameLoop() {
+        println()
         println("The heroes $cleric, $mage and $warrior are fighting the boss $necro.")
+        println()
         var round = 1
 
         while (!gameOver()) {
@@ -179,7 +181,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. Slam (Deal 50 dmg to an enemy.)
             2. Sword Swipe (Deal 30 dmg to all enemies.)
             3. Taunt (Force enemies to target ${warrior.name} for 3 turns.)
-            4. Battle Shout (Increase your dmg by 10%.)
+            4. Battle Shout (Increase your durability by 10%.)
             5. Use Item
             """.trimIndent()
         val errMsg = "Invalid selection. Please select a valid attack:"
@@ -264,10 +266,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val prompt =
             """
             Choose which ability to use for $mage:
-            1. Fireball (Deal 40 dmg to each enemy.)
-            2. Lightning Bolt (Deal 60 dmg to an enemy.)
-            3. Magic Missile (Deal 20-30 dmg to a random enemy then repeat this.)
-            4. Burn (Set target enemy on fire dealing 20 dmg and burning them for 10 each turn.)
+            1. Fireball (Deal 35-45 dmg to each enemy.)
+            2. Lightning Bolt (Deal 50-60 dmg to an enemy.)
+            3. Magic Missile (Deal 20-35 dmg to a random enemy then repeat this.)
+            4. Burn (Set target enemy on fire dealing 30 dmg and burning them for 10 each turn.)
             5. Use Item
             """.trimIndent()
         val errMsg = "Invalid selection. Please select a valid attack:"
