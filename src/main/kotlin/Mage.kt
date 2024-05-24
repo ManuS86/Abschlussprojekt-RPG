@@ -26,7 +26,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
 
     fun burn(target: Enemy) {
         if (!target.burning) {
-            val dmgAmnt = (20 * dmgMod).roundToInt()
+            val dmgAmnt = (30 * dmgMod).roundToInt()
             target.hp -= dmgAmnt
             target.burning = true
             println("$name deals $dmgAmnt dmg to ${target.name} with Burn and sets it on fire.")
