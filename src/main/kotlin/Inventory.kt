@@ -13,7 +13,7 @@ class Inventory(
             return false
         }
         if (target.cantHeal) {
-            println("You are grievously wounded and can't heal currently. Try another action.")
+            println("The target is grievously wounded and can't be healed currently. Try another action.")
             return false
         }
         healthPotion.use(target)
