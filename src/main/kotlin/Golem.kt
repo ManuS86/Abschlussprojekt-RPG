@@ -17,7 +17,7 @@ class Golem(name: String, maxHp: Int = 150) : Enemy(name, maxHp) {
 
     fun taunt() {
         isTaunting = true
-        tauntTimer = 2
+        tauntTimer = 3
         println("The $name is taunting the heroes forcing them to attack him for the next 2 turns.")
     }
 
