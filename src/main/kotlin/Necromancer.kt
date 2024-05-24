@@ -21,7 +21,16 @@ class Necromancer(name: String, maxHp: Int = 300) : Enemy(name, maxHp) {
         println("$name drains ${target.name} for $dmgAmnt dmg and heals himself for $amntHealed with Vampiric Touch.")
     }
 
-    fun bite() {
+    fun grievousWound(target: Hero) {
+        val dmgAmnt = (30 * dmgMod / target.durability).roundToInt()
+        target.hp -= dmgAmnt
+        val preHealHp = hp
+        heal(dmgAmnt)
+        val amntHealed = hp - preHealHp
+        target.cantHeal = true
+        target.cantHealTimer = 2
+        println("$name grievously wounds (can't heal for one turn) ${target.name} and deals $dmgAmnt dmg.")
+
     }
 
     fun bestowCurse(target: Hero) {
