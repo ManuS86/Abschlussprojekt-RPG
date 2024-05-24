@@ -49,14 +49,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
         }
 
-        if (golem != null && golem!!.tauntTimer > 0) {
-            golem!!.tauntTimer--
-        }
-
-        if (golem != null && golem!!.tauntTimer == 0) {
-            golem!!.isTaunting = false
-        }
-
         println()
         println("Your party of $heroes attacks $enemies.")
         if (cleric.hp > 0) {
@@ -81,12 +73,32 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             golemAttack()
         }
 
-        if (warrior.tauntTimer > 0) {
+        if (warrior.isTaunting) {
             warrior.tauntTimer--
         }
 
         if (warrior.tauntTimer == 0) {
             warrior.isTaunting = false
+        }
+
+        if (golem != null && golem!!.isTaunting) {
+            golem!!.tauntTimer--
+        }
+
+        if (golem != null && golem!!.tauntTimer == 0) {
+            golem!!.isTaunting = false
+        }
+
+        heroes.forEach {
+            if (it.cantHeal) {
+                it.cantHealTimer--
+            }
+        }
+
+        heroes.forEach {
+            if (it.cantHealTimer == 0) {
+                it.cantHeal = false
+            }
         }
         println()
     }
@@ -134,7 +146,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             4 -> {
-                necro.(heroes.filter { it.hp > 0 }.random())
+                necro.grievousWound(heroes.filter { it.hp > 0 }.random())
             }
 
             5 -> {
@@ -184,8 +196,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                     Select a target 1, 2, ...:
                     """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
-                        warrior.slam(enemies[selection - 1])
+                        val target = enemies[select(prompt, errMsg, enemies.size) - 1]
+                        warrior.slam(target)
                     }
                 } else {
                     if (golem != null && golem!!.isTaunting) {
@@ -225,9 +237,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
-                            println("You are out of Health Potions. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseHealthPotion(target)) {
                             warriorAttack()
                         }
                     }
@@ -239,9 +250,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseElixir(heroes[selection - 1])) {
-                            println("You are out of Elixirs. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseElixir(target)) {
                             warriorAttack()
                         }
                     }
@@ -278,8 +288,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Select a target 1, 2, ...:
                 """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
-                        mage.lightningBolt(enemies[selection - 1])
+                        val target = enemies[select(prompt, errMsg, enemies.size) - 1]
+                        mage.lightningBolt(target)
                     }
                 } else {
                     if (golem != null && golem!!.isTaunting) {
@@ -305,8 +315,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Select a target 1, 2, ...:
                 """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
-                        val target = enemies[selection - 1]
+                        val target = enemies[select(prompt, errMsg, enemies.size) - 1]
                         mage.burn(target)
                     }
                 } else {
@@ -336,9 +345,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
-                            println("You are out of Health Potions. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseHealthPotion(target)) {
                             mageAttack()
                         }
                     }
@@ -350,9 +358,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Please select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseElixir(heroes[selection - 1])) {
-                            println("You are out of Elixirs. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseElixir(target)) {
                             mageAttack()
                         }
                     }
@@ -381,8 +388,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                     Select a target 1, 2, ...:
                     """.trimIndent()
                 val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, heroes.size)
-                cleric.healingHands(heroes[selection - 1])
+                val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                if (target.cantHeal) {
+                    println("The target is grievously wounded and can't be healed currently. Try another action.")
+                    clericAttack()
+                } else {
+                    cleric.healingHands(target)
+                }
             }
 
             2 -> {
@@ -396,8 +408,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Select a target 1, 2, ...:
                 """.trimIndent()
                 val errMsg = "Please select a valid target:"
-                val selection = select(prompt, errMsg, heroes.size)
-                cleric.dispel(heroes[selection - 1])
+                val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                cleric.dispel(target)
                 cursedHero = null
             }
 
@@ -412,8 +424,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Select a target 1, 2, ...:
                 """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, enemies.size)
-                        cleric.cripple(enemies[selection - 1])
+                        val target = enemies[select(prompt, errMsg, enemies.size) - 1]
+                        cleric.cripple(target)
                     }
                 } else {
                     if (golem != null && golem!!.isTaunting) {
@@ -441,9 +453,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseHealthPotion(heroes[selection - 1])) {
-                            println("You are out of Health Potions. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseHealthPotion(target)) {
                             clericAttack()
                         }
                     }
@@ -455,9 +466,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             Select a target 1, 2, ...:
                             """.trimIndent()
                         val errMsg = "Please select a valid target:"
-                        val selection = select(prompt, errMsg, heroes.size)
-                        if (!inventory.tryUseElixir(heroes[selection - 1])) {
-                            println("You are out of Elixirs. Try using another action.")
+                        val target = heroes[select(prompt, errMsg, heroes.size) - 1]
+                        if (!inventory.tryUseElixir(target)) {
                             clericAttack()
                         }
                     }
