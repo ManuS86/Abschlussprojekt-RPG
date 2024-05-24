@@ -68,7 +68,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         if (necro.hp > 0) {
             println()
-            println("${necro.name} attack's your party of $heroes.")
+            println("${necro.name} attacks your party of $heroes.")
             necroAttack()
         }
 
