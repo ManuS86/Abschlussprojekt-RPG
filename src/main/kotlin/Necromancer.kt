@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, maxHp: Int = 300) : Enemy(name, maxHp) {
+class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     fun deathWave(heroes: List<Hero>) {
         heroes.forEach { it.hp -= (30 * dmgMod / it.durability).roundToInt() }
         println("$name deals ${heroes.forEach { (30 * dmgMod / it.durability).roundToInt() }} dmg to each hero with Death Wave.")

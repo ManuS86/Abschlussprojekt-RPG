@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Golem(name: String, maxHp: Int = 150) : Enemy(name, maxHp) {
+class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
 
