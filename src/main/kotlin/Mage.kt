@@ -27,7 +27,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
             val dmgAmnt = (30 * dmgMod).roundToInt()
             target.hp -= dmgAmnt
             target.burning = true
-            println("$name deals $dmgAmnt dmg to ${target.name} with Burn and sets it on fire.")
+            println("$name deals $dmgAmnt dmg to ${target.name} with Burn and sets them on fire.")
         }
     }
 
