@@ -1,20 +1,18 @@
 import kotlin.math.roundToInt
 
-@Suppress("NAME_SHADOWING")
 class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enemy>, private val inventory: Inventory) {
-    private val boss: Necromancer = enemies[0] as Necromancer
+    private val necro: Necromancer = enemies[0] as Necromancer
     private var golem: Golem? = null
     private val cleric: Cleric = heroes[0] as Cleric
     private val mage: Mage = heroes[1] as Mage
     private val warrior: Warrior = heroes[2] as Warrior
     private var cursedHero: Hero? = null
-    private var burningEnemies: MutableList<Enemy> = mutableListOf()
 
     fun gameLoop() {
-        println("The heroes $cleric, $mage and $warrior} are fighting the boss $boss.")
+        println("The heroes $cleric, $mage and $warrior are fighting the boss $necro.")
         var round = 1
 
-        while (!isGameOver()) {
+        while (!gameOver()) {
             round(round)
             round++
         }
@@ -29,15 +27,14 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun isGameOver(): Boolean {
+    private fun gameOver(): Boolean {
         return enemies.all { it.hp <= 0 } || heroes.all { it.hp <= 0 }
     }
 
     private fun round(round: Int) {
-        println("-----Combat round ${round}-----")
+        println("----- Combat round $round -----")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
-                cursedHero!!.cursed = false
                 cursedHero = null
             }
             println()
@@ -45,11 +42,23 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
         }
 
-        burningEnemies.forEach { it.hp -= 10 }
-        burningEnemies.forEach { println("$it is burning and takes 10 dmg.") }
+        enemies.forEach {
+            if (it.burning) {
+                it.hp -= (10 * mage.dmgMod).roundToInt()
+                println("$it is burning and takes 10 dmg.")
+            }
+        }
+
+        if (golem != null && golem!!.tauntTimer > 0) {
+            golem!!.tauntTimer--
+        }
+
+        if (golem != null && golem!!.tauntTimer == 0) {
+            golem!!.isTaunting = false
+        }
 
         println()
-        println("Your party attacks $boss and his minions.")
+        println("Your party of $heroes attacks $enemies.")
         if (cleric.hp > 0) {
             clericAttack()
         }
@@ -60,23 +69,36 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             warriorAttack()
         }
 
-        if (boss.hp > 0) {
+        if (necro.hp > 0) {
             println()
-            println("${boss.name} attack's your party.")
-            bossAttack()
+            println("${necro.name} attack's your party of $heroes.")
+            necroAttack()
         }
 
         if (golem != null && golem!!.hp > 0) {
             println()
-            println("The ${golem?.name} attacks your party.")
+            println("The ${golem?.name} attacks your party of $heroes.")
             golemAttack()
         }
+
+        if (warrior.tauntTimer > 0) {
+            warrior.tauntTimer--
+        }
+
+        if (warrior.tauntTimer == 0) {
+            warrior.isTaunting = false
+        }
+        println()
     }
 
     private fun golemAttack() {
         when ((1..3).random()) {
             1 -> {
-                golem!!.smash(heroes.filter { it.hp > 0 }.random())
+                if (warrior.isTaunting) {
+                    golem!!.smash(warrior)
+                } else {
+                    golem!!.smash(heroes.filter { it.hp > 0 }.random())
+                }
             }
 
             2 -> {
@@ -85,6 +107,55 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             3 -> {
                 golem!!.taunt()
+            }
+        }
+    }
+
+    private fun necroAttack() {
+        when ((1..6).random()) {
+            1 -> {
+                necro.deathWave(heroes)
+            }
+
+            2 -> {
+                if (warrior.isTaunting) {
+                    necro.blight(warrior)
+                } else {
+                    necro.blight(heroes.filter { it.hp > 0 }.random())
+                }
+            }
+
+            3 -> {
+                if (warrior.isTaunting) {
+                    necro.vampiricTouch(warrior)
+                } else {
+                    necro.vampiricTouch(heroes.filter { it.hp > 0 }.random())
+                }
+            }
+
+            4 -> {
+                necro.(heroes.filter { it.hp > 0 }.random())
+            }
+
+            5 -> {
+                if (cursedHero == null) {
+                    cursedHero = heroes.filter { it.hp > 0 }.random()
+                    necro.bestowCurse(cursedHero!!)
+                } else if (warrior.isTaunting) {
+                    cursedHero = warrior
+                    necro.bestowCurse(cursedHero!!)
+                } else {
+                    necroAttack()
+                }
+            }
+
+            6 -> {
+                if (golem == null && necro.hp <= necro.maxHp * 0.5) {
+                    necro.summonGolem(enemies)
+                    golem = enemies[1] as Golem
+                } else {
+                    necroAttack()
+                }
             }
         }
     }
@@ -104,16 +175,24 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         when (select(prompt, errMsg, 5)) {
             1 -> {
                 if (enemies.size > 1) {
-                    val prompt =
-                        """
+                    if (golem != null && golem!!.isTaunting) {
+                        warrior.slam(golem!!)
+                    } else {
+                        val prompt =
+                            """
                     $enemies
                     Select a target 1, 2, ...:
                     """.trimIndent()
-                    val errMsg = "Please select a valid target:"
-                    val selection = select(prompt, errMsg, enemies.size)
-                    warrior.slam(enemies[selection - 1])
+                        val errMsg = "Please select a valid target:"
+                        val selection = select(prompt, errMsg, enemies.size)
+                        warrior.slam(enemies[selection - 1])
+                    }
                 } else {
-                    warrior.slam(enemies[0])
+                    if (golem != null && golem!!.isTaunting) {
+                        warrior.slam(golem!!)
+                    } else {
+                        warrior.slam(enemies[0])
+                    }
                 }
             }
 
@@ -190,16 +269,24 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             2 -> {
                 if (enemies.size > 1) {
-                    val prompt =
-                        """
+                    if (golem != null && golem!!.isTaunting) {
+                        mage.lightningBolt(golem!!)
+                    } else {
+                        val prompt =
+                            """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                    val errMsg = "Please select a valid target:"
-                    val selection = select(prompt, errMsg, enemies.size)
-                    mage.lightningBolt(enemies[selection - 1])
+                        val errMsg = "Please select a valid target:"
+                        val selection = select(prompt, errMsg, enemies.size)
+                        mage.lightningBolt(enemies[selection - 1])
+                    }
                 } else {
-                    mage.lightningBolt(enemies[0])
+                    if (golem != null && golem!!.isTaunting) {
+                        mage.lightningBolt(golem!!)
+                    } else {
+                        mage.lightningBolt(enemies[0])
+                    }
                 }
             }
 
@@ -209,16 +296,26 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             4 -> {
                 if (enemies.size > 1) {
-                    val prompt =
-                        """
+                    if (golem != null && golem!!.isTaunting) {
+                        mage.burn(golem!!)
+                    } else {
+                        val prompt =
+                            """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                    val errMsg = "Please select a valid target:"
-                    val selection = select(prompt, errMsg, enemies.size)
-                    mage.burn(enemies[selection - 1])
+                        val errMsg = "Please select a valid target:"
+                        val selection = select(prompt, errMsg, enemies.size)
+                        val target = enemies[selection - 1]
+                        mage.burn(target)
+                    }
                 } else {
-                    mage.burn(enemies[0])
+                    if (golem != null && golem!!.isTaunting) {
+                        mage.burn(golem!!)
+                    } else {
+                        val target = enemies[0]
+                        mage.burn(target)
+                    }
                 }
             }
 
@@ -280,7 +377,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1 -> {
                 val prompt =
                     """
-                    $enemies
+                    $heroes
                     Select a target 1, 2, ...:
                     """.trimIndent()
                 val errMsg = "Please select a valid target:"
@@ -295,26 +392,35 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             3 -> {
                 val prompt =
                     """
-                $enemies
+                $heroes
                 Select a target 1, 2, ...:
                 """.trimIndent()
                 val errMsg = "Please select a valid target:"
                 val selection = select(prompt, errMsg, heroes.size)
                 cleric.dispel(heroes[selection - 1])
+                cursedHero = null
             }
 
             4 -> {
                 if (enemies.size > 1) {
-                    val prompt =
-                        """
+                    if (golem != null && golem!!.isTaunting) {
+                        cleric.cripple(golem!!)
+                    } else {
+                        val prompt =
+                            """
                 $enemies
                 Select a target 1, 2, ...:
                 """.trimIndent()
-                    val errMsg = "Please select a valid target:"
-                    val selection = select(prompt, errMsg, enemies.size)
-                    cleric.cripple(enemies[selection - 1])
+                        val errMsg = "Please select a valid target:"
+                        val selection = select(prompt, errMsg, enemies.size)
+                        cleric.cripple(enemies[selection - 1])
+                    }
                 } else {
-                    cleric.cripple(enemies[0])
+                    if (golem != null && golem!!.isTaunting) {
+                        cleric.cripple(golem!!)
+                    } else {
+                        cleric.cripple(enemies[0])
+                    }
                 }
             }
 
@@ -355,44 +461,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                             clericAttack()
                         }
                     }
-                }
-            }
-        }
-    }
-
-    private fun bossAttack() {
-        when ((1..6).random()) {
-            1 -> {
-                boss.deathWave(heroes)
-            }
-
-            2 -> {
-                boss.blight(heroes.filter { it.hp > 0 }.random())
-            }
-
-            3 -> {
-                boss.vampiricTouch(heroes.filter { it.hp > 0 }.random())
-            }
-
-            4 -> {
-                boss.(heroes.filter { it.hp > 0 }.random())
-            }
-
-            5 -> {
-                if (cursedHero == null) {
-                    cursedHero = heroes.filter { it.hp > 0 }.random()
-                    boss.bestowCurse(cursedHero!!)
-                } else {
-                    bossAttack()
-                }
-            }
-
-            6 -> {
-                if (golem == null && boss.hp <= boss.maxHp * 0.5) {
-                    boss.summonGolem(enemies)
-                    golem = enemies[1] as Golem
-                } else {
-                    bossAttack()
                 }
             }
         }
