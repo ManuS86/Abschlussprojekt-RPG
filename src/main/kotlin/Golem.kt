@@ -1,7 +1,7 @@
 import kotlin.math.roundToInt
 
 class Golem(name: String, maxHp: Int = 150) : Enemy(name, maxHp) {
-    var taunting = false
+    var isTaunting = false
     var tauntTimer = 0
 
     fun smash(target: Hero) {
@@ -16,7 +16,7 @@ class Golem(name: String, maxHp: Int = 150) : Enemy(name, maxHp) {
     }
 
     fun taunt() {
-        taunting = true
+        isTaunting = true
         tauntTimer = 2
         println("The $name is taunting the heroes forcing them to attack him for the next 2 turns.")
     }

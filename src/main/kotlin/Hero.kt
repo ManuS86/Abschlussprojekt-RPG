@@ -4,7 +4,6 @@ open class Hero(val name: String, val maxHp: Int) {
     var hp = maxHp
     var dmgMod = 1.0
     var durability = 1.0
-    var cursed = false
 
     fun heal(healAmount: Int) {
         hp = min(hp + healAmount, maxHp)
