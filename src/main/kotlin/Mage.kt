@@ -4,12 +4,14 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
         println("$name deals ${(40 * dmgMod).roundToInt()} dmg to each enemy with Fireball.")
+        println()
     }
 
     fun lightningBolt(target: Enemy) {
         val dmgAmnt = ((50..60).random() * dmgMod).roundToInt()
         target.hp -= dmgAmnt
         println("$name deals $dmgAmnt dmg to ${target.name} with Lightning Bolt.")
+        println()
     }
 
     fun magicMissile(targets: MutableList<Enemy>) {
@@ -20,6 +22,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
         val target2 = targets.random()
         target2.hp -= dmgAmnt2
         println("$name deals $dmgAmnt1 to ${target1.name} and $dmgAmnt2 to ${target2.name} with Magic Missile.")
+        println()
     }
 
     fun burn(target: Enemy) {
@@ -28,6 +31,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
             target.hp -= dmgAmnt
             target.burning = true
             println("$name deals $dmgAmnt dmg to ${target.name} with Burn and sets them on fire.")
+            println()
         }
     }
 

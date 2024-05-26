@@ -5,6 +5,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
         println("$name heals ${target.name} for $amntHealed")
+        println()
     }
 
     fun healingWave(targets: List<Hero>) {
@@ -14,10 +15,12 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
         println("$name heals all allies for $amntsHealed with Healing Wave.")
+        println()
     }
 
     fun dispel(target: Hero) {
         println("$name dispelled ${target.name}'s curse.")
+        println()
     }
 
     fun cripple(target: Enemy) {
@@ -25,6 +28,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
             target.dmgMod -= 0.1
         }
         println("$name crippled ${target.name} (reducing their damage by 10%)")
+        println()
     }
 
     override fun toString(): String {
