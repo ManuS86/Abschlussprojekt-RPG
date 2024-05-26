@@ -3,7 +3,7 @@ fun main() {
         listOf(
             Cleric("Elara"),
             Mage("Keros"),
-            Warrior("Harkon")
+            Warrior("Haarkon")
         ),
         mutableListOf(
             Necromancer("Acheron")
