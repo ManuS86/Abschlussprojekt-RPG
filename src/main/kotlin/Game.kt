@@ -70,7 +70,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun round(round: Int) {
-        println("$bold----- Round $round -----$reset")
+        println("$bold                                         -------------------- Round $round --------------------$reset")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero = null
@@ -92,10 +92,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         println()
         println("Your party of $blue$bold${heroes.filter { it.hp > 0 }}$reset attacks $yellow$bold${enemies.filter { it.hp > 0 }}$reset.")
-        Thread.sleep(200)
+        Thread.sleep(500)
 
         val attackers = heroes.filter { it.hp > 0 }.toMutableList()
-
 
         while (attackers.size > 0) {
             val prompt =
@@ -149,13 +148,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
 
 
-        Thread.sleep(500)
+        Thread.sleep(600)
 
         if (necro.hp > 0) {
             println()
             println("$yellow$bold${necro}$reset attacks your party of $blue$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
-            Thread.sleep(500)
+            Thread.sleep(600)
             necroAttack()
             Thread.sleep(200)
             if (gameOverCheck()) {
@@ -164,13 +163,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
         }
 
-        Thread.sleep(500)
+        Thread.sleep(600)
 
         if (golem != null && golem!!.hp > 0) {
             println()
             println("The $yellow$bold${golem?.name} attacks your party of $blue$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
-            Thread.sleep(500)
+            Thread.sleep(600)
             golemAttack()
             Thread.sleep(200)
             if (gameOverCheck()) {
@@ -211,6 +210,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     private fun warriorTurn() {
         warriorAttack()
+        Thread.sleep(200)
         if (gameOverCheck()) {
             println()
         }
@@ -219,6 +219,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     private fun mageTurn() {
         mageAttack()
+        Thread.sleep(200)
         if (gameOverCheck()) {
             println()
         }
@@ -227,6 +228,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     private fun clericTurn() {
         clericAttack()
+        Thread.sleep(200)
         if (gameOverCheck()) {
             println()
         }
@@ -364,7 +366,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             5 -> {
-                Thread.sleep(500)
+                Thread.sleep(200)
                 if (!useInventory()) {
                     warriorAttack()
                 }
@@ -436,7 +438,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             5 -> {
-                Thread.sleep(500)
+                Thread.sleep(200)
                 if (!useInventory()) {
                     mageAttack()
                 }
@@ -502,7 +504,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             5 -> {
-                Thread.sleep(500)
+                Thread.sleep(200)
                 if (!useInventory()) {
                     clericAttack()
                 }
