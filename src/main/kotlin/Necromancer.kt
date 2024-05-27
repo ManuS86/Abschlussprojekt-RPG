@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, maxHp: Int = 10) : Enemy(name, maxHp) {
+class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     private val red = "\u001B[31m"
     private val green = "\u001B[32m"
     private val yellow = "\u001B[33m"
@@ -25,7 +25,7 @@ class Necromancer(name: String, maxHp: Int = 10) : Enemy(name, maxHp) {
         val preHealHp = hp
         heal(dmgAmnt)
         val amntHealed = hp - preHealHp
-        println("   >>> $bold$yellow$name$reset drains $bold$blue${target.name}$reset for $bold$red$dmgAmnt dmg$reset and heals $bold${yellow}himself$reset for $bold$red$amntHealed$reset with $bold${yellow}Vampiric Touch$reset <<<")
+        println("   >>> $bold$yellow$name$reset drains $bold$blue${target.name}$reset for $bold$red$dmgAmnt dmg$reset and heals $bold${yellow}himself$reset for $bold$green$amntHealed$reset with $bold${yellow}Vampiric Touch$reset <<<")
     }
 
     fun grievousWounds(target: Hero) {
