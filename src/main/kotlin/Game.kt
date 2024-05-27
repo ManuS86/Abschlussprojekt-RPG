@@ -327,7 +327,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Battle Shout (Increase your durability by ${green}10%$reset$blue.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "${red}Invalid selection. Please select a valid attack:$reset"
+        val errMsg = "${red}Please select a valid attack:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -384,7 +384,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Burn (Deal $red${bold}30 dmg$reset$blue and set the target on fire burning them for 10 each turn.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "${red}Invalid selection. Please select a valid attack:$reset"
+        val errMsg = "${red}Please select a valid attack:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -456,7 +456,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Cripple (Reduce an enemy's dmg dealt by $red${bold}10%$reset$blue.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "Please select a valid attack:"
+        val errMsg = "${red}Please select a valid attack:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
