@@ -1,16 +1,22 @@
 import kotlin.math.roundToInt
 
 class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
+    private val red = "\u001B[31m"
+    private val green = "\u001B[32m"
+    private val yellow = "\u001B[33m"
+    private val bold = "\u001B[1m"
+    private val reset = "\u001B[0m"
+
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
-        println("$name deals ${(40 * dmgMod).roundToInt()} dmg to each enemy with Fireball.")
+        println("$green$bold$name$reset$green deals $red${(40 * dmgMod).roundToInt()} dmg$reset$green to $bold${yellow}each enemy$reset$green with Fireball.$reset")
         println()
     }
 
     fun lightningBolt(target: Enemy) {
         val dmgAmnt = ((50..60).random() * dmgMod).roundToInt()
         target.hp -= dmgAmnt
-        println("$name deals $dmgAmnt dmg to ${target.name} with Lightning Bolt.")
+        println("$green$bold$name$reset$green deals $red$bold$dmgAmnt dmg$reset$green to $bold$yellow${target.name}$reset$green with Lightning Bolt.$reset")
         println()
     }
 
@@ -21,7 +27,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
         val dmgAmnt2 = ((20..35).random() * dmgMod).roundToInt()
         val target2 = targets.random()
         target2.hp -= dmgAmnt2
-        println("$name deals $dmgAmnt1 to ${target1.name} and $dmgAmnt2 to ${target2.name} with Magic Missile.")
+        println("$green$bold$name$reset$green deals $red$bold$dmgAmnt1 dmg$reset$green to $yellow$bold${target1.name}$reset$green and $red$bold$dmgAmnt2 dmg$reset to $yellow$bold${target2.name}$reset$green with Magic Missile.$reset")
         println()
     }
 
@@ -30,7 +36,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
             val dmgAmnt = (30 * dmgMod).roundToInt()
             target.hp -= dmgAmnt
             target.burning = true
-            println("$name deals $dmgAmnt dmg to ${target.name} with Burn and sets them on fire.")
+            println("$green$bold$name$reset$green deals $red$bold$dmgAmnt dmg${reset}$green to $yellow$bold${target.name}$reset$green with Burn and sets them on fire.$reset")
             println()
         }
     }
