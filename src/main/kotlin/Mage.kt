@@ -22,10 +22,10 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
 
     fun magicMissile(targets: MutableList<Enemy>) {
         val dmgAmnt1 = ((20..35).random() * dmgMod).roundToInt()
-        val target1 = targets.random()
+        val target1 = targets.filter { it.hp > 0 }.random()
         target1.hp -= dmgAmnt1
         val dmgAmnt2 = ((20..35).random() * dmgMod).roundToInt()
-        val target2 = targets.random()
+        val target2 = targets.filter { it.hp > 0 }.random()
         target2.hp -= dmgAmnt2
         println("   >>> $bold$blue$name$reset deals $red$bold$dmgAmnt1 dmg$reset to $yellow$bold${target1.name}$reset and $red$bold$dmgAmnt2 dmg$reset to $yellow$bold${target2.name}$reset with ${bold}Magic Missile$reset <<<")
         println()
