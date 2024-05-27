@@ -27,7 +27,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
         val dmgAmnt2 = ((20..35).random() * dmgMod).roundToInt()
         val target2 = targets.random()
         target2.hp -= dmgAmnt2
-        println("$blue$bold$name$reset$blue deals $red$bold$dmgAmnt1 dmg$reset$blue to $yellow$bold${target1.name}$reset$blue and $red$bold$dmgAmnt2 dmg$reset to $yellow$bold${target2.name}$reset$blue with ${bold}Magic Missile$reset$blue.$reset")
+        println("$blue$bold$name$reset$blue deals $red$bold$dmgAmnt1 dmg$reset$blue to $yellow$bold${target1.name}$reset$blue and $red$bold$dmgAmnt2 dmg$reset$blue to $yellow$bold${target2.name}$reset$blue with ${bold}Magic Missile$reset$blue.$reset")
         println()
     }
 
