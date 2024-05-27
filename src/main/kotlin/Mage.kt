@@ -9,14 +9,14 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
 
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
-        println("   >>> $blue$bold$name$reset$blue deals $red${(40 * dmgMod).roundToInt()} dmg$reset$blue to $bold${yellow}each enemy$reset$blue with ${bold}Fireball$reset$blue.$reset <<<")
+        println("   >>> $bold$blue$name$reset deals $bold${(40 * dmgMod).roundToInt()} dmg$reset to $bold${yellow}each enemy$reset with $bold${blue}Fireball$reset <<<")
         println()
     }
 
     fun lightningBolt(target: Enemy) {
         val dmgAmnt = ((50..60).random() * dmgMod).roundToInt()
         target.hp -= dmgAmnt
-        println("   >>> $blue$bold$name$reset$blue deals $red$bold$dmgAmnt dmg$reset$blue to $bold$yellow${target.name}$reset$blue with ${bold}Lightning Bolt$reset$blue.$reset <<<")
+        println("   >>> $bold$blue$name$reset deals $red$bold$dmgAmnt dmg$reset to $bold$yellow${target.name}$reset with $bold${blue}Lightning Bolt$reset <<<")
         println()
     }
 
@@ -27,7 +27,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
         val dmgAmnt2 = ((20..35).random() * dmgMod).roundToInt()
         val target2 = targets.random()
         target2.hp -= dmgAmnt2
-        println("   >>> $blue$bold$name$reset$blue deals $red$bold$dmgAmnt1 dmg$reset$blue to $yellow$bold${target1.name}$reset$blue and $red$bold$dmgAmnt2 dmg$reset$blue to $yellow$bold${target2.name}$reset$blue with ${bold}Magic Missile$reset$blue.$reset <<<")
+        println("   >>> $bold$blue$name$reset deals $red$bold$dmgAmnt1 dmg$reset to $yellow$bold${target1.name}$reset and $red$bold$dmgAmnt2 dmg$reset to $yellow$bold${target2.name}$reset with ${bold}Magic Missile$reset <<<")
         println()
     }
 
@@ -36,7 +36,7 @@ class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
             val dmgAmnt = (30 * dmgMod).roundToInt()
             target.hp -= dmgAmnt
             target.burning = true
-            println("   >>> $blue$bold$name$reset$blue deals $red$bold$dmgAmnt dmg${reset}$blue to $yellow$bold${target.name}$reset$blue with ${bold}Burn$reset$blue and sets them on fire.$reset <<<")
+            println("   >>> $bold$blue$name$reset deals $red$bold$dmgAmnt dmg$reset to $yellow$bold${target.name}$reset with $bold${blue}Burn$reset and sets them on fire <<<")
             println()
         }
     }
