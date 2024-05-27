@@ -11,7 +11,7 @@ class HealthPotion : Potion() {
         val preHealHp = target.hp
         target.heal(healAmount)
         val amountHealed = target.hp - preHealHp
-        println("$blue$bold${target.name}$reset$blue drinks a Health Potion to heal for $green$bold$amountHealed hp$reset")
+        println("                                         $blue$bold${target.name}$reset$blue drinks a Health Potion to heal for $green$bold$amountHealed hp$reset$blue.$reset")
     }
 
     override fun toString(): String {
