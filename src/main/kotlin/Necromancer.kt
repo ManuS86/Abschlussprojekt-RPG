@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
+class Necromancer(name: String, maxHp: Int = 10) : Enemy(name, maxHp) {
     private val red = "\u001B[31m"
     private val green = "\u001B[32m"
     private val yellow = "\u001B[33m"
@@ -10,13 +10,13 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
 
     fun deathWave(heroes: List<Hero>) {
         heroes.forEach { it.hp -= (30 * dmgMod / it.durability).roundToInt() }
-        println("$name deals ${heroes.forEach { (30 * dmgMod / it.durability).roundToInt() }} dmg to each hero with Death Wave.")
+        println("   >>> $bold$yellow$name$reset deals $bold$red${heroes.forEach { (30 * dmgMod / it.durability).roundToInt() }} dmg$reset to each hero with Death Wave <<<")
     }
 
     fun blight(target: Hero) {
         val dmgAmnt = (50 * dmgMod / target.durability).roundToInt()
         target.hp -= dmgAmnt
-        println("$name deals $dmgAmnt dmg to ${target.name} with Blight.")
+        println("   >>> $bold$yellow$name$reset deals $bold$red$dmgAmnt dmg$reset to $bold$blue${target.name}$reset with $bold${yellow}Blight$reset <<<")
     }
 
     fun vampiricTouch(target: Hero) {
@@ -25,7 +25,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
         val preHealHp = hp
         heal(dmgAmnt)
         val amntHealed = hp - preHealHp
-        println("$name drains ${target.name} for $dmgAmnt dmg and heals himself for $amntHealed with Vampiric Touch.")
+        println("   >>> $bold$yellow$name$reset drains $bold$blue${target.name}$reset for $bold$red$dmgAmnt dmg$reset and heals $bold${yellow}himself$reset for $bold$red$amntHealed$reset with $bold${yellow}Vampiric Touch$reset <<<")
     }
 
     fun grievousWounds(target: Hero) {
@@ -33,21 +33,21 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
         target.hp -= dmgAmnt
         target.cantHeal = true
         target.cantHealTimer = 2
-        println("$name grievously wounds (can't heal for one turn) ${target.name} and deals $dmgAmnt dmg.")
+        println("   >>> $bold$yellow$name$reset grievously wounds (can't heal for one turn) $bold$blue${target.name}$reset and deals $bold$red$dmgAmnt dmg$reset <<<")
 
     }
 
     fun bestowCurse(target: Hero) {
         if (hp > (maxHp * 0.2)) {
             hp -= (maxHp * 0.1).roundToInt()
-            println("$name casts Bestow Curse on $target and they lose 10% of their max. health.")
+            println("   >>> $bold$yellow$name$reset casts $bold${yellow}Bestow Curse$reset on $blue$bold$target$reset and they lose $bold${red}10%$reset of their max. health <<<")
         }
     }
 
     fun summonGolem(enemies: MutableList<Enemy>) {
         val golem = Golem("Golem")
         enemies.add(golem)
-        println("$name has summoned a $golem.")
+        println("   >>> $bold$yellow$name$reset has summoned a $bold$yellow$golem$reset <<<")
     }
 
     override fun toString(): String {
