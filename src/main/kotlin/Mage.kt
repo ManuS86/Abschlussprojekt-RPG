@@ -2,7 +2,6 @@ import kotlin.math.roundToInt
 
 class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
     private val red = "\u001B[31m"
-    private val green = "\u001B[32m"
     private val yellow = "\u001B[33m"
     private val blue = "\u001B[34m"
     private val bold = "\u001B[1m"

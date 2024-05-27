@@ -3,6 +3,7 @@ import kotlin.math.roundToInt
 class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
+
     private val red = "\u001B[31m"
     private val green = "\u001B[32m"
     private val yellow = "\u001B[33m"

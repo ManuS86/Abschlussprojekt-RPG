@@ -3,6 +3,7 @@ import kotlin.math.roundToInt
 class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
+
     private val red = "\u001B[31m"
     private val yellow = "\u001B[33m"
     private val blue = "\u001B[34m"
