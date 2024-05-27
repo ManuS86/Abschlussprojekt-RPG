@@ -10,7 +10,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val preHealHp = target.hp
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
-        println("$blue$bold$name$reset ${blue}heals $bold${target.name}$reset ${blue}for $bold$amntHealed$reset")
+        println("$blue$bold$name$reset ${blue}heals $bold${target.name}$reset ${blue}for $green$bold$amntHealed hp$reset")
         println()
     }
 
@@ -20,7 +20,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
-        println("$blue$bold$name$reset ${blue}heals all allies for $bold$amntsHealed$reset$blue with Healing Wave.$reset")
+        println("$blue$bold$name$reset ${blue}heals all allies for $green$bold$amntsHealed hp$reset$blue with Healing Wave.$reset")
         println()
     }
 
