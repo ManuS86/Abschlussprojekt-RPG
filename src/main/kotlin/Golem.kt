@@ -12,14 +12,14 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     private val reset = "\u001B[0m"
 
     fun smash(target: Hero) {
-        val dmgAmnt = (40 * dmgMod / target.durability).roundToInt()
+        val dmgAmnt = (40 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         println("   >>> $bold$yellow$name$reset deals $red$bold$dmgAmnt dmg$reset to $blue$bold${target.name}$reset with    >>> $bold${yellow}Smash$reset <<<")
     }
 
     fun groundSlam(targets: List<Hero>) {
-        targets.forEach { it.hp -= (20 * dmgMod / it.durability).roundToInt() }
-        println("   >>> $bold$yellow$name$reset deals $red$bold${targets.forEach { (20 * dmgMod / it.durability).roundToInt() }} dmg$reset to $bold${blue}each hero$reset with    >>> $bold${yellow}Ground Slam$reset <<<")
+        targets.forEach { it.hp -= (20 * dmgMod / it.tenacity).roundToInt() }
+        println("   >>> $bold$yellow$name$reset deals $red$bold${targets.forEach { (20 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to $bold${blue}each hero$reset with    >>> $bold${yellow}Ground Slam$reset <<<")
     }
 
     fun taunt() {

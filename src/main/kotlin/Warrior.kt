@@ -32,8 +32,8 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     }
 
     fun battleShout() {
-        durability += 0.1
-        println("   >>> $bold$blue$name$reset made himself more durable ($bold${green}x10% dmg reduction$reset) with $bold${blue}Battle Shout$reset <<<")
+        tenacity += 0.1
+        println("   >>> $bold$blue$name$reset made himself more tenacious ($bold${green}x10% dmg reduction$reset) with $bold${blue}Battle Shout$reset <<<")
         println()
     }
 

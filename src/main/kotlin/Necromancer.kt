@@ -9,18 +9,18 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     private val reset = "\u001B[0m"
 
     fun deathWave(heroes: List<Hero>) {
-        heroes.forEach { it.hp -= (30 * dmgMod / it.durability).roundToInt() }
-        println("   >>> $bold$yellow$name$reset deals $bold$red${heroes.forEach { (30 * dmgMod / it.durability).roundToInt() }} dmg$reset to each hero with Death Wave <<<")
+        heroes.forEach { it.hp -= (30 * dmgMod / it.tenacity).roundToInt() }
+        println("   >>> $bold$yellow$name$reset deals $bold$red${heroes.forEach { (30 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to each hero with Death Wave <<<")
     }
 
     fun blight(target: Hero) {
-        val dmgAmnt = (50 * dmgMod / target.durability).roundToInt()
+        val dmgAmnt = (50 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         println("   >>> $bold$yellow$name$reset deals $bold$red$dmgAmnt dmg$reset to $bold$blue${target.name}$reset with $bold${yellow}Blight$reset <<<")
     }
 
     fun vampiricTouch(target: Hero) {
-        val dmgAmnt = (30 * dmgMod / target.durability).roundToInt()
+        val dmgAmnt = (30 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         val preHealHp = hp
         heal(dmgAmnt)
@@ -29,7 +29,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     }
 
     fun grievousWounds(target: Hero) {
-        val dmgAmnt = (30 * dmgMod / target.durability).roundToInt()
+        val dmgAmnt = (30 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         target.cantHeal = true
         target.cantHealTimer = 2
