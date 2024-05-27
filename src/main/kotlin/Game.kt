@@ -69,7 +69,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun round(round: Int) {
-        println("----- Round $round -----")
+        println("$bold----- Round $round -----$reset")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero = null
@@ -453,7 +453,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. Healing Hands (Heal an ally for $green${bold}30-40hp$reset$blue.)
             2. Healing Wave (Heal each ally for $green${bold}20-30hp$reset$blue.)
             3. Dispel (Dispel a debuff.)
-            4. Cripple (Reduce an enemies dmg dealt by $red${bold}10%$reset$blue.)
+            4. Cripple (Reduce an enemy's dmg dealt by $red${bold}10%$reset$blue.)
             5. Use Item$reset
             """.trimIndent()
         val errMsg = "Please select a valid attack:"
