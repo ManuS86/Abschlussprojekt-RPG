@@ -6,14 +6,17 @@ class Inventory(
         Elixir()
     )
 ) {
+    private val red = "\u001B[31m"
+    private val reset = "\u001B[0m"
+
     fun tryUseHealthPotion(target: Hero): Boolean {
         val healthPotion = content.find { it is HealthPotion }
         if (healthPotion == null) {
-            println("You are out of Health Potions. Try using another action.")
+            println("${red}You are out of Health Potions. Try using another action.$reset")
             return false
         }
         if (target.cantHeal) {
-            println("The target is grievously wounded and can't be healed currently. Try another action.")
+            println("${red}The target is grievously wounded and can't be healed currently. Try another action.$reset")
             return false
         }
         healthPotion.use(target)
@@ -24,7 +27,7 @@ class Inventory(
     fun tryUseElixir(target: Hero): Boolean {
         val elixir = content.find { it is Elixir }
         if (elixir == null) {
-            println("You are out of Elixirs. Try using another action.")
+            println("${red}You are out of Elixirs. Try using another action.$reset")
             return false
         }
         elixir.use(target)
