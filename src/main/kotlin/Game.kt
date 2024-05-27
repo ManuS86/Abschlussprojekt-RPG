@@ -8,6 +8,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private val mage: Mage = heroes[1] as Mage
     private val warrior: Warrior = heroes[2] as Warrior
     private var cursedHero: Hero? = null
+
     private val red = "\u001B[31m"
     private val green = "\u001B[32m"
     private val yellow = "\u001B[33m"
@@ -54,8 +55,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val prompt =
             """
             Do you want to play again?
-            1. Yes
-            2. No
+            1. $bold${green}Yes$reset
+            2. $bold${red}No$reset
             """.trimIndent()
         val errMsg = "${red}Invalid Input. Please try again$reset."
         when (select(prompt, errMsg, 2)) {
@@ -102,7 +103,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $blue$bold$attackers$reset$blue
             Select an attacker 1, 2, ...:$reset
             """.trimIndent()
-            val errMsg = "${red}Please select a valid attacker:$reset"
+            val errMsg = "${red}Invalid Input. Please try again:$reset"
 
             if (attackers.size > 1) {
                 when (attackers[select(prompt, errMsg, attackers.size) - 1]) {
@@ -327,7 +328,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Battle Shout (Increase your durability by ${green}10%$reset$blue.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "${red}Please select a valid attack:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -384,7 +385,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Burn (Deal $red${bold}30 dmg$reset$blue and set the target on fire burning them for 10 each turn.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "${red}Please select a valid attack:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -456,7 +457,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             4. Cripple (Reduce an enemy's dmg dealt by $red${bold}10%$reset$blue.)
             5. Use Item$reset
             """.trimIndent()
-        val errMsg = "${red}Please select a valid attack:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -518,7 +519,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             2. Elixir
             Select an item to use:$reset
             """.trimIndent()
-        val errMsg = "${red}Please select an existing item:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
         when (select(prompt, errMsg, 2)) {
             1 -> {
                 Thread.sleep(200)
@@ -542,7 +543,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $yellow$bold${enemies.filter { it.hp > 0 }}$reset$blue
             Select a target 1, 2, ...:$reset
             """.trimIndent()
-        val errMsg = "${red}Please select a valid target:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
         val target =
             enemies.filter { it.hp > 0 }[select(prompt, errMsg, enemies.filter { it.hp > 0 }.size) - 1]
         return target
@@ -555,7 +556,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $bold${heroes.filter { it.hp > 0 }}$reset$blue
             Select a target 1, 2, ...:$reset
             """.trimIndent()
-        val errMsg = "${red}Please select a valid target:$reset"
+        val errMsg = "${red}Invalid Input. Please try again:$reset"
         val target =
             heroes.filter { it.hp > 0 }[select(prompt, errMsg, heroes.filter { it.hp > 0 }.size) - 1]
         return target
