@@ -308,7 +308,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. $bold${blue}Stab$reset (Deal $red${bold}50 dmg$reset to $bold${yellow}an enemy$reset.)
             2. $bold${blue}Sword Swipe$reset (Deal $red${bold}30 dmg$reset to $bold${yellow}each enemy$reset.)
             3. $bold${blue}Taunt$reset (Force $bold${yellow}enemies$reset to target $bold$blue${warrior.name}$reset for 3 turns.)
-            4. $bold${blue}Battle Shout$reset (Increase $bold${blue}your$reset $bold${green}tenacity$reset by $bold${green}10%$reset.)
+            4. $bold${blue}Battle Shout$reset (Increase $bold${blue}your$reset tenacity by $bold${green}10%$reset.)
             5. $bold${blue}Use Item$reset
             """.trimIndent()
         val errMsg = "${red}Invalid Input. Please try again:$reset"
@@ -434,8 +434,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 >>> It's $blue$bold$cleric's$reset turn. <<<
             
             Choose which ability to use:
-            1. $bold${blue}Healing Hands$reset (Heal an ally for $green${bold}30-40hp$reset.)
-            2. $bold${blue}Healing Wave$reset (Heal each ally for $green${bold}20-30hp$reset.)
+            1. $bold${blue}Healing Hands$reset (Heal $bold${blue}an ally$reset for $green${bold}30-40hp$reset.)
+            2. $bold${blue}Healing Wave$reset (Heal $bold${blue}each ally$reset for $green${bold}20-30hp$reset.)
             3. $bold${blue}Dispel$reset (Dispel $bold${blue}an ally's$reset debuff.)
             4. $bold${blue}Cripple$reset (Reduce $bold${yellow}an enemy's$reset dmg dealt by $red${bold}10%$reset.)
             5. $bold${blue}Use Item$reset
