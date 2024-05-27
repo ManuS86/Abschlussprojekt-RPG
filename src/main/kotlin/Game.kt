@@ -38,7 +38,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun gameOver() {
-        println("${bold}Game Over$reset")
+        println("$bold          --------------- Game Over ---------------$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
             println()
