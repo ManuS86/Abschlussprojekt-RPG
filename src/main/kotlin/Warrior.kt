@@ -12,7 +12,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     fun stab(target: Enemy) {
         val dmgAmnt = (50 * dmgMod).roundToInt()
         target.hp -= dmgAmnt
-        println("$green$bold$name$reset deals $red$bold$dmgAmnt dmg$reset$green to $yellow$bold${target.name}$reset$green with Stab.$reset")
+        println("$green$bold$name$reset$green deals $red$bold$dmgAmnt dmg$reset$green to $yellow$bold${target.name}$reset$green with Stab.$reset")
         println()
     }
 
