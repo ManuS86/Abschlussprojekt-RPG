@@ -26,7 +26,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     fun taunt() {
         isTaunting = true
         tauntTimer = 3
-        println("$blue$bold$name$reset$blue is ${bold}taunting$reset$blue the $yellow${bold}enemies$reset$blue forcing them to attack him for the next 3 turns.$reset")
+        println("$blue$bold$name$reset$blue is ${bold}taunting$reset$blue the $yellow${bold}enemies$reset$blue forcing them to attack him for the next ${bold}3$reset$blue turns.$reset")
         println()
     }
 
