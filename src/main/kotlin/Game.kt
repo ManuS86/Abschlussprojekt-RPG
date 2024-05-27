@@ -321,8 +321,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             It's $bold$warrior's$reset$green turn.
             
             Choose which ability to use:
-            1. Slam (Deal 50 dmg to an enemy.)
-            2. Sword Swipe (Deal 30 dmg to all enemies.)
+            1. Stab (Deal $red${bold}50 dmg$reset$green to an enemy.)
+            2. Sword Swipe (Deal $red${bold}30 dmg$reset$green to all enemies.)
             3. Taunt (Force enemies to target $bold${warrior.name}$reset$green for 3 turns.)
             4. Battle Shout (Increase your durability by 10%.)
             5. Use Item$reset
@@ -378,10 +378,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             It's $bold$mage's$reset$green turn.
             
             Choose which ability to use:
-            1. Fireball (Deal 35-45 dmg to each enemy.)
-            2. Lightning Bolt (Deal 50-60 dmg to an enemy.)
-            3. Magic Missile (Deal 20-35 dmg to a random enemy then repeat this.)
-            4. Burn (Deal 30 dmg and set the target on fire burning them for 10 each turn.)
+            1. Fireball (Deal $red${bold}35-45 dmg$reset$green to each enemy.)
+            2. Lightning Bolt (Deal $red${bold}50-60 dmg$reset$green to an enemy.)
+            3. Magic Missile (Deal $red${bold}20-35 dmg$reset$green to a random enemy then repeat this.)
+            4. Burn (Deal $red${bold}30 dmg$reset$green and set the target on fire burning them for 10 each turn.)
             5. Use Item$reset
             """.trimIndent()
         val errMsg = "${red}Invalid selection. Please select a valid attack:$reset"
@@ -453,7 +453,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. Healing Hands (Heal an ally for 30-40hp.)
             2. Healing Wave (Heal each ally for 20-30hp.)
             3. Dispel (Dispel a debuff.)
-            4. Cripple (Reduce an enemies dmg dealt by 10%.)
+            4. Cripple (Reduce an enemies dmg dealt by $red${bold}10%$reset$green.)
             5. Use Item$reset
             """.trimIndent()
         val errMsg = "Please select a valid attack:"
