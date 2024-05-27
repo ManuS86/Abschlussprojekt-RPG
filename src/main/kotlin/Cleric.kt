@@ -34,7 +34,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("   >>> $bold$blue$name$reset crippled $yellow$bold${target.name}$reset (reducing his $bold${red}dmg by 10%$reset) <<<")
+        println("   >>> $bold$blue$name$reset crippled $yellow$bold${target.name}$reset (reducing his dmg by $bold${red}10%$reset) <<<")
         println()
     }
 
