@@ -8,10 +8,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private val mage: Mage = heroes[1] as Mage
     private val warrior: Warrior = heroes[2] as Warrior
     private var cursedHero: Hero? = null
+    private val red = "\u001B[31m"
+    private val green = "\u001B[32m"
+    private val yellow = "\u001B[33m"
+    private val bold = "\u001B[1m"
+    private val reset = "\u001B[0m"
 
     fun gameLoop() {
         println()
-        println("The heroes $cleric, $mage and $warrior are fighting the boss $necro.")
+        println("The heroes $green$bold$cleric, $mage and $warrior$reset are fighting the boss $yellow$bold$necro$reset.")
         println()
         Thread.sleep(200)
 
@@ -31,15 +36,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun gameOver() {
-        println("Game Over")
+        println("${bold}Game Over$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
             println()
-            println("All your heroes are dead. You lost!")
+            println("$red${bold}All your heroes are dead. You lost!$reset")
         } else {
             Thread.sleep(200)
             println()
-            println("All enemies are defeated. You won!")
+            println("$green${bold}All enemies are defeated. You won!$reset")
         }
     }
 
@@ -54,7 +59,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             when (input) {
                 "yes" -> main()
                 "no" -> exitProcess(0)
-                else -> println("Invalid Input. Please try again.")
+                else -> println("${red}Invalid Input. Please try again$reset.")
             }
         }
     }
@@ -70,7 +75,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 cursedHero = null
             }
             println()
-            println("${cursedHero!!.name} is cursed and loses ${cursedHero!!.maxHp * 0.1}hp.")
+            println("$green$bold${cursedHero!!.name}$reset is cursed and loses $red$bold${cursedHero!!.maxHp * 0.1}hp$reset.")
             cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
             Thread.sleep(200)
         }
@@ -79,24 +84,26 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (it.burning) {
                 it.hp -= (10 * mage.dmgMod).roundToInt()
                 println()
-                println("$it is burning and takes 10 dmg.")
+                println("$yellow$bold$it$reset is burning and takes $red${bold}10 dmg$reset.")
                 Thread.sleep(200)
             }
         }
 
         println()
-        println("Your party of ${heroes.filter { it.hp > 0 }} attacks ${enemies.filter { it.hp > 0 }}.")
+        println("Your party of $green$bold${heroes.filter { it.hp > 0 }}$reset attacks $yellow$bold${enemies.filter { it.hp > 0 }}$reset.")
         Thread.sleep(200)
 
         val attackers = heroes.filter { it.hp > 0 }.toMutableList()
-        val prompt =
-            """
-            $attackers
-            Select an attacker 1, 2, ...:
-            """.trimIndent()
-        val errMsg = "Please select a valid attacker:"
+
 
         while (attackers.size > 0) {
+            val prompt =
+                """
+            $green$bold$attackers$reset$green
+            Select an attacker 1, 2, ...:$reset
+            """.trimIndent()
+            val errMsg = "${red}Please select a valid attacker:$reset"
+
             if (attackers.size > 1) {
                 when (attackers[select(prompt, errMsg, attackers.size) - 1]) {
                     cleric -> {
@@ -140,11 +147,12 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
         }
 
+
         Thread.sleep(500)
 
         if (necro.hp > 0) {
             println()
-            println("${necro.name} attacks your party of ${heroes.filter { it.hp > 0 }}.")
+            println("$yellow$bold${necro}$reset attacks your party of $green$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
             Thread.sleep(500)
             necroAttack()
@@ -159,7 +167,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         if (golem != null && golem!!.hp > 0) {
             println()
-            println("The ${golem?.name} attacks your party of ${heroes.filter { it.hp > 0 }}.")
+            println("The $yellow$bold${golem?.name} attacks your party of $green$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
             Thread.sleep(500)
             golemAttack()
@@ -223,6 +231,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
         Thread.sleep(500)
     }
+
 
     private fun golemAttack() {
         when ((1..3).random()) {
@@ -308,32 +317,33 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-            It's $warrior's turn.
+            $green
+            It's $bold$warrior's$reset$green turn.
             
             Choose which ability to use:
             1. Slam (Deal 50 dmg to an enemy.)
             2. Sword Swipe (Deal 30 dmg to all enemies.)
-            3. Taunt (Force enemies to target ${warrior.name} for 3 turns.)
+            3. Taunt (Force enemies to target $bold${warrior.name}$reset$green for 3 turns.)
             4. Battle Shout (Increase your durability by 10%.)
-            5. Use Item
+            5. Use Item$reset
             """.trimIndent()
-        val errMsg = "Invalid selection. Please select a valid attack:"
+        val errMsg = "${red}Invalid selection. Please select a valid attack:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
                 Thread.sleep(500)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
-                        warrior.slam(golem!!)
+                        warrior.stab(golem!!)
                     } else {
                         val target = targetEnemy()
-                        warrior.slam(target)
+                        warrior.stab(target)
                     }
                 } else {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
-                        warrior.slam(golem!!)
+                        warrior.stab(golem!!)
                     } else {
-                        warrior.slam(enemies.filter { it.hp > 0 }[0])
+                        warrior.stab(enemies.filter { it.hp > 0 }[0])
                     }
                 }
             }
@@ -364,16 +374,17 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-            It's $mage's turn.
+            $green
+            It's $bold$mage's$reset$green turn.
             
             Choose which ability to use:
             1. Fireball (Deal 35-45 dmg to each enemy.)
             2. Lightning Bolt (Deal 50-60 dmg to an enemy.)
             3. Magic Missile (Deal 20-35 dmg to a random enemy then repeat this.)
-            4. Burn (Set target enemy on fire dealing 30 dmg and burning them for 10 each turn.)
-            5. Use Item
+            4. Burn (Deal 30 dmg and set the target on fire burning them for 10 each turn.)
+            5. Use Item$reset
             """.trimIndent()
-        val errMsg = "Invalid selection. Please select a valid attack:"
+        val errMsg = "${red}Invalid selection. Please select a valid attack:$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -435,14 +446,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-            It's $cleric's turn.
+            $green
+            It's $bold$cleric's$reset$green turn.
             
             Choose which ability to use:
             1. Healing Hands (Heal an ally for 30-40hp.)
             2. Healing Wave (Heal each ally for 20-30hp.)
             3. Dispel (Dispel a debuff.)
             4. Cripple (Reduce an enemies dmg dealt by 10%.)
-            5. Use Item
+            5. Use Item$reset
             """.trimIndent()
         val errMsg = "Please select a valid attack:"
 
@@ -451,7 +463,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Thread.sleep(500)
                 val target = targetHero()
                 if (target.cantHeal) {
-                    println("The target is grievously wounded and can't be healed currently. Try another action.")
+                    println("${red}The target is grievously wounded and can't be healed currently. Try another action.$reset")
                     clericAttack()
                 } else {
                     cleric.healingHands(target)
@@ -500,12 +512,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun useInventory(): Boolean {
         val prompt =
             """
-            $inventory
+            $green
+            $bold$inventory$reset$green
             1. Health Potion
             2. Elixir
-            Select an item to use:
+            Select an item to use:$reset
             """.trimIndent()
-        val errMsg = "Please select an existing item:"
+        val errMsg = "${red}Please select an existing item:$reset"
         when (select(prompt, errMsg, 2)) {
             1 -> {
                 Thread.sleep(200)
@@ -525,10 +538,11 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun targetEnemy(): Enemy {
         val prompt =
             """
-            ${enemies.filter { it.hp > 0 }}
-            Select a target 1, 2, ...:
+            $green
+            $yellow$bold${enemies.filter { it.hp > 0 }}$reset$green
+            Select a target 1, 2, ...:$reset
             """.trimIndent()
-        val errMsg = "Please select a valid target:"
+        val errMsg = "${red}Please select a valid target:$reset"
         val target =
             enemies.filter { it.hp > 0 }[select(prompt, errMsg, enemies.filter { it.hp > 0 }.size) - 1]
         return target
@@ -537,10 +551,11 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun targetHero(): Hero {
         val prompt =
             """
-            ${heroes.filter { it.hp > 0 }}
-            Select a target 1, 2, ...:
+            $green
+            $bold${heroes.filter { it.hp > 0 }}$reset$green
+            Select a target 1, 2, ...:$reset
             """.trimIndent()
-        val errMsg = "Please select a valid target:"
+        val errMsg = "${red}Please select a valid target:$reset"
         val target =
             heroes.filter { it.hp > 0 }[select(prompt, errMsg, heroes.filter { it.hp > 0 }.size) - 1]
         return target
