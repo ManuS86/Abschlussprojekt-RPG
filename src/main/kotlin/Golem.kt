@@ -25,7 +25,7 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     fun taunt() {
         isTaunting = true
         tauntTimer = 3
-        println("   >>> The $bold$yellow$name$reset is $bold${yellow}taunting$reset the $bold${blue}heroes$reset forcing them to attack him for the next $bold${green}2$reset turns <<<")
+        println("   >>> The $bold$yellow$name$reset is $bold${yellow}taunting$reset the $bold${blue}heroes$reset forcing them to attack him for the next $bold${green}2 turns$reset <<<")
     }
 
     override fun toString(): String {
