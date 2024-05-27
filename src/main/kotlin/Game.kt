@@ -45,23 +45,22 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         } else {
             Thread.sleep(200)
             println()
-            println("$blue${bold}All enemies are defeated. You won!$reset")
+            println("$green${bold}All enemies are defeated. You won!$reset")
         }
     }
 
     private fun newGame() {
         Thread.sleep(500)
-        println()
-        println("Do you want to play again?")
-        var input: String? = null
-        while (input != "no" || input != "yes") {
-            print("> ")
-            input = readln().lowercase()
-            when (input) {
-                "yes" -> main()
-                "no" -> exitProcess(0)
-                else -> println("${red}Invalid Input. Please try again$reset.")
-            }
+        val prompt =
+            """
+            Do you want to play again?
+            1. Yes
+            2. No
+            """.trimIndent()
+        val errMsg = "${red}Invalid Input. Please try again$reset."
+        when (select(prompt, errMsg, 2)) {
+            1 -> main()
+            2 -> exitProcess(0)
         }
     }
 
