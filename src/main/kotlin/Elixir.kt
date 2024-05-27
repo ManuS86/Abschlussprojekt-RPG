@@ -6,7 +6,7 @@ class Elixir : Potion() {
 
     override fun use(target: Hero) {
         target.dmgMod += 0.1
-        println("                                         $blue$bold${target.name}$reset$blue drinks an ${bold}Elixir$reset$blue to increase their $bold${green}dmg by +10%$reset$blue.$reset")
+        println("   >>> $blue$bold${target.name}$reset$blue drinks an ${bold}Elixir$reset$blue to increase their $bold${green}dmg by +10%$reset$blue.$reset <<<")
     }
 
     override fun toString(): String {

@@ -11,7 +11,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val preHealHp = target.hp
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
-        println("$blue$bold$name$reset ${blue}heals $bold${target.name}$reset ${blue}for $green$bold$amntHealed hp$reset$blue with ${bold}Healing Hands$reset$blue.$reset")
+        println("   >>> $blue$bold$name$reset ${blue}heals $bold${target.name}$reset ${blue}for $green$bold$amntHealed hp$reset$blue with ${bold}Healing Hands$reset$blue.$reset <<<")
         println()
     }
 
@@ -21,12 +21,12 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
-        println("$blue$bold$name$reset ${blue}heals all allies for $green$bold$amntsHealed hp$reset$blue with ${bold}Healing Wave$reset$blue.$reset")
+        println("   >>> $blue$bold$name$reset ${blue}heals all allies for $green$bold$amntsHealed hp$reset$blue with ${bold}Healing Wave$reset$blue.$reset <<<")
         println()
     }
 
     fun dispel(target: Hero) {
-        println("$blue$bold$name$reset$blue dispelled $bold${target.name}'s$reset$blue Curse.$reset")
+        println("   >>> $blue$bold$name$reset$blue dispelled $bold${target.name}'s$reset$blue Curse.$reset <<<")
         println()
     }
 
@@ -34,7 +34,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("$blue$bold$name$reset$blue crippled $yellow$bold${target.name}$reset$blue (reducing his $bold${red}dmg by 10%$reset$blue)$reset")
+        println("   >>> $blue$bold$name$reset$blue crippled $yellow$bold${target.name}$reset$blue (reducing his $bold${red}dmg by 10%$reset$blue)$reset <<<")
         println()
     }
 
