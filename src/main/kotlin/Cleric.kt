@@ -2,7 +2,8 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     private val red = "\u001B[91m"
     private val green = "\u001B[92m"
     private val yellow = "\u001B[93m"
-    private val blue = "\u001B[94m"
+    private val blue1 = "\u001B[34m"
+    private val blue2 = "\u001B[94m"
     private val bold = "\u001B[1m"
     private val reset = "\u001B[0m"
 
@@ -11,7 +12,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val preHealHp = target.hp
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
-        println("   >>> $bold$blue$name$reset heals $bold$blue${target.name}$reset for $green$amntHealed hp$reset with $bold${blue}Healing Hands$reset <<<")
+        println("   >>> $bold$blue2$name$reset heals $bold$blue2${target.name}$reset for $green$amntHealed hp$reset with $bold${blue1}Healing Hands$reset <<<")
         println()
     }
 
@@ -21,12 +22,12 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
-        println("   >>> $bold$blue$name$reset heals $bold${blue}all allies$reset for $green$amntsHealed hp$reset with $bold${blue}Healing Wave$reset <<<")
+        println("   >>> $bold$blue2$name$reset heals $bold${blue2}all allies$reset for $green$amntsHealed hp$reset with $bold${blue1}Healing Wave$reset <<<")
         println()
     }
 
     fun dispel(target: Hero) {
-        println("   >>> $bold$blue$name$reset dispelled $bold$blue${target.name}'s$reset Curse <<<")
+        println("   >>> $bold$blue2$name$reset dispelled $bold$blue2${target.name}'s$reset Curse <<<")
         println()
     }
 
@@ -34,7 +35,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("   >>> $bold$blue$name$reset crippled $yellow$bold${target.name}$reset (reducing his dmg by ${red}10%$reset) <<<")
+        println("   >>> $bold$blue2$name$reset crippled $yellow$bold${target.name}$reset (reducing his dmg by ${red}10%$reset) <<<")
         println()
     }
 
