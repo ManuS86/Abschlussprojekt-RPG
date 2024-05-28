@@ -324,7 +324,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             Choose which ability to use:
             1. $bold${blue1}Stab$reset (Deal ${red2}50 dmg$reset to $bold${yellow}an enemy$reset.)
             2. $bold${blue1}Sword Swipe$reset (Deal ${red2}30 dmg$reset to $bold${yellow}each enemy$reset.)
-            3. $bold${blue1}Taunt$reset (Force $bold${yellow}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3$bold turns$reset.)
+            3. $bold${blue1}Taunt$reset (Force $bold${yellow}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
             4. $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
