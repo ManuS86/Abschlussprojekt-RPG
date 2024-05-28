@@ -14,7 +14,7 @@ class Inventory(
             return false
         }
         if (target.cantHeal) {
-            println("${red1}The target is grievously wounded and can't be healed currently. Try another action.$reset")
+            println("${red1}The target is wounded and can't be healed currently. Try another action.$reset")
             return false
         }
         healthPotion.use(target)

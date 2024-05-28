@@ -28,7 +28,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(
             """
-            The heroes $blue2$bold$cleric, $mage and $warrior$reset are fighting the boss $yellow2$bold$necro$reset.
+            The heroes $blue2$bold$cleric$reset, $blue2$bold$mage$reset and $blue2$bold$warrior$reset are fighting the boss $yellow2$bold$necro$reset.
             Defeat him before it's too late!
         """.trimIndent()
         )
@@ -41,23 +41,27 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             nr++
         }
 
-        gameOver()
+        gameOver(nr-1)
 
         Thread.sleep(500)
 
         newGame()
     }
 
-    private fun gameOver() {
-        println("$bold$white      ------------------ Game Over ------------------$reset")
+    private fun gameOver(nr: Int) {
+        println("$bold$white        ------------------ Game Over ------------------$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
             println()
-            println("        >>> $red2${bold}All your ${blue2}heroes$reset$red2${bold} are dead. You lost!$reset <<<")
+            println("               $white>>> The fight lasted $nr rounds <<<$reset")
+            println()
+            println("          $white>>>$reset $red2${bold}All your ${blue2}heroes$reset$red2${bold} are dead. You lost!$reset $white<<<$reset")
         } else {
             Thread.sleep(200)
             println()
-            println("        >>> $green2${bold}All ${yellow2}enemies$reset$green2${bold} are defeated. You won!$reset <<<")
+            println("               $white>>> The fight lasted $nr rounds <<<$reset")
+            println()
+            println("          $white>>>$reset $green2${bold}All ${yellow2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
         }
     }
 
@@ -99,9 +103,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         enemies.forEach {
             if (it.burning) {
-                it.hp -= (15 * mage.dmgMod).roundToInt()
                 println()
-                println("        $white>>>$reset $yellow2$bold$it$reset is ${red1}burning$reset and takes $red2${bold}15 dmg$reset $white<<<$reset")
+                println("        $white>>>$reset $yellow2$bold${it.name}$reset is ${red1}burning$reset and takes ${red2}15 dmg$reset $white<<<$reset")
+                it.hp -= (15 * mage.dmgMod).roundToInt()
                 Thread.sleep(200)
             }
         }
@@ -159,6 +163,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             println()
             Thread.sleep(600)
             necroAttack()
+            println()
             if (gameOverCheck()) {
                 return
             }
@@ -172,6 +177,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             println()
             Thread.sleep(600)
             golemAttack()
+            println()
             if (gameOverCheck()) {
                 return
             }

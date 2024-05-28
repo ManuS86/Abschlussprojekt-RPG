@@ -4,7 +4,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
 
     fun deathWave(heroes: List<Hero>) {
         heroes.forEach { it.hp -= (40 * dmgMod / it.tenacity).roundToInt() }
-        println("   $white>>>$reset $bold$yellow2$name$reset deals $red2${heroes.forEach { (40 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to each hero with $bold${yellow1}Death Wave$reset $white<<<$reset")
+        println("   $white>>>$reset $bold$yellow2$name$reset deals $red2${(40 * dmgMod).roundToInt() } dmg$reset to each hero with $bold${yellow1}Death Wave$reset $white<<<$reset")
     }
 
     fun blight(target: Hero) {
