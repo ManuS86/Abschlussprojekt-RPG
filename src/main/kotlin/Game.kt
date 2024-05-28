@@ -380,7 +380,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             
             Choose which ability to use:
             1. $bold${blue1}Fireball$reset (Deal ${red2}35-45 dmg$reset to $bold${Yellow}each enemy$reset.)
-            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset$blue2 to $bold${Yellow}an enemy$reset.)
+            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset to $bold${Yellow}an enemy$reset.)
             3. $bold${blue1}Magic Missile$reset (Deal ${red2}20-35 dmg$reset to $bold${Yellow}a random enemy$reset, then repeat $bold${blue1}this$reset.)
             4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${Yellow}an enemy$reset and burn them for an additional ${red2}10 dmg$reset each turn.)
             5. $bold${blue1}Use Item$reset
