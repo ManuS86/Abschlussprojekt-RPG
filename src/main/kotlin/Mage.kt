@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Mage(name: String, maxHp: Int = 70) : Hero(name, maxHp) {
+class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     private val white = "\u001B[97m"
     private val red = "\u001B[91m"
     private val yellow = "\u001B[93m"

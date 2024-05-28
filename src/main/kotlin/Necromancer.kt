@@ -11,12 +11,12 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     private val reset = "\u001B[0m"
 
     fun deathWave(heroes: List<Hero>) {
-        heroes.forEach { it.hp -= (30 * dmgMod / it.tenacity).roundToInt() }
-        println("   $white>>>$reset $bold$yellow2$name$reset deals $red${heroes.forEach { (30 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to each hero with $bold${yellow1}Death Wave$reset $white<<<$reset")
+        heroes.forEach { it.hp -= (40 * dmgMod / it.tenacity).roundToInt() }
+        println("   $white>>>$reset $bold$yellow2$name$reset deals $red${heroes.forEach { (40 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to each hero with $bold${yellow1}Death Wave$reset $white<<<$reset")
     }
 
     fun blight(target: Hero) {
-        val dmgAmnt = (50 * dmgMod / target.tenacity).roundToInt()
+        val dmgAmnt = (60 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         println("   $white>>>$reset $bold$yellow2$name$reset deals $red$dmgAmnt dmg$reset to $bold$blue${target.name}$reset with $bold${yellow1}Blight$reset $white<<<$reset")
     }
@@ -31,11 +31,11 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     }
 
     fun grievousWounds(target: Hero) {
-        val dmgAmnt = (30 * dmgMod / target.tenacity).roundToInt()
+        val dmgAmnt = (40 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         target.cantHeal = true
         target.cantHealTimer = 2
-        println("   $white>>>$reset $bold$yellow2$name$reset $bold${yellow1}grievously wounds$reset (can't heal for one turn) $bold$blue${target.name}$reset and deals $red$dmgAmnt dmg$reset $white<<<$reset")
+        println("   $white>>>$reset $bold$yellow2$name$reset $bold${yellow1} wounds$reset (can't heal for one turn) $bold$blue${target.name}$reset and deals $red$dmgAmnt dmg$reset with $bold${yellow1}Grievous Wounds$reset $white<<<$reset")
 
     }
 
