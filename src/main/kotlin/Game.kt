@@ -41,7 +41,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             nr++
         }
 
-        gameOver(nr-1)
+        gameOver(nr - 1)
 
         Thread.sleep(500)
 
