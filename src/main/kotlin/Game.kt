@@ -9,17 +9,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private val warrior: Warrior = heroes[2] as Warrior
     private var cursedHero: Hero? = null
 
-    private val white = "\u001B[97m"
-    private val red1 = "\u001B[31m"
-    private val red2 = "\u001B[91m"
-    private val green1 = "\u001B[32m"
-    private val green2 = "\u001B[92m"
-    private val yellow = "\u001B[93m"
-    private val blue1 = "\u001B[34m"
-    private val blue2 = "\u001B[94m"
-    private val bold = "\u001B[1m"
-    private val reset = "\u001B[0m"
-
     fun gameLoop() {
         println(
             "$bold$white\n" +
@@ -39,7 +28,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(
             """
-            The heroes $blue2$bold$cleric, $mage and $warrior$reset are fighting the boss $yellow$bold$necro$reset.
+            The heroes $blue2$bold$cleric, $mage and $warrior$reset are fighting the boss $yellow2$bold$necro$reset.
             Defeat him before it's too late!
         """.trimIndent()
         )
@@ -68,7 +57,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         } else {
             Thread.sleep(200)
             println()
-            println("        >>> $green2${bold}All ${yellow}enemies$reset$green2${bold} are defeated. You won!$reset <<<")
+            println("        >>> $green2${bold}All ${yellow2}enemies$reset$green2${bold} are defeated. You won!$reset <<<")
         }
     }
 
@@ -103,22 +92,22 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 cursedHero = null
             }
             println()
-            println("        $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${red1}cursed$reset and loses $red2$bold${cursedHero!!.maxHp * 0.1}hp$reset $white<<<$reset")
+            println("        $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${red1}cursed$reset and loses $red2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
             cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
             Thread.sleep(200)
         }
 
         enemies.forEach {
             if (it.burning) {
-                it.hp -= (10 * mage.dmgMod).roundToInt()
+                it.hp -= (15 * mage.dmgMod).roundToInt()
                 println()
-                println("        $white>>>$reset $yellow$bold$it$reset is ${red1}burning$reset and takes $red2${bold}10 dmg$reset $white<<<$reset")
+                println("        $white>>>$reset $yellow2$bold$it$reset is ${red1}burning$reset and takes $red2${bold}15 dmg$reset $white<<<$reset")
                 Thread.sleep(200)
             }
         }
 
         println()
-        println("Your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset attacks $yellow$bold${enemies.filter { it.hp > 0 }}$reset.")
+        println("Your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset attacks $yellow2$bold${enemies.filter { it.hp > 0 }}$reset.")
 
         val attackers = heroes.filter { it.hp > 0 }.toMutableList()
 
@@ -166,7 +155,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         if (necro.hp > 0) {
             println()
-            println("$yellow$bold${necro}$reset attacks your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset.")
+            println("$yellow2$bold${necro}$reset attacks your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
             Thread.sleep(600)
             necroAttack()
@@ -179,7 +168,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         if (golem != null && golem!!.hp > 0) {
             println()
-            println("The $yellow$bold${golem?.name} attacks your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset.")
+            println("The $yellow2$bold${golem?.name} attacks your party of $blue2$bold${heroes.filter { it.hp > 0 }}$reset.")
             println()
             Thread.sleep(600)
             golemAttack()
@@ -324,9 +313,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $blue2$bold$warrior's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Stab$reset (Deal ${red2}50 dmg$reset to $bold${yellow}an enemy$reset.)
-            2. $bold${blue1}Sword Swipe$reset (Deal ${red2}30 dmg$reset to $bold${yellow}each enemy$reset.)
-            3. $bold${blue1}Taunt$reset (Force $bold${yellow}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
+            1. $bold${blue1}Stab$reset (Deal ${red2}50 dmg$reset to $bold${yellow2}an enemy$reset.)
+            2. $bold${blue1}Sword Swipe$reset (Deal ${red2}30 dmg$reset to $bold${yellow2}each enemy$reset.)
+            3. $bold${blue1}Taunt$reset (Force $bold${yellow2}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
             4. $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
@@ -381,10 +370,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $blue2$bold$mage's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Fireball$reset (Deal ${red2}35-45 dmg$reset to $bold${yellow}each enemy$reset.)
-            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset to $bold${yellow}an enemy$reset.)
-            3. $bold${blue1}Magic Missile$reset (Deal ${red2}20-35 dmg$reset to $bold${yellow}a random enemy$reset, then repeat $bold${blue1}this$reset.)
-            4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${yellow}an enemy$reset and burn them for an additional ${red2}10 dmg$reset ${green2}each turn$reset.)
+            1. $bold${blue1}Fireball$reset (Deal ${red2}35-45 dmg$reset to $bold${yellow2}each enemy$reset.)
+            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset to $bold${yellow2}an enemy$reset.)
+            3. $bold${blue1}Magic Missile$reset (Deal ${red2}20-35 dmg$reset to $bold${yellow2}a random enemy$reset, then repeat $bold${blue1}this$reset.)
+            4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${yellow2}an enemy$reset and burn them for an additional ${red2}15 dmg$reset ${green2}each turn$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
@@ -456,7 +445,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}30-40 hp$reset.)
             2. $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}20-30 hp$reset.)
             3. $bold${blue1}Dispel$reset (Dispel $bold${blue2}an ally's$reset debuff.)
-            4. $bold${blue1}Cripple$reset (Reduce $bold${yellow}an enemy's$reset dmg dealt by ${red2}10%$reset.)
+            4. $bold${blue1}Cripple$reset (Reduce $bold${yellow2}an enemy's$reset dmg dealt by ${red2}10%$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
@@ -542,8 +531,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val prompt =
             """
             
-            $yellow$bold${enemies.filter { it.hp > 0 }}$reset
-            Select a target ${blue2}1, 2, ...$reset:
+            $yellow2$bold${enemies.filter { it.hp > 0 }}$reset
+            Select a target ${yellow2}1, 2, ...$reset:
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
         val target =
