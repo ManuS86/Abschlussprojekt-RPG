@@ -27,7 +27,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     }
 
     fun dispel(target: Hero) {
-        println("   >>> $bold$blue2$name$reset dispelled $bold$blue2${target.name}'s$reset Curse <<<")
+        println("   >>> $bold$blue2$name$reset removed $bold$blue2${target.name}'s$reset curse with $bold${blue1}Dispel$reset <<<")
         println()
     }
 
@@ -35,7 +35,7 @@ class Cleric(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("   >>> $bold$blue2$name$reset crippled $yellow$bold${target.name}$reset (reducing his dmg by ${red}10%$reset) <<<")
+        println("   >>> $bold$blue2$name$reset reduced $yellow$bold${target.name}'s$reset dmg by ${red}10%$reset with $bold${blue1}Cripple$reset <<<")
         println()
     }
 
