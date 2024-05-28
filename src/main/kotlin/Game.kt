@@ -49,19 +49,19 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun gameOver(nr: Int) {
-        println("$bold$white        ------------------ Game Over ------------------$reset")
+        println("$bold$white            ------------------ Game Over ------------------$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
             println()
-            println("               $white>>> The fight lasted $nr rounds <<<$reset")
+            println("                   $white>>> The fight lasted $nr rounds <<<$reset")
             println()
-            println("          $white>>>$reset $red2${bold}All your ${blue2}heroes$reset$red2${bold} are dead. You lost!$reset $white<<<$reset")
+            println("           $white>>>$reset $red2${bold}All your ${blue2}heroes$reset$red2${bold} are dead. You lost!$reset $white<<<$reset")
         } else {
             Thread.sleep(200)
             println()
-            println("               $white>>> The fight lasted $nr rounds <<<$reset")
+            println("                   $white>>> The fight lasted $nr rounds <<<$reset")
             println()
-            println("          $white>>>$reset $green2${bold}All ${yellow2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
+            println("           $white>>>$reset $green2${bold}All ${yellow2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
         }
     }
 
@@ -90,13 +90,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun round(nr: Int) {
-        println("$bold$white                  -------------------------- ROUND $nr --------------------------$reset")
+        println("$bold$white     -------------------------- ROUND $nr --------------------------$reset")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero = null
             }
             println()
-            println("        $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${red1}cursed$reset and loses $red2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
+            println("              $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${red1}cursed$reset and loses $red2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
             cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
             Thread.sleep(200)
         }
@@ -104,7 +104,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         enemies.forEach {
             if (it.burning) {
                 println()
-                println("        $white>>>$reset $yellow2$bold${it.name}$reset is ${red1}burning$reset and takes ${red2}15 dmg$reset $white<<<$reset")
+                println("              $white>>>$reset $yellow2$bold${it.name}$reset is ${red1}burning$reset and takes ${red2}15 dmg$reset $white<<<$reset")
                 it.hp -= (15 * mage.dmgMod).roundToInt()
                 Thread.sleep(200)
             }
