@@ -568,7 +568,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(prompt)
         while (true) {
-            print("> ")
+            print("$white>$reset ")
             val input = readln().toIntOrNull()
             if (input != null && input in (1..max)) {
                 return input
