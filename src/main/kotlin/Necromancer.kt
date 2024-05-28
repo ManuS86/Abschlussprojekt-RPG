@@ -35,7 +35,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
         target.hp -= dmgAmnt
         target.cantHeal = true
         target.cantHealTimer = 2
-        println("   $white>>>$reset $bold$yellow2$name$reset $bold${yellow1} wounds$reset (can't heal for one turn) $bold$blue${target.name}$reset and deals $red$dmgAmnt dmg$reset with $bold${yellow1}Grievous Wounds$reset $white<<<$reset")
+        println("   $white>>>$reset $bold$yellow2$name$reset $bold${yellow1}wounds$reset $bold$blue${target.name}$reset (can't heal for one turn) and deals $red$dmgAmnt dmg$reset with $bold${yellow1}Grievous Wounds$reset $white<<<$reset")
 
     }
 

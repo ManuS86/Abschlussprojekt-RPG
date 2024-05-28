@@ -101,7 +101,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 cursedHero = null
             }
             println()
-            println("   >>> $blue2$bold${cursedHero!!.name}$reset is cursed and loses $red2$bold${cursedHero!!.maxHp * 0.1}hp$reset <<<")
+            println("        $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${red1}cursed$reset and loses $red2$bold${cursedHero!!.maxHp * 0.1}hp$reset $white<<<$reset")
             cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
             Thread.sleep(200)
         }
@@ -110,7 +110,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (it.burning) {
                 it.hp -= (10 * mage.dmgMod).roundToInt()
                 println()
-                println("   $white>>>$reset $yellow$bold$it$reset is burning and takes $red2${bold}10 dmg$reset $white<<<$reset")
+                println("        $white>>>$reset $yellow$bold$it$reset is ${red1}burning$reset and takes $red2${bold}10 dmg$reset $white<<<$reset")
                 Thread.sleep(200)
             }
         }
@@ -382,7 +382,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. $bold${blue1}Fireball$reset (Deal ${red2}35-45 dmg$reset to $bold${yellow}each enemy$reset.)
             2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset to $bold${yellow}an enemy$reset.)
             3. $bold${blue1}Magic Missile$reset (Deal ${red2}20-35 dmg$reset to $bold${yellow}a random enemy$reset, then repeat $bold${blue1}this$reset.)
-            4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${yellow}an enemy$reset and burn them for an additional ${red2}10 dmg$reset each turn.)
+            4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${yellow}an enemy$reset and burn them for an additional ${red2}10 dmg$reset ${green2}each turn$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
