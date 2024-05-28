@@ -1,8 +1,10 @@
 import kotlin.math.roundToInt
 
 class HealthPotion : Potion() {
-    private val green = "\u001B[32m"
-    private val blue = "\u001B[34m"
+    private val white = "\u001B[97m"
+    private val green1 = "\u001B[32m"
+    private val green2 = "\u001B[92m"
+    private val blue = "\u001B[94m"
     private val bold = "\u001B[1m"
     private val reset = "\u001B[0m"
 
@@ -11,7 +13,7 @@ class HealthPotion : Potion() {
         val preHealHp = target.hp
         target.heal(healAmount)
         val amountHealed = target.hp - preHealHp
-        println("   >>> $bold$blue${target.name}$reset drinks a $bold${blue}Health Potion$reset to heal for $green$bold$amountHealed hp$reset. <<<")
+        println("   $white>>>$reset $bold$blue${target.name}$reset drinks a $bold${green1}Health Potion$reset to heal for $green2$amountHealed hp$reset. $white<<<$reset")
     }
 
     override fun toString(): String {
