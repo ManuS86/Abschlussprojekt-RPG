@@ -35,7 +35,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
         val amntHealed = hp - preHealHp
         println("       $white>>>$reset $bold$yellow2$name$reset drains $bold$blue2${target.name}$reset for $red2$dmgAmnt dmg$reset and heals $bold${yellow2}himself$reset for $green2$amntHealed hp$reset with $bold${yellow1}Vampiric Touch$reset $white<<<$reset")
         Thread.sleep(200)
-        println("                            $white>>>$reset $bold$yellow2$name$reset now has $green2$hp hp$reset and $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("                       $white>>>$reset $bold$yellow2$name$reset now has $green2$hp hp$reset and $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
