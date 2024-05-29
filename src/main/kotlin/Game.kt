@@ -105,7 +105,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (it.burning) {
                 it.hp -= (15 * mage.skillMod).roundToInt()
                 println()
-                println("                                      $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
+                println("                                     $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
                 Thread.sleep(200)
             }
         }
