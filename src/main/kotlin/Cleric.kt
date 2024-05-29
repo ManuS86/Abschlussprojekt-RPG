@@ -16,6 +16,7 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
                 }
             }$reset for $green2$amntHealed hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset"
         )
+        Thread.sleep(200)
         println("               $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
     }
 
@@ -26,6 +27,7 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
         println("   $white>>>$reset $bold$blue2$name$reset heals all allies $bold$blue2${targets.map { it.name }}$reset for $green2$amntsHealed hp$reset with $bold${blue1}Healing Wave$reset $white<<<$reset")
+        Thread.sleep(200)
         println("                   $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now have $green2${targets.map { it.hp }} hp$reset $white<<<$reset")
     }
 

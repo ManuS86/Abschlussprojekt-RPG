@@ -8,6 +8,7 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
         val dmgAmnt = (50 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
         println("           $white>>>$reset $bold$yellow2$name$reset deals $red2$dmgAmnt dmg$reset to $blue2$bold${target.name}$reset with $bold${yellow1}Smash$reset $white<<<$reset")
+        Thread.sleep(200)
         println("                     $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
@@ -15,13 +16,15 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     fun groundSlam(targets: List<Hero>) {
         targets.forEach { it.hp -= (30 * dmgMod / it.tenacity).roundToInt() }
         println("           $white>>>$reset $bold$yellow2$name$reset deals $red2${targets.map { (20 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${yellow1}Ground Slam$reset $white<<<$reset")
-        println("               $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
-            if (targets.size == 1) {
-                "has"
-            } else {
-                "have"
-            }
-        } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
+        Thread.sleep(200)
+        println(
+            "               $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
+                if (targets.size == 1) {
+                    "has"
+                } else {
+                    "have"
+                }
+            } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
         )
         deathCheckAoe(targets)
     }

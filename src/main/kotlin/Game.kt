@@ -161,7 +161,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             println()
             println("$necro attacks your party of ${heroes.filter { it.hp > 0 }}.")
             println()
-            Thread.sleep(600)
+            Thread.sleep(400)
             necroAttack()
             println()
             if (gameOverCheck()) {
@@ -175,7 +175,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             println()
             println("The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.")
             println()
-            Thread.sleep(600)
+            Thread.sleep(400)
             golemAttack()
             println()
             if (gameOverCheck()) {
@@ -214,21 +214,21 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun warriorTurn(attackers: MutableList<Hero>) {
-        Thread.sleep(500)
+        Thread.sleep(400)
         warriorAttack()
         attackers.remove(warrior)
         println()
     }
 
     private fun mageTurn(attackers: MutableList<Hero>) {
-        Thread.sleep(500)
+        Thread.sleep(400)
         mageAttack()
         attackers.remove(mage)
         println()
     }
 
     private fun clericTurn(attackers: MutableList<Hero>) {
-        Thread.sleep(500)
+        Thread.sleep(400)
         clericAttack()
         attackers.remove(cleric)
         println()
@@ -237,6 +237,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun golemAttack() {
         when ((1..3).random()) {
             1 -> {
+                Thread.sleep(500)
                 if (warrior.isTaunting && warrior.hp > 0) {
                     golem!!.smash(warrior)
                 } else {
@@ -245,17 +246,19 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             2 -> {
+                Thread.sleep(500)
                 golem!!.groundSlam(heroes.filter { it.hp > 0 })
             }
 
             3 -> {
+                Thread.sleep(500)
                 golem!!.taunt()
             }
         }
     }
 
     private fun necroAttack() {
-        when ((6..6).random()) {
+        when ((1..6).random()) {
             1 -> {
                 Thread.sleep(500)
                 necro.deathWave(heroes.filter { it.hp > 0 })
@@ -318,7 +321,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-            
                 $white>>>$reset It's $warrior$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
@@ -332,7 +334,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
                         warrior.stab(golem!!)
@@ -350,12 +352,12 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             2 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 warrior.swordSwipe(enemies.filter { it.hp > 0 }.toMutableList())
             }
 
             3 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 warrior.taunt()
             }
 
@@ -375,7 +377,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-            
                 $white>>>$reset It's $mage$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
@@ -389,12 +390,12 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 mage.fireball(enemies.filter { it.hp > 0 }.toMutableList())
             }
 
             2 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
                         mage.lightningBolt(golem!!)
@@ -412,12 +413,12 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             3 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 mage.magicMissiles(enemies.filter { it.hp > 0 }.toMutableList())
             }
 
             4 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
                         mage.burn(golem!!)
@@ -447,7 +448,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-            
                 $white>>>$reset It's $cleric$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
@@ -461,7 +461,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 val target = targetHero()
                 if (target.cantHeal) {
                     println("${red2}The target is grievously wounded and can't be healed currently. Try another action.$reset")
@@ -472,19 +472,19 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             2 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 cleric.healingWave(heroes.filter { it.hp > 0 })
             }
 
             3 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 val target = targetHero()
                 cleric.dispel(target)
                 cursedHero = null
             }
 
             4 -> {
-                Thread.sleep(500)
+                Thread.sleep(400)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
                         cleric.cripple(golem!!)
@@ -522,13 +522,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
         when (select(prompt, errMsg, 2)) {
             1 -> {
-                Thread.sleep(200)
+                Thread.sleep(400)
                 val target = targetHero()
                 return inventory.tryUseHealthPotion(target)
             }
 
             2 -> {
-                Thread.sleep(200)
+                Thread.sleep(400)
                 val target = targetHero()
                 return inventory.tryUseElixir(target)
             }
@@ -568,6 +568,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         while (true) {
             print("$white>$reset ")
             val input = readln().toIntOrNull()
+            println()
             if (input != null && input in (1..max)) {
                 return input
             }

@@ -21,6 +21,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val dmgAmnt = ((50..60).random() * skillMod).roundToInt()
         target.hp -= dmgAmnt
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt dmg$reset to $bold$yellow2${target.name}$reset with $bold${blue1}Lightning Bolt$reset $white<<<$reset")
+        Thread.sleep(200)
         println("               $white>>>$reset $bold$yellow2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
@@ -33,13 +34,15 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         val target2 = targets.filter { it.hp > 0 }.random()
         target2.hp -= dmgAmnt2
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt1 dmg$reset to $yellow2$bold${target1.name}$reset and $red2$dmgAmnt2 dmg$reset to $yellow2$bold${target2.name}$reset with $blue1${bold}Magic Missiles$reset $white<<<$reset")
-        println("                $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset now ${
-            if (targets.size == 1) {
-                "has"
-            } else {
-                "have"
-            }
-        } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
+        Thread.sleep(200)
+        println(
+            "                $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset now ${
+                if (targets.size == 1) {
+                    "has"
+                } else {
+                    "have"
+                }
+            } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
         )
         deathCheckAoe(targets)
     }
@@ -50,6 +53,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
             target.hp -= dmgAmnt
             target.burning = true
             println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt dmg$reset to $yellow2$bold${target.name}$reset with $bold${blue1}Burn$reset and sets them on fire $white<<<$reset")
+            Thread.sleep(200)
             println("                   $white>>>$reset $bold$yellow2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
             deathCheck(target)
         }
