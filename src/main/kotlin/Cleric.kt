@@ -41,7 +41,7 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
                 } else {
                     "${target.name}'s"
                 }
-            }$reset ${red1}negative effects$reset with $bold${blue1}Dispel$reset $white<<<$reset"
+            }$reset ${yellow1}negative effects$reset with $bold${blue1}Dispel$reset $white<<<$reset"
         )
     }
 
@@ -49,7 +49,7 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("    $white>>>$reset $bold$blue2$name$reset reduced $yellow2$bold${target.name}'s$reset dmg by ${red2}10%$reset with $bold${blue1}Cripple$reset $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset reduced $red2$bold${target.name}'s$reset dmg by ${yellow2}10%$reset with $bold${blue1}Cripple$reset $white<<<$reset")
     }
 
     override fun toString(): String {
