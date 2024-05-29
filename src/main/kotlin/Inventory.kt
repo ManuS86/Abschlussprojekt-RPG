@@ -38,6 +38,6 @@ class Inventory(
     }
 
     override fun toString(): String {
-        return "Inventory: $content"
+        return "$white${bold}Inventory$reset: $content"
     }
 }

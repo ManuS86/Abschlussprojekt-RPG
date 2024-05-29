@@ -11,6 +11,6 @@ class HealthPotion : Potion() {
     }
 
     override fun toString(): String {
-        return "Health Potion"
+        return "$bold${green1}Health Potion$reset"
     }
 }

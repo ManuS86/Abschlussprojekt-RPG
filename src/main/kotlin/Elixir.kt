@@ -6,6 +6,6 @@ class Elixir : Potion() {
     }
 
     override fun toString(): String {
-        return "Elixir"
+        return "$bold${green1}Elixir$reset"
     }
 }

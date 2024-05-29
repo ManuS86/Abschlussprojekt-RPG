@@ -5,7 +5,13 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
         val preHealHp = target.hp
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
-        println("    $white>>>$reset $bold$blue2$name$reset heals $bold$blue2${target.name}$reset for $green2$amntHealed hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset heals $bold$blue2${
+            if (target.name == name) {
+            "herself"
+        } else {
+            target.name
+        }
+        }$reset for $green2$amntHealed hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset")
         println("               $white>>>$reset $bold$blue2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
     }
 
@@ -20,7 +26,13 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
     }
 
     fun dispel(target: Hero) {
-        println("    $white>>>$reset $bold$blue2$name$reset removed $bold$blue2${target.name}'s$reset curse with $bold${blue1}Dispel$reset $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset removed $bold$blue2${
+            if (target.name == name) {
+                "her"
+            } else {
+                "${ target.name }'s"
+            }
+        }$reset ${red1}Curse$reset with $bold${blue1}Dispel$reset $white<<<$reset")
     }
 
     fun cripple(target: Enemy) {
@@ -31,6 +43,6 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "$name (Cleric, ${hp} hp)"
+        return "$bold$blue2$name$reset $white($reset${blue1}Cleric$reset, $green2${hp} hp$reset$white)$reset"
     }
 }
