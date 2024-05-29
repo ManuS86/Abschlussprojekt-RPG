@@ -25,8 +25,8 @@ abstract class Hero(val name: String, val maxHp: Int) {
                 }$reset ${
                     if (targets.filter { it.hp <= 0 }.size == 1) {
                         "is"
-                } else {
-                    "are"
+                    } else {
+                        "are"
                     }
                 } dead. $white<<<$reset"
             )

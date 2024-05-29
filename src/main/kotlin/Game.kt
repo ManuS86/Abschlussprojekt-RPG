@@ -255,7 +255,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun necroAttack() {
-        when ((1..6).random()) {
+        when ((6..6).random()) {
             1 -> {
                 Thread.sleep(500)
                 necro.deathWave(heroes.filter { it.hp > 0 })

@@ -8,14 +8,21 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
         val dmgAmnt = (50 * dmgMod).roundToInt()
         target.hp -= dmgAmnt
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt dmg$reset to $yellow2$bold${target.name}$reset with $bold${blue1}Stab$reset $white<<<$reset")
-        println("           $white>>>$reset $bold$yellow2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
+        println("           $white>>>$reset $bold$yellow2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
     fun swordSwipe(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= (30 * dmgMod).roundToInt() }
-        println("    $white>>>$reset $bold$blue2$name$reset deals $red2${(30 * dmgMod).roundToInt()} dmg$reset to $yellow2${bold}each enemy$reset with $bold${blue1}Sword Swipe$reset $white<<<$reset")
-        println("             $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset deals $red2${(30 * dmgMod).roundToInt()} dmg$reset to $bold${yellow2}each enemy$reset with $bold${blue1}Sword Swipe$reset $white<<<$reset")
+        println("             $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset now ${
+            if (targets.size == 1) {
+                "has"
+            } else {
+                "have"
+            }
+        } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
+        )
         deathCheckAoe(targets)
     }
 
