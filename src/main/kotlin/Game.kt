@@ -217,18 +217,21 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(500)
         warriorAttack()
         attackers.remove(warrior)
+        println()
     }
 
     private fun mageTurn(attackers: MutableList<Hero>) {
         Thread.sleep(500)
         mageAttack()
         attackers.remove(mage)
+        println()
     }
 
     private fun clericTurn(attackers: MutableList<Hero>) {
         Thread.sleep(500)
         clericAttack()
         attackers.remove(cleric)
+        println()
     }
 
     private fun golemAttack() {
@@ -448,8 +451,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $blue2$bold$cleric's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}30-40 hp$reset.)
-            2. $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}20-30 hp$reset.)
+            1. $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}35-45 hp$reset.)
+            2. $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}25-35 hp$reset.)
             3. $bold${blue1}Dispel$reset (Dispel $bold${blue2}an ally's$reset debuff.)
             4. $bold${blue1}Cripple$reset (Reduce $bold${yellow2}an enemy's$reset dmg dealt by ${red2}10%$reset.)
             5. $bold${blue1}Use Item$reset
