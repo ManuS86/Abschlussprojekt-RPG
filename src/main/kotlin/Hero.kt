@@ -10,4 +10,20 @@ abstract class Hero(val name: String, val maxHp: Int) {
     fun heal(healAmount: Int) {
         hp = min(hp + healAmount, maxHp)
     }
+
+    fun deathCheck(target: Enemy) {
+        if (target.hp <= 0) {
+            println("       $white>>>$reset $bold$yellow2${target.name}$reset is dead. $white<<<$reset")
+        }
+    }
+
+    fun deathCheckAoe(targets: MutableList<Enemy>) {
+        if (targets.any { it.hp <= 0 }) {
+            println(
+                "       $white>>>$reset $bold$yellow2${
+                    targets.filter { it.hp <= 0 }.map { it.name }
+                }$reset are dead. $white<<<$reset"
+            )
+        }
+    }
 }

@@ -5,7 +5,8 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2${(40 * dmgMod).roundToInt()} dmg$reset to $bold${yellow2}each enemy$reset with $bold${blue1}Fireball$reset $white<<<$reset")
-        println("           $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        println("       $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        deathCheckAoe(targets)
     }
 
     fun lightningBolt(target: Enemy) {
@@ -13,6 +14,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         target.hp -= dmgAmnt
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt dmg$reset to $bold$yellow2${target.name}$reset with $bold${blue1}Lightning Bolt$reset $white<<<$reset")
         println("               $white>>>$reset $bold$yellow2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
+        deathCheck(target)
     }
 
     fun magicMissiles(targets: MutableList<Enemy>) {
@@ -24,6 +26,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         target2.hp -= dmgAmnt2
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt1 dmg$reset to $yellow2$bold${target1.name}$reset and $red2$dmgAmnt2 dmg$reset to $yellow2$bold${target2.name}$reset with $blue1${bold}Magic Missiles$reset $white<<<$reset")
         println("                $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        deathCheckAoe(targets)
     }
 
     fun burn(target: Enemy) {
@@ -33,6 +36,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
             target.burning = true
             println("    $white>>>$reset $bold$blue2$name$reset deals $red2$dmgAmnt dmg$reset to $yellow2$bold${target.name}$reset with $bold${blue1}Burn$reset and sets them on fire $white<<<$reset")
             println("                   $white>>>$reset $bold$yellow2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
+            deathCheck(target)
         }
     }
 
