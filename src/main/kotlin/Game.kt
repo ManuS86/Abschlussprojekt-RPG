@@ -28,9 +28,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(
             """
-            The ${blue2}heroes$reset $cleric, $mage and $warrior are fighting the ${red2}boss$reset $necro.
-            Defeat him before it's too late!
-        """.trimIndent()
+            The heroes $cleric, $mage and $warrior are fighting the boss $necro.
+                                                          Defeat him before it's too late!
+            """.trimIndent()
         )
         println()
 
