@@ -7,8 +7,8 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     fun smash(target: Hero) {
         val dmgAmnt = (50 * dmgMod / target.tenacity).roundToInt()
         target.hp -= dmgAmnt
-        println("           $white>>>$reset $bold$yellow2$name$reset deals $bold$red2$dmgAmnt dmg$reset to $blue2$bold${target.name}$reset with $bold${yellow1}Smash$reset $white<<<$reset")
-        println("                   $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("           $white>>>$reset $bold$yellow2$name$reset deals $red2$dmgAmnt dmg$reset to $blue2$bold${target.name}$reset with $bold${yellow1}Smash$reset $white<<<$reset")
+        println("                     $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
