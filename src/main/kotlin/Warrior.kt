@@ -9,7 +9,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
         target.hp -= dmgAmnt
         println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2$dmgAmnt dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Stab$reset $white<<<$reset")
         Thread.sleep(200)
-        println("           $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("              $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 

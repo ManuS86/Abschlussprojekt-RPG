@@ -6,7 +6,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         targets.forEach { it.hp -= ((35..45).random() * skillMod).roundToInt() }
         println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Fireball$reset $white<<<$reset")
         println(
-            "       $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
+            "        $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
