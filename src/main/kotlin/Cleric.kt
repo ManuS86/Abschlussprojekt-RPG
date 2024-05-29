@@ -26,13 +26,15 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
     }
 
     fun dispel(target: Hero) {
-        println("    $white>>>$reset $bold$blue2$name$reset removed $bold$blue2${
+        target.cantHeal = false
+        target.cantHealTimer = 0
+        println("    $white>>>$reset $bold$blue2$name$reset removed all of $bold$blue2${
             if (target.name == name) {
                 "her"
             } else {
                 "${ target.name }'s"
             }
-        }$reset ${red1}Curse$reset with $bold${blue1}Dispel$reset $white<<<$reset")
+        }$reset ${red1}negative effects$reset with $bold${blue1}Dispel$reset $white<<<$reset")
     }
 
     fun cripple(target: Enemy) {
