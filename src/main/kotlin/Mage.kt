@@ -5,7 +5,7 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= ((35..45).random() * dmgMod).roundToInt() }
         println("    $white>>>$reset $bold$blue2$name$reset deals $red2${(40 * dmgMod).roundToInt()} dmg$reset to $bold${yellow2}each enemy$reset with $bold${blue1}Fireball$reset $white<<<$reset")
-        println("      $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        println("           $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
     }
 
     fun lightningBolt(target: Enemy) {

@@ -5,7 +5,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
     fun deathWave(targets: List<Hero>) {
         targets.forEach { it.hp -= (40 * dmgMod / it.tenacity).roundToInt() }
         println("       $white>>>$reset $bold$yellow2$name$reset deals $red2${(40 * dmgMod).roundToInt()} dmg$reset to each hero with $bold${yellow1}Death Wave$reset $white<<<$reset")
-        println("       $white>>>$reset $bold$blue2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        println("      $white>>>$reset $bold$blue2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
     }
 
     fun blight(target: Hero) {
@@ -22,7 +22,7 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
         heal(dmgAmnt)
         val amntHealed = hp - preHealHp
         println("       $white>>>$reset $bold$yellow2$name$reset drains $bold$blue2${target.name}$reset for $red2$dmgAmnt dmg$reset and heals $bold${yellow2}himself$reset for $green2$amntHealed hp$reset with $bold${yellow1}Vampiric Touch$reset $white<<<$reset")
-        println("                       $white>>>$reset $bold$blue2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
+        println("                            $white>>>$reset $bold$blue2${target.name}$reset has $green2${target.hp} hp$reset left. $white<<<$reset")
     }
 
     fun grievousWounds(target: Hero) {

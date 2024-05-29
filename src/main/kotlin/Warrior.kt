@@ -13,8 +13,8 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
 
     fun swordSwipe(targets: List<Enemy>) {
         targets.forEach { it.hp -= (30 * dmgMod).roundToInt() }
-        println("           $white>>>$reset $bold$blue2$name$reset deals $red2${(30 * dmgMod).roundToInt()} dmg$reset to $yellow2${bold}each enemy$reset with $bold${blue1}Sword Swipe$reset $white<<<$reset")
-        println("      $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset deals $red2${(30 * dmgMod).roundToInt()} dmg$reset to $yellow2${bold}each enemy$reset with $bold${blue1}Sword Swipe$reset $white<<<$reset")
+        println("             $white>>>$reset $bold$yellow2${targets.map { it.name }}$reset have $green2${targets.map { it.hp }} hp$reset left. $white<<<$reset")
     }
 
     fun taunt() {
