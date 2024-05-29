@@ -1,6 +1,6 @@
 import kotlin.math.min
 
-open class Hero(val name: String, val maxHp: Int) {
+abstract class Hero(val name: String, val maxHp: Int) {
     var hp = maxHp
     var dmgMod = 1.0
     var tenacity = 1.0
