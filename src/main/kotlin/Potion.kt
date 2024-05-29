@@ -1,4 +1,4 @@
-open class Potion {
+abstract class Potion {
     open fun use(target: Hero) {
     }
 }

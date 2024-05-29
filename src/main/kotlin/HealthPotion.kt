@@ -1,12 +1,6 @@
 import kotlin.math.roundToInt
 
 class HealthPotion : Potion() {
-    private val white = "\u001B[97m"
-    private val green1 = "\u001B[32m"
-    private val green2 = "\u001B[92m"
-    private val blue2 = "\u001B[94m"
-    private val bold = "\u001B[1m"
-    private val reset = "\u001B[0m"
 
     override fun use(target: Hero) {
         val healAmount = (target.maxHp * 0.5).roundToInt()
