@@ -28,7 +28,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(
             """
-            The heroes $cleric, $mage and $warrior are fighting the boss $necro.
+            The ${blue2}heroes$reset $cleric, $mage and $warrior are fighting the ${yellow2}boss$reset $necro.
             Defeat him before it's too late!
         """.trimIndent()
         )
@@ -103,9 +103,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         enemies.forEach {
             if (it.burning) {
-                it.hp -= (15 * mage.dmgMod).roundToInt()
+                it.hp -= (15 * mage.skillMod).roundToInt()
                 println()
-                println("              $white>>>$reset $yellow2$bold${it.name}$reset is ${red1}burning$reset and takes ${red2}${(15 * mage.dmgMod).roundToInt()} dmg$reset $white<<<$reset")
+                println("              $white>>>$reset $yellow2$bold${it.name}$reset is ${red1}burning$reset and takes ${red2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
                 Thread.sleep(200)
             }
         }
@@ -322,8 +322,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $warrior$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Stab$reset (Deal ${red2}50 dmg$reset to $bold${yellow2}an enemy$reset.)
-            2. $bold${blue1}Sword Swipe$reset (Deal ${red2}30 dmg$reset to $bold${yellow2}each enemy$reset.)
+            1. $bold${blue1}Stab$reset (Deal ${red2}${(50 * warrior.skillMod).roundToInt()} dmg$reset to $bold${yellow2}an enemy$reset.)
+            2. $bold${blue1}Sword Swipe$reset (Deal ${red2}${(30 * warrior.skillMod).roundToInt()} dmg$reset to $bold${yellow2}each enemy$reset.)
             3. $bold${blue1}Taunt$reset (Force $bold${yellow2}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
             4. $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
             5. $bold${blue1}Use Item$reset
@@ -379,10 +379,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $mage$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Fireball$reset (Deal ${red2}35-45 dmg$reset to $bold${yellow2}each enemy$reset.)
-            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}50-60 dmg$reset to $bold${yellow2}an enemy$reset.)
-            3. $bold${blue1}Magic Missiles$reset (Deal ${red2}20-35 dmg$reset to $bold${yellow2}a random enemy$reset, then repeat $bold${blue1}this$reset.)
-            4. $bold${blue1}Burn$reset (Deal ${red2}30 dmg$reset to $bold${yellow2}an enemy$reset and burn them for an additional ${red2}15 dmg$reset ${green2}each turn$reset.)
+            1. $bold${blue1}Fireball$reset (Deal ${red2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} dmg$reset to $bold${yellow2}each enemy$reset.)
+            2. $bold${blue1}Lightning Bolt$reset (Deal ${red2}${(50 * mage.skillMod).roundToInt()}-${(60 * mage.skillMod).roundToInt()} dmg$reset to $bold${yellow2}an enemy$reset.)
+            3. $bold${blue1}Magic Missiles$reset (Deal ${red2}${(20 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} dmg$reset to $bold${yellow2}a random enemy$reset, then repeat $bold${blue1}this$reset.)
+            4. $bold${blue1}Burn$reset (Deal ${red2}${(30 * mage.skillMod).roundToInt()} dmg$reset to $bold${yellow2}an enemy$reset and burn them for an additional ${red2}${(15 * mage.skillMod).roundToInt()} dmg$reset ${green2}each turn$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
@@ -451,8 +451,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $white>>>$reset It's $cleric$blue2$bold's$reset turn. $white<<<$reset
             
             Choose which ability to use:
-            1. $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}35-45 hp$reset.)
-            2. $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}25-35 hp$reset.)
+            1. $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} hp$reset.)
+            2. $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}${(25 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} hp$reset.)
             3. $bold${blue1}Dispel$reset (Dispel $bold${blue2}an ally's$reset debuff.)
             4. $bold${blue1}Cripple$reset (Reduce $bold${yellow2}an enemy's$reset dmg dealt by ${red2}10%$reset.)
             5. $bold${blue1}Use Item$reset

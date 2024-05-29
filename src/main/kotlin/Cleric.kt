@@ -1,7 +1,9 @@
+import kotlin.math.roundToInt
+
 class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
 
     fun healingHands(target: Hero) {
-        val healAmnt = (35..45).random()
+        val healAmnt = ((35..45).random() * skillMod).roundToInt()
         val preHealHp = target.hp
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
@@ -18,7 +20,7 @@ class Cleric(name: String, maxHp: Int = 90) : Hero(name, maxHp) {
     }
 
     fun healingWave(targets: List<Hero>) {
-        val healAmnt = (25..35).random()
+        val healAmnt = ((25..35).random() * skillMod).roundToInt()
         val preHealHp = targets.map { it.hp }
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
