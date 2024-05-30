@@ -325,7 +325,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             
             Choose which ability to use:
             1. $bold${blue1}Stab$reset (Deal ${yellow2}${(50 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
-            2. $bold${blue1}Sword Swipe$reset (Deal ${yellow2}${(30 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
+            2. $bold${blue1}Cleave$reset (Deal ${yellow2}${(30 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
             3. $bold${blue1}Taunt$reset (Force $bold${red2}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
             4. $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
             5. $bold${blue1}Use Item$reset
@@ -353,7 +353,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             2 -> {
                 Thread.sleep(400)
-                warrior.swordSwipe(enemies.filter { it.hp > 0 }.toMutableList())
+                warrior.cleave(enemies.filter { it.hp > 0 }.toMutableList())
             }
 
             3 -> {

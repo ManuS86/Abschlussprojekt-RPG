@@ -13,9 +13,9 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
         deathCheck(target)
     }
 
-    fun swordSwipe(targets: MutableList<Enemy>) {
+    fun cleave(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= (30 * skillMod).roundToInt() }
-        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Sword Swipe$reset $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Cleave$reset $white<<<$reset")
         Thread.sleep(200)
         println(
             "             $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
