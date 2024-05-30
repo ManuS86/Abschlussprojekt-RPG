@@ -18,7 +18,7 @@ abstract class Enemy(var name: String, val maxHp: Double) {
     fun deathCheckAoe(targets: List<Hero>) {
         if (targets.any { it.hp <= 0 }) {
             println(
-                "               $white>>>$reset $bold${blue2}2${
+                "            $white>>>$reset $bold${blue2}2${
                     targets.filter { it.hp <= 0 }.map { it.name }
                 }$reset ${
                     if (targets.filter { it.hp <= 0 }.size == 1) {
