@@ -46,19 +46,26 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun gameOver(nr: Int) {
-        println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
+        //println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
+        println("$bold$white\n" +
+                "                   ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \n" +
+                "                  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗\n" +
+                "                  ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝\n" +
+                "                  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗\n" +
+                "                  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║\n" +
+                "                   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝\n" +
+                "                                                                                            \n$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
+            println("                                    $white>>> The fight lasted $nr rounds <<<$reset")
             println()
-            println("                                             $white>>> The fight lasted $nr rounds <<<$reset")
-            println()
-            println("                                         $white>>>$reset $yellow2${bold}All your ${blue2}heroes$reset$yellow2${bold} are dead. You lost!$reset $white<<<$reset")
+            println("                                $white>>>$reset $yellow2${bold}All your ${blue2}heroes$reset$yellow2${bold} are dead. You lost!$reset $white<<<$reset")
         } else {
             Thread.sleep(200)
             println()
-            println("                                              $white>>> The fight lasted $nr rounds <<<$reset")
+            println("                                     $white>>> The fight lasted $nr rounds <<<$reset")
             println()
-            println("                                         $white>>>$reset $green2${bold}All ${red2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
+            println("                                $white>>>$reset $green2${bold}All ${red2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
         }
     }
 
