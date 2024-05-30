@@ -49,7 +49,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun gameOver(nr: Int) {
-        println("$bold$white                    -------------------------------------- GAME OVER --------------------------------------$reset")
+        println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
             println()
@@ -90,7 +90,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun round(nr: Int) {
-        println("$bold$white                    -------------------------------------- ROUND $nr --------------------------------------$reset")
+        println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero = null
@@ -258,7 +258,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun necroAttack() {
-        when ((1..1).random()) {
+        when ((1..6).random()) {
             1 -> {
                 Thread.sleep(500)
                 necro.deathWave(heroes.filter { it.hp > 0 })
