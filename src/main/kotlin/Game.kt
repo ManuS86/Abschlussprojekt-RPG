@@ -118,9 +118,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         while (!gameOverCheck() && attackers.size > 0) {
             val prompt =
                 """
-            $attackers
-            Select an attacker ${blue2}1, 2, ...$reset:
-            """.trimIndent()
+                $attackers
+                Select an attacker ${blue2}1, 2, ...$reset:
+                """.trimIndent()
             val errMsg = "${red1}Invalid Input. Please try again:$reset"
 
             Thread.sleep(500)
