@@ -4,10 +4,10 @@ class Necromancer(name: String, maxHp: Int = 500) : Enemy(name, maxHp) {
 
     fun deathWave(targets: List<Hero>) {
         targets.forEach { it.hp -= (40 * dmgMod / it.tenacity).roundToInt() }
-        println("                                               $white>>>$reset $bold$red2$name$reset deals $yellow2${(40 * dmgMod).roundToInt()} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${red1}Death Wave$reset $white<<<$reset")
+        println("                     $white>>>$reset $bold$red2$name$reset deals $yellow2${(40 * dmgMod).roundToInt()} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${red1}Death Wave$reset $white<<<$reset")
         Thread.sleep(200)
         println(
-            "                                                           $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
+            "                                  $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
