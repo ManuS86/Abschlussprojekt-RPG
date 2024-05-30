@@ -29,19 +29,18 @@ The inventory contains multiple items with different abilities:
     * 1x Elixir: increases a heroes permanently by 10%
 
 
-### Information about the Boss and his Golem:
+### Information about the Boss and the Golem:
 
 
 
 * The boss is a Necromancer who can summon a Golem when he drops below 50% max. HP
-* The Necromancer has 6 different abilities
-* Boss abilities:
+* The Necromancer abilities:
     * Death Wave: deals damage to each hero. 
     * Curse: can only affect one hero at a time **reduces the HP of the target by 10% of their max HP every turn until they reach 20% of their max HP**.
     * Vampiric Touch: drains a heros HP and heals the boss for the amount of damage dealt
     * Grievous Wounds: deals damage to a hero and prevents them from healing for one turn
     * Blight: deals a lot of damage to a hero
-      * Summon Golem: summons a **Golem** once per game, when the boss drops **below 50% max HP**. It has less HP than the Necromancer and only 3 attacks. It attacks after the Necromancer each turn.
+    * Summon Golem: summons a **Golem** once per game, when the boss drops **below 50% max HP**. It has less HP than the Necromancer and only 3 attacks. It attacks after the Necromancer each turn.
 * Golem abilities:
     * Smash: deals a lot of damage to a hero
     * Ground Slam: deals damage to each hero
