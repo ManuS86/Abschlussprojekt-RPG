@@ -13,7 +13,7 @@ abstract class Hero(val name: String, val maxHp: Double) {
 
     fun deathCheck(target: Enemy) {
         if (target.hp <= 0) {
-            println("                $white>>>$reset $bold$red2${target.name}$reset is dead. $white<<<$reset")
+            println("                  $white>>>$reset $bold$red2${target.name}$reset is dead. $white<<<$reset")
         }
     }
 

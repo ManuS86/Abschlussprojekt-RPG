@@ -22,7 +22,7 @@ class Mage(name: String, maxHp: Double = 80.0) : Hero(name, maxHp) {
         target.hp -= dmgAmnt
         println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $bold$red2${target.name}$reset with $bold${blue1}Lightning Bolt$reset $white<<<$reset")
         Thread.sleep(200)
-        println("               $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("                  $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
