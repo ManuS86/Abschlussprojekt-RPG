@@ -258,61 +258,57 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun necroAttack() {
-        when ((1..6).random()) {
-            1 -> {
-                Thread.sleep(500)
-                necro.deathWave(heroes.filter { it.hp > 0 })
-            }
-
-            2 -> {
-                Thread.sleep(500)
-                if (warrior.isTaunting && warrior.hp > 0) {
-                    necro.blight(warrior)
-                } else {
-                    necro.blight(heroes.filter { it.hp > 0 }.random())
+        if (golem == null && necro.hp <= necro.maxHp * 0.5) {
+            Thread.sleep(500)
+            necro.summonGolem(enemies)
+            golem = enemies[1] as Golem
+        } else {
+            when ((1..5).random()) {
+                1 -> {
+                    Thread.sleep(500)
+                    necro.deathWave(heroes.filter { it.hp > 0 })
                 }
-            }
 
-            3 -> {
-                Thread.sleep(500)
-                if (warrior.isTaunting && warrior.hp > 0) {
-                    necro.vampiricTouch(warrior)
-                } else {
-                    necro.vampiricTouch(heroes.filter { it.hp > 0 }.random())
-                }
-            }
-
-            4 -> {
-                Thread.sleep(500)
-                if (warrior.isTaunting && warrior.hp > 0) {
-                    necro.grievousWounds(warrior)
-                } else {
-                    necro.grievousWounds(heroes.filter { it.hp > 0 }.random())
-                }
-            }
-
-            5 -> {
-                Thread.sleep(500)
-                if (cursedHero == null) {
+                2 -> {
+                    Thread.sleep(500)
                     if (warrior.isTaunting && warrior.hp > 0) {
-                        cursedHero = warrior
-                        necro.bestowCurse(cursedHero!!)
+                        necro.blight(warrior)
                     } else {
-                        cursedHero = heroes.filter { it.hp > 0 }.random()
-                        necro.bestowCurse(cursedHero!!)
+                        necro.blight(heroes.filter { it.hp > 0 }.random())
                     }
-                } else {
-                    necroAttack()
                 }
-            }
 
-            6 -> {
-                Thread.sleep(500)
-                if (golem == null && necro.hp <= necro.maxHp * 0.5) {
-                    necro.summonGolem(enemies)
-                    golem = enemies[1] as Golem
-                } else {
-                    necroAttack()
+                3 -> {
+                    Thread.sleep(500)
+                    if (warrior.isTaunting && warrior.hp > 0) {
+                        necro.vampiricTouch(warrior)
+                    } else {
+                        necro.vampiricTouch(heroes.filter { it.hp > 0 }.random())
+                    }
+                }
+
+                4 -> {
+                    Thread.sleep(500)
+                    if (warrior.isTaunting && warrior.hp > 0) {
+                        necro.grievousWounds(warrior)
+                    } else {
+                        necro.grievousWounds(heroes.filter { it.hp > 0 }.random())
+                    }
+                }
+
+                5 -> {
+                    Thread.sleep(500)
+                    if (cursedHero == null) {
+                        if (warrior.isTaunting && warrior.hp > 0) {
+                            cursedHero = warrior
+                            necro.bestowCurse(cursedHero!!)
+                        } else {
+                            cursedHero = heroes.filter { it.hp > 0 }.random()
+                            necro.bestowCurse(cursedHero!!)
+                        }
+                    } else {
+                        necroAttack()
+                    }
                 }
             }
         }
