@@ -1,20 +1,20 @@
 import kotlin.math.roundToInt
 
-class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
+class Warrior(name: String, maxHp: Double = 100.0) : Hero(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
 
     fun stab(target: Enemy) {
-        val dmgAmnt = (50 * skillMod).roundToInt()
+        val dmgAmnt = 50 * skillMod
         target.hp -= dmgAmnt
-        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2$dmgAmnt dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Stab$reset $white<<<$reset")
+        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Stab$reset $white<<<$reset")
         Thread.sleep(200)
-        println("              $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("              $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
     fun cleave(targets: MutableList<Enemy>) {
-        targets.forEach { it.hp -= (30 * skillMod).roundToInt() }
+        targets.forEach { it.hp -= 30 * skillMod }
         println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Cleave$reset $white<<<$reset")
         Thread.sleep(200)
         println(
@@ -24,7 +24,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
+            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
         )
         deathCheckAoe(targets)
     }
@@ -41,6 +41,6 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "$bold$blue2$name$reset $white($reset${blue1}Warrior$reset, $green2${hp} hp$reset$white)$reset"
+        return "$bold$blue2$name$reset $white($reset${blue1}Warrior$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
     }
 }

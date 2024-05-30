@@ -1,20 +1,20 @@
 import kotlin.math.roundToInt
 
-class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
+class Golem(name: String, maxHp: Double = 250.0) : Enemy(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
 
     fun smash(target: Hero) {
-        val dmgAmnt = (50 * dmgMod / target.tenacity).roundToInt()
+        val dmgAmnt = 50 * dmgMod / target.tenacity
         target.hp -= dmgAmnt
-        println("                                                   $white>>>$reset $bold$red2$name$reset deals $yellow2$dmgAmnt dmg$reset to $blue2$bold${target.name}$reset with $bold${red1}Smash$reset $white<<<$reset")
+        println("                                                   $white>>>$reset $bold$red2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $blue2$bold${target.name}$reset with $bold${red1}Smash$reset $white<<<$reset")
         Thread.sleep(200)
-        println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
         deathCheck(target)
     }
 
     fun groundSlam(targets: List<Hero>) {
-        targets.forEach { it.hp -= (30 * dmgMod / it.tenacity).roundToInt() }
+        targets.forEach { it.hp -= 30 * dmgMod / it.tenacity }
         println("                                                   $white>>>$reset $bold$red2$name$reset deals $yellow2${targets.map { (20 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${red1}Ground Slam$reset $white<<<$reset")
         Thread.sleep(200)
         println(
@@ -24,7 +24,7 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp }} hp$reset $white<<<$reset"
+            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
         )
         deathCheckAoe(targets)
     }
@@ -36,6 +36,6 @@ class Golem(name: String, maxHp: Int = 250) : Enemy(name, maxHp) {
     }
 
     override fun toString(): String {
-        return "$bold$red2$name$reset $white($reset$green2${hp} hp$reset$white)$reset"
+        return "$bold$red2$name$reset $white($reset$green2${hp.roundToInt()} hp$reset$white)$reset"
     }
 }

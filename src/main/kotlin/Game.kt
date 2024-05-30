@@ -92,7 +92,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 cursedHero = null
             }
-            cursedHero!!.hp -= (cursedHero!!.maxHp * 0.1).roundToInt()
+            cursedHero!!.hp -= cursedHero!!.maxHp * 0.1
             println()
             println("                                           $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${yellow1}cursed$reset and loses $yellow2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
             Thread.sleep(200)
@@ -100,7 +100,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
         enemies.forEach {
             if (it.burning) {
-                it.hp -= (15 * mage.skillMod).roundToInt()
+                it.hp -= 15 * mage.skillMod
                 println()
                 println("                                         $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
                 Thread.sleep(200)

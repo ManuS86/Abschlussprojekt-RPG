@@ -1,11 +1,11 @@
 import kotlin.math.min
 
-abstract class Enemy(var name: String, val maxHp: Int) {
+abstract class Enemy(var name: String, val maxHp: Double) {
     var hp = maxHp
     var dmgMod = 1.0
     var burning = false
 
-    fun heal(healAmount: Int) {
+    fun heal(healAmount: Double) {
         hp = min(hp + healAmount, maxHp)
     }
 
