@@ -39,15 +39,15 @@ class Mage(name: String, maxHp: Double = 80.0) : Hero(name, maxHp) {
         println(
             "    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt1.roundToInt()} dmg$reset to $red2$bold${target1.name}$reset ${
                 if (target2 != null) {
-                    "and $yellow2${dmgAmnt2.roundToInt()} dmg $reset to $red2$bold${target2.name}$reset"
+                    "and $yellow2${dmgAmnt2.roundToInt()} dmg$reset to $red2$bold${target2.name}$reset"
                 } else {
                     ""
                 }
-            }with $blue1${bold}Magic Missiles$reset $white<<<$reset"
+            } with $blue1${bold}Magic Missiles$reset $white<<<$reset"
         )
         Thread.sleep(200)
         println(
-            "              $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
+            "                $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
