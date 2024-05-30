@@ -18,7 +18,7 @@ class Warrior(name: String, maxHp: Int = 100) : Hero(name, maxHp) {
         println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Cleave$reset $white<<<$reset")
         Thread.sleep(200)
         println(
-            "             $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
+            "               $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
                 if (targets.size == 1) {
                     "has"
                 } else {

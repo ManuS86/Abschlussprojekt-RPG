@@ -383,7 +383,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             1. $bold${blue1}Fireball$reset (Deal ${yellow2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
             2. $bold${blue1}Lightning Bolt$reset (Deal ${yellow2}${(50 * mage.skillMod).roundToInt()}-${(60 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
             3. $bold${blue1}Magic Missiles$reset (Deal ${yellow2}${(20 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}a random enemy$reset, then repeat $bold${blue1}this$reset.)
-            4. $bold${blue1}Burn$reset (Deal ${yellow2}${(30 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset and burn them for an additional ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset ${green2}each turn$reset.)
+            4. $bold${blue1}Searing Touch$reset (Deal ${yellow2}${(30 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset and burn them for an additional ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset ${green2}each turn$reset.)
             5. $bold${blue1}Use Item$reset
             """.trimIndent()
         val errMsg = "${red1}Invalid Input. Please try again:$reset"
@@ -421,17 +421,17 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Thread.sleep(400)
                 if (enemies.filter { it.hp > 0 }.size > 1) {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
-                        mage.burn(golem!!)
+                        mage.searingTouch(golem!!)
                     } else {
                         val target = targetEnemy()
-                        mage.burn(target)
+                        mage.searingTouch(target)
                     }
                 } else {
                     if (golem != null && golem!!.isTaunting && golem!!.hp > 0) {
-                        mage.burn(golem!!)
+                        mage.searingTouch(golem!!)
                     } else {
                         val target = enemies.filter { it.hp > 0 }[0]
-                        mage.burn(target)
+                        mage.searingTouch(target)
                     }
                 }
             }

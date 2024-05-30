@@ -47,14 +47,14 @@ class Mage(name: String, maxHp: Int = 80) : Hero(name, maxHp) {
         deathCheckAoe(targets)
     }
 
-    fun burn(target: Enemy) {
+    fun searingTouch(target: Enemy) {
         if (!target.burning) {
             val dmgAmnt = (30 * skillMod).roundToInt()
             target.hp -= dmgAmnt
             target.burning = true
-            println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2$dmgAmnt dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Burn$reset and sets them on fire $white<<<$reset")
+            println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2$dmgAmnt dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Searing Touch$reset and sets them on fire $white<<<$reset")
             Thread.sleep(200)
-            println("                   $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+            println("                       $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
             deathCheck(target)
         }
     }
