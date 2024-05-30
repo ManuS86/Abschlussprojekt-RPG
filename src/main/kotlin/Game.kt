@@ -162,7 +162,31 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(600)
 
         if (necro.hp > 0) {
-            println()
+            println(
+                """
+                                          .                                                      .
+                                        .n                   .                 .                  n.
+                                  .   .dP                  dP                   9b                 9b.    .
+                                 4    qXb         .       dX                     Xb       .        dXp     t
+                                dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
+                                9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
+                                 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+                                  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
+                                    `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'
+                                        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
+                                                        )b.  .dbo.dP'`v'`9b.odb.  .dX(
+                                                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
+                                                     dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
+                                                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
+                                                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
+                                                     `'      9XXXXXX(   )XXXXXXP      `'
+                                                              XXXX X.`v'.X XXXX
+                                                              XP^X'`b   d'`X^XX
+                                                              X. 9  `   '  P )X
+                                                              `b  `       '  d'
+                                                               `             '
+                """.trimIndent()
+            )
             println("$necro attacks your party of ${heroes.filter { it.hp > 0 }}.")
             println()
             Thread.sleep(400)
@@ -176,7 +200,33 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(600)
 
         if (golem != null && golem!!.hp > 0) {
-            println()
+            println(
+                """
+                                ⠀⠀⠀⠀⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⡏⠀⠀⠀⡼⠉⠉⠁⢀⡴⠋⠀⠀⠤⢄⡀⠀⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⡇⠀⠀⠀⢧⡀⠀⢠⠎⠀⢠⣤⡞⠒⠲⡌⠃⠀⠀⠀⠱⢤⡀⠀⢀⣀⣀⣀⠀⠀
+                                ⠀⣧⠀⠀⠀⠀⠙⠲⠏⠀⢀⡀⠙⣇⠀⠀⢘⡶⠆⣤⠤⠔⢲⣯⡖⠉⠀⠀⠈⢧⠀
+                                ⠀⢺⣦⡀⠀⠂⠀⠀⠀⠀⠀⢠⣄⠼⣗⠒⠋⠀⠀⠹⣄⣠⣿⡋⡀⢠⣤⡆⠀⢸⠀
+                                ⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠈⠦⣠⠴⣄⢀⣠⣄⣸⠇⠀⣳⣿⣧⠈⢹⠁
+                                ⠀⠀⠀⠘⠶⡆⠀⠆⢶⣴⠀⢾⠀⠀⠀⠀⠀⠀⠈⠉⡼⡭⣭⡴⠖⠼⠛⣿⣿⠏⠀
+                                ⠀⠀⠀⠀⠀⢻⠀⠀⠀⠁⠀⠘⡄⠀⣠⢤⣀⡤⡄⢸⣿⣿⠋⠀⠀⠀ ⠀⠙⠁⠀⠀
+                                ⠀⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠘⠛⢱⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⠀⠀⠀⣸⠁⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⠀⠀⠀⠹⡆⠀⠀⠀⣷⣄⢠⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⠀⠀⠀⢸⠃⠀⡄⠀⠀⠺⠾⠃⠀⠀⠀⠀⠾⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⠀⣀⣀⡴⠋⠀⠛⠁⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠃⠀⢀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⢸⠁⠀⠀⠀⠀⣤⡄⠀⠀⠀⡴⠛⠲⡄⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⡇⠀⠀⠀⣀⠀⠘⠀⠀⣠⠞⠁⠀⠀⢣⠀⠀⠀⠀⠠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
+                                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁⠀⠀⠀⠀⠀⠀⠀
+                """.trimIndent()
+            )
             println("The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.")
             println()
             Thread.sleep(400)
@@ -321,8 +371,19 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-                $white>>>$reset It's $warrior$blue2$bold's$reset turn. $white<<<$reset
+                                 /}
+                                //
+                               /{     />
+                ,_____________///----/{________________________________________________
+              /|=============|/\|---/-/________________________________________________\
+              \|=============|\/|---\-\________________________________________________/
+                '~~~~~~~~~~~~~\\\----\{
+                               \{     \>
+                                \\
+                                 \}
             
+                $white>>>$reset It's $warrior$blue2$bold's$reset turn $white<<<$reset
+
             Choose which ability to use:
             $white[1] $bold${blue1}Stab$reset (Deal ${yellow2}${(50 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
             $white[2] $bold${blue1}Cleave$reset (Deal ${yellow2}${(30 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
@@ -377,8 +438,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-                $white>>>$reset It's $mage$blue2$bold's$reset turn. $white<<<$reset
+                    __...--~~~~~-._   _.-~~~~~--...__
+                  //               `V'               \\ 
+                 //                 |                 \\ 
+                //__...--~~~~~~-._  |  _.-~~~~~~--...__\\ 
+               //__.....----~~~~._\ | /_.~~~~----.....__\\
+              ====================\\|//====================
             
+                $white>>>$reset It's $mage$blue2$bold's$reset turn $white<<<$reset
+
             Choose which ability to use:
             $white[1] $bold${blue1}Fireball$reset (Deal ${yellow2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
             $white[2] $bold${blue1}Lightning Bolt$reset (Deal ${yellow2}${(50 * mage.skillMod).roundToInt()}-${(60 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
@@ -448,7 +516,21 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-                $white>>>$reset It's $cleric$blue2$bold's$reset turn. $white<<<$reset
+                                    .-.
+                              ___  (   )  ___
+                         ,_.-'   `'-| |-'`   '-._,
+                          '.      .-| |-.      .'
+                            `~~~~`  |.') `~~~~`
+                                   (_.|
+                                    |._)
+                                    |.')
+                                   (_.|
+                                    |._)
+                                   ('.|
+                                    |._)
+                                    '-'
+    
+                $white>>>$reset It's $cleric$blue2$bold's$reset turn $white<<<$reset
             
             Choose which ability to use:
             $white[1] $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} hp$reset.)
