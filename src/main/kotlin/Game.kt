@@ -31,6 +31,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(600)
         println("                                            Defeat him before it's too late!")
         println()
+        println()
 
         var nr = 1
 
