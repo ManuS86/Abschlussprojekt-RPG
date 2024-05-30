@@ -25,10 +25,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                     "                                                                                                    \$\$    \$\$/                     \n" +
                     "                                                                                                     \$\$\$\$\$\$/                      \n$reset"
         )
-        Thread.sleep(800)
+        Thread.sleep(600)
         println()
         println("The heroes $cleric, $mage and $warrior are fighting the boss $necro.")
-        Thread.sleep(600)
+        Thread.sleep(400)
         println("                                            Defeat him before it's too late!")
         println()
         println()
@@ -82,7 +82,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val errMsg = "${red1}Invalid Input. Please try again$reset."
         when (select(prompt, errMsg, 2)) {
             1 -> {
-                Thread.sleep(500)
+                Thread.sleep(600)
                 main()
             }
 
@@ -130,7 +130,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 """.trimIndent()
             val errMsg = "${red1}Invalid Input. Please try again:$reset"
 
-            Thread.sleep(500)
+            Thread.sleep(400)
             if (attackers.size > 1) {
                 when (attackers[select(prompt, errMsg, attackers.size) - 1]) {
                     cleric -> {
@@ -167,7 +167,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         if (necro.hp > 0) {
             println(
                 """
-                                                 .                                                      .
+                                                 $red1$bold.                                                      .
                                                .n                   .                 .                  n.
                                          .   .dP                  dP                   9b                 9b.    .
                                         4    qXb         .       dX                     Xb       .        dXp     t
@@ -188,7 +188,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                                                      X. 9  `   '  P )X
                                                                      `b  `       '  d'
                                                                       `             '
-                
+                $reset
                 $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
                 """.trimIndent()
             )
@@ -206,7 +206,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         if (golem != null && golem!!.hp > 0) {
             println(
                 """
-                                                ⠀⠀⠀⠀⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                 ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                 ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                 ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -229,7 +229,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                                 ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
                                                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
-                
+                $reset
                 The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
                 """.trimIndent()
             )
@@ -296,7 +296,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun golemAttack() {
         when ((1..3).random()) {
             1 -> {
-                Thread.sleep(500)
+                Thread.sleep(600)
                 if (warrior.isTaunting && warrior.hp > 0) {
                     golem!!.smash(warrior)
                 } else {
@@ -305,12 +305,12 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
 
             2 -> {
-                Thread.sleep(500)
+                Thread.sleep(600)
                 golem!!.groundSlam(heroes.filter { it.hp > 0 })
             }
 
             3 -> {
-                Thread.sleep(500)
+                Thread.sleep(600)
                 golem!!.taunt()
             }
         }
@@ -318,18 +318,18 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     private fun necroAttack() {
         if (golem == null && necro.hp <= necro.maxHp * 0.5) {
-            Thread.sleep(500)
+            Thread.sleep(600)
             necro.summonGolem(enemies)
             golem = enemies[1] as Golem
         } else {
             when ((1..5).random()) {
                 1 -> {
-                    Thread.sleep(500)
+                    Thread.sleep(600)
                     necro.deathWave(heroes.filter { it.hp > 0 })
                 }
 
                 2 -> {
-                    Thread.sleep(500)
+                    Thread.sleep(600)
                     if (warrior.isTaunting && warrior.hp > 0) {
                         necro.blight(warrior)
                     } else {
@@ -338,7 +338,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 }
 
                 3 -> {
-                    Thread.sleep(500)
+                    Thread.sleep(600)
                     if (warrior.isTaunting && warrior.hp > 0) {
                         necro.vampiricTouch(warrior)
                     } else {
@@ -347,7 +347,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 }
 
                 4 -> {
-                    Thread.sleep(500)
+                    Thread.sleep(600)
                     if (warrior.isTaunting && warrior.hp > 0) {
                         necro.grievousWounds(warrior)
                     } else {
@@ -356,7 +356,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 }
 
                 5 -> {
-                    Thread.sleep(500)
+                    Thread.sleep(600)
                     if (cursedHero == null) {
                         if (warrior.isTaunting && warrior.hp > 0) {
                             cursedHero = warrior
@@ -376,7 +376,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-                                 /}
+                                 $bold$blue1/}
                                 //
                                /{     />
                 ,_____________///----/{________________________________________________
@@ -386,7 +386,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                \{     \>
                                 \\
                                  \}
-            
+            $reset
                 $white>>>$reset It's $warrior$blue2$bold's$reset turn $white<<<$reset
 
             Choose which ability to use:
@@ -443,13 +443,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-                    __...--~~~~~-._   _.-~~~~~--...__
+                    $blue1${bold}__...--~~~~~-._   _.-~~~~~--...__
                   //               `V'               \\ 
                  //                 |                 \\ 
                 //__...--~~~~~~-._  |  _.-~~~~~~--...__\\ 
                //__.....----~~~~._\ | /_.~~~~----.....__\\
               ====================\\|//====================
-            
+            $reset
                 $white>>>$reset It's $mage$blue2$bold's$reset turn $white<<<$reset
 
             Choose which ability to use:
@@ -521,7 +521,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-                                    .-.
+                                    $blue1$bold.-.
                               ___  (   )  ___
                          ,_.-'   `'-| |-'`   '-._,
                           '.      .-| |-.      .'
@@ -534,7 +534,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                    ('.|
                                     |._)
                                     '-'
-    
+            $reset
                 $white>>>$reset It's $cleric$blue2$bold's$reset turn $white<<<$reset
             
             Choose which ability to use:
