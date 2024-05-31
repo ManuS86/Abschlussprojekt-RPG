@@ -62,7 +62,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(600)
 
         if (necro.hp > 0) {
-            necroTurn()
+            necroAttack()
+
             if (gameOverCheck()) {
                 return
             }
@@ -71,7 +72,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         Thread.sleep(600)
 
         if (golem != null && golem!!.hp > 0) {
-            golemTurn()
+            golemAttack()
+
             if (gameOverCheck()) {
                 return
             }
@@ -249,76 +251,6 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun golemTurn() {
-        println(
-            """
-                                                    ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⡏⠀⠀⠀⡼⠉⠉⠁⢀⡴⠋⠀⠀⠤⢄⡀⠀⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⡇⠀⠀⠀⢧⡀⠀⢠⠎⠀⢠⣤⡞⠒⠲⡌⠃⠀⠀⠀⠱⢤⡀⠀⢀⣀⣀⣀⠀⠀
-                                                    ⠀⣧⠀⠀⠀⠀⠙⠲⠏⠀⢀⡀⠙⣇⠀⠀⢘⡶⠆⣤⠤⠔⢲⣯⡖⠉⠀⠀⠈⢧⠀
-                                                    ⠀⢺⣦⡀⠀⠂⠀⠀⠀⠀⠀⢠⣄⠼⣗⠒⠋⠀⠀⠹⣄⣠⣿⡋⡀⢠⣤⡆⠀⢸⠀
-                                                    ⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠈⠦⣠⠴⣄⢀⣠⣄⣸⠇⠀⣳⣿⣧⠈⢹⠁
-                                                    ⠀⠀⠀⠘⠶⡆⠀⠆⢶⣴⠀⢾⠀⠀⠀⠀⠀⠀⠈⠉⡼⡭⣭⡴⠖⠼⠛⣿⣿⠏⠀
-                                                    ⠀⠀⠀⠀⠀⢻⠀⠀⠀⠁⠀⠘⡄⠀⣠⢤⣀⡤⡄⢸⣿⣿⠋⠀⠀⠀ ⠀⠙⠁⠀⠀
-                                                    ⠀⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠘⠛⢱⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⠀⣸⠁⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⠀⠹⡆⠀⠀⠀⣷⣄⢠⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⠀⢸⠃⠀⡄⠀⠀⠺⠾⠃⠀⠀⠀⠀⠾⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⣀⣀⡴⠋⠀⠛⠁⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠃⠀⢀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⢸⠁⠀⠀⠀⠀⣤⡄⠀⠀⠀⡴⠛⠲⡄⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⡇⠀⠀⠀⣀⠀⠘⠀⠀⣠⠞⠁⠀⠀⢣⠀⠀⠀⠀⠠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
-                                                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
-                    $reset
-                    The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
-                    """.trimIndent()
-        )
-        println()
-        Thread.sleep(400)
-        golemAttack()
-        println()
-    }
-
-    private fun necroTurn() {
-        println(
-            """
-                                                     $red1$bold.                                                      .
-                                                   .n                   .                 .                  n.
-                                             .   .dP                  dP                   9b                 9b.    .
-                                            4    qXb         .       dX                     Xb       .        dXp     t
-                                           dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
-                                           9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
-                                            9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
-                                             `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
-                                               `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'
-                                                   ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
-                                                                   )b.  .dbo.dP'`v'`9b.odb.  .dX(
-                                                                 ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
-                                                                dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
-                                                               dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
-                                                               9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
-                                                                `'      9XXXXXX(   )XXXXXXP      `'
-                                                                         XXXX X.`v'.X XXXX
-                                                                         XP^X'`b   d'`X^XX
-                                                                         X. 9  `   '  P )X
-                                                                         `b  `       '  d'
-                                                                          `             '
-                    $reset
-                    $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
-                    """.trimIndent()
-        )
-        println()
-        Thread.sleep(400)
-        necroAttack()
-        println()
-    }
-
     private fun warriorTurn(attackers: MutableList<Hero>) {
         Thread.sleep(400)
         warriorAttack()
@@ -341,6 +273,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun golemAttack() {
+        golemLogo()
         when ((1..3).random()) {
             1 -> {
                 Thread.sleep(600)
@@ -361,9 +294,45 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 golem!!.taunt()
             }
         }
+        println()
+    }
+
+    private fun golemLogo() {
+        println(
+            """
+                                                        ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⡏⠀⠀⠀⡼⠉⠉⠁⢀⡴⠋⠀⠀⠤⢄⡀⠀⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⡇⠀⠀⠀⢧⡀⠀⢠⠎⠀⢠⣤⡞⠒⠲⡌⠃⠀⠀⠀⠱⢤⡀⠀⢀⣀⣀⣀⠀⠀
+                                                        ⠀⣧⠀⠀⠀⠀⠙⠲⠏⠀⢀⡀⠙⣇⠀⠀⢘⡶⠆⣤⠤⠔⢲⣯⡖⠉⠀⠀⠈⢧⠀
+                                                        ⠀⢺⣦⡀⠀⠂⠀⠀⠀⠀⠀⢠⣄⠼⣗⠒⠋⠀⠀⠹⣄⣠⣿⡋⡀⢠⣤⡆⠀⢸⠀
+                                                        ⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠈⠦⣠⠴⣄⢀⣠⣄⣸⠇⠀⣳⣿⣧⠈⢹⠁
+                                                        ⠀⠀⠀⠘⠶⡆⠀⠆⢶⣴⠀⢾⠀⠀⠀⠀⠀⠀⠈⠉⡼⡭⣭⡴⠖⠼⠛⣿⣿⠏⠀
+                                                        ⠀⠀⠀⠀⠀⢻⠀⠀⠀⠁⠀⠘⡄⠀⣠⢤⣀⡤⡄⢸⣿⣿⠋⠀⠀⠀ ⠀⠙⠁⠀⠀
+                                                        ⠀⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠘⠛⢱⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⠀⣸⠁⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⠀⠹⡆⠀⠀⠀⣷⣄⢠⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⠀⢸⠃⠀⡄⠀⠀⠺⠾⠃⠀⠀⠀⠀⠾⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⣀⣀⡴⠋⠀⠛⠁⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠃⠀⢀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⢸⠁⠀⠀⠀⠀⣤⡄⠀⠀⠀⡴⠛⠲⡄⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⡇⠀⠀⠀⣀⠀⠘⠀⠀⣠⠞⠁⠀⠀⢣⠀⠀⠀⠀⠠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
+                                                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
+                        $reset
+                        The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
+                        """.trimIndent()
+        )
+        println()
+        Thread.sleep(400)
     }
 
     private fun necroAttack() {
+        necroLogo()
         if (golem == null && necro.hp <= necro.maxHp * 0.5) {
             Thread.sleep(600)
             necro.summonGolem(enemies)
@@ -418,6 +387,39 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 }
             }
         }
+        println()
+    }
+
+    private fun necroLogo() {
+        println(
+            """
+                                                         $red1$bold.                                                      .
+                                                       .n                   .                 .                  n.
+                                                 .   .dP                  dP                   9b                 9b.    .
+                                                4    qXb         .       dX                     Xb       .        dXp     t
+                                               dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
+                                               9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
+                                                9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+                                                 `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
+                                                   `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'
+                                                       ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
+                                                                       )b.  .dbo.dP'`v'`9b.odb.  .dX(
+                                                                     ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
+                                                                    dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
+                                                                   dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
+                                                                   9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
+                                                                    `'      9XXXXXX(   )XXXXXXP      `'
+                                                                             XXXX X.`v'.X XXXX
+                                                                             XP^X'`b   d'`X^XX
+                                                                             X. 9  `   '  P )X
+                                                                             `b  `       '  d'
+                                                                              `             '
+                        $reset
+                        $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
+                        """.trimIndent()
+        )
+        println()
+        Thread.sleep(400)
     }
 
     private fun warriorAttack() {
