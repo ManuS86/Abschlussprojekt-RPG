@@ -8,6 +8,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private val mage: Mage = heroes[1] as Mage
     private val warrior: Warrior = heroes[2] as Warrior
     private var cursedHero: Hero? = null
+    private var inventoryUsed = false
 
     fun gameLoop() {
         println(
@@ -49,7 +50,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun gameOver(nr: Int) {
         //println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
         println(
-                    "$bold$white                               ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \n" +
+            "$bold$white                               ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \n" +
                     "                              ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗\n" +
                     "                              ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝\n" +
                     "                              ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗\n" +
@@ -267,6 +268,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 it.cantHeal = false
             }
         }
+
+        inventoryUsed = false
         println()
     }
 
@@ -431,7 +434,14 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             5 -> {
                 Thread.sleep(200)
-                if (!useInventory()) {
+                if (!inventoryUsed) {
+                    if (!useInventory()) {
+                        warriorAttack()
+                    } else {
+                        inventoryUsed = true
+                    }
+                } else {
+                    println("${red1}You have already used your inventory this round, try something else.$reset")
                     warriorAttack()
                 }
             }
@@ -509,7 +519,14 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             5 -> {
                 Thread.sleep(200)
-                if (!useInventory()) {
+                if (!inventoryUsed) {
+                    if (!useInventory()) {
+                        mageAttack()
+                    } else {
+                        inventoryUsed = true
+                    }
+                } else {
+                    println("${red1}You have already used your inventory this round, try something else.$reset")
                     mageAttack()
                 }
             }
@@ -588,7 +605,14 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
             5 -> {
                 Thread.sleep(200)
-                if (!useInventory()) {
+                if (!inventoryUsed) {
+                    if (!useInventory()) {
+                        clericAttack()
+                    } else {
+                        inventoryUsed = true
+                    }
+                } else {
+                    println("${red1}You have already used your inventory this round, try something else.$reset")
                     clericAttack()
                 }
             }
