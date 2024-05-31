@@ -14,10 +14,10 @@ class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
                 } else {
                     target.name
                 }
-            }$reset for $green2$amntHealed hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset"
+            }$reset for $green2${amntHealed.roundToInt()} hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset"
         )
         Thread.sleep(200)
-        println("               $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp} hp$reset $white<<<$reset")
+        println("               $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
     }
 
     fun healingWave(targets: List<Hero>) {
@@ -25,10 +25,10 @@ class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
         val preHealHp = targets.map { it.hp }
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
-        val amntsHealed = (preHealHp zip postHealHp).map { it.second - it.first }
+        val amntsHealed = (preHealHp zip postHealHp).map { (it.second - it.first).roundToInt() }
         println("   $white>>>$reset $bold$blue2$name$reset heals all allies $bold$blue2${targets.map { it.name }}$reset for $green2$amntsHealed hp$reset with $bold${blue1}Healing Wave$reset $white<<<$reset")
         Thread.sleep(200)
-        println("                   $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now have $green2${targets.map { it.hp }} hp$reset $white<<<$reset")
+        println("                   $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now have $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset")
     }
 
     fun dispel(target: Hero) {

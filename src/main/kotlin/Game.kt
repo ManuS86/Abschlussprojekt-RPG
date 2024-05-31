@@ -47,6 +47,26 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         newGame()
     }
 
+    private fun round(nr: Int) {
+        beginningOfTurn(nr)
+        heroesAttack()
+        Thread.sleep(600)
+        if (necro.hp > 0) {
+            necroTurn()
+            if (gameOverCheck()) {
+                return
+            }
+        }
+        Thread.sleep(600)
+        if (golem != null && golem!!.hp > 0) {
+            golemTurn()
+            if (gameOverCheck()) {
+                return
+            }
+        }
+        endOfTurnEffects()
+    }
+
     private fun gameOver(nr: Int) {
         //println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
         println(
@@ -95,28 +115,58 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         return enemies.all { it.hp <= 0 } || heroes.all { it.hp <= 0 }
     }
 
-    private fun round(nr: Int) {
+    private fun beginningOfTurn(nr: Int) {
         println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
-        if (cursedHero != null) {
-            if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
-                println("$cursedHero's curse ended.")
-                cursedHero = null
+        curseTick()
+        burnTick()
+    }
+
+    private fun endOfTurnEffects() {
+        warriorTauntTimerAdjustment()
+
+        golemTauntTimerAdjustment()
+
+        heroesCantHealTimerAdjustments()
+
+        inventoryUsed = false
+        println()
+    }
+
+    private fun heroesCantHealTimerAdjustments() {
+        heroes.forEach {
+            if (it.cantHeal) {
+                it.cantHealTimer--
             }
-            cursedHero!!.hp -= cursedHero!!.maxHp * 0.1
-            println()
-            println("                                           $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${yellow1}cursed$reset and loses $yellow2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
-            Thread.sleep(200)
         }
 
-        enemies.forEach {
-            if (it.burning) {
-                it.hp -= 15 * mage.skillMod
-                println()
-                println("                                         $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
-                Thread.sleep(200)
+        heroes.forEach {
+            if (it.cantHealTimer == 0) {
+                it.cantHeal = false
             }
         }
+    }
 
+    private fun golemTauntTimerAdjustment() {
+        if (golem != null && golem!!.isTaunting) {
+            golem!!.tauntTimer--
+        }
+
+        if (golem != null && golem!!.tauntTimer == 0) {
+            golem!!.isTaunting = false
+        }
+    }
+
+    private fun warriorTauntTimerAdjustment() {
+        if (warrior.isTaunting) {
+            warrior.tauntTimer--
+        }
+
+        if (warrior.tauntTimer == 0) {
+            warrior.isTaunting = false
+        }
+    }
+
+    private fun heroesAttack() {
         println()
         println("Your party of ${heroes.filter { it.hp > 0 }} attacks ${enemies.filter { it.hp > 0 }}.")
 
@@ -125,9 +175,9 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         while (!gameOverCheck() && attackers.size > 0) {
             val prompt =
                 """
-                $attackers
-                Select an attacker ${blue2}[1, 2, ..]$reset:
-                """.trimIndent()
+                    $attackers
+                    Select an attacker ${blue2}[1, 2, ..]$reset:
+                    """.trimIndent()
             val errMsg = "${red1}!Invalid Input. Please try again!$reset"
 
             Thread.sleep(400)
@@ -161,116 +211,99 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 }
             }
         }
+    }
 
-        Thread.sleep(600)
-
-        if (necro.hp > 0) {
-            println(
-                """
-                                                 $red1$bold.                                                      .
-                                               .n                   .                 .                  n.
-                                         .   .dP                  dP                   9b                 9b.    .
-                                        4    qXb         .       dX                     Xb       .        dXp     t
-                                       dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
-                                       9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
-                                        9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
-                                         `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
-                                           `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'
-                                               ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
-                                                               )b.  .dbo.dP'`v'`9b.odb.  .dX(
-                                                             ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
-                                                            dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
-                                                           dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
-                                                           9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
-                                                            `'      9XXXXXX(   )XXXXXXP      `'
-                                                                     XXXX X.`v'.X XXXX
-                                                                     XP^X'`b   d'`X^XX
-                                                                     X. 9  `   '  P )X
-                                                                     `b  `       '  d'
-                                                                      `             '
-                $reset
-                $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
-                """.trimIndent()
-            )
-            println()
-            Thread.sleep(400)
-            necroAttack()
-            println()
-            if (gameOverCheck()) {
-                return
+    private fun burnTick() {
+        enemies.forEach {
+            if (it.burning) {
+                it.hp -= 15 * mage.skillMod
+                println()
+                println("                                         $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
+                Thread.sleep(200)
             }
         }
+    }
 
-        Thread.sleep(600)
-
-        if (golem != null && golem!!.hp > 0) {
-            println(
-                """
-                                                ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⡏⠀⠀⠀⡼⠉⠉⠁⢀⡴⠋⠀⠀⠤⢄⡀⠀⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⡇⠀⠀⠀⢧⡀⠀⢠⠎⠀⢠⣤⡞⠒⠲⡌⠃⠀⠀⠀⠱⢤⡀⠀⢀⣀⣀⣀⠀⠀
-                                                ⠀⣧⠀⠀⠀⠀⠙⠲⠏⠀⢀⡀⠙⣇⠀⠀⢘⡶⠆⣤⠤⠔⢲⣯⡖⠉⠀⠀⠈⢧⠀
-                                                ⠀⢺⣦⡀⠀⠂⠀⠀⠀⠀⠀⢠⣄⠼⣗⠒⠋⠀⠀⠹⣄⣠⣿⡋⡀⢠⣤⡆⠀⢸⠀
-                                                ⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠈⠦⣠⠴⣄⢀⣠⣄⣸⠇⠀⣳⣿⣧⠈⢹⠁
-                                                ⠀⠀⠀⠘⠶⡆⠀⠆⢶⣴⠀⢾⠀⠀⠀⠀⠀⠀⠈⠉⡼⡭⣭⡴⠖⠼⠛⣿⣿⠏⠀
-                                                ⠀⠀⠀⠀⠀⢻⠀⠀⠀⠁⠀⠘⡄⠀⣠⢤⣀⡤⡄⢸⣿⣿⠋⠀⠀⠀ ⠀⠙⠁⠀⠀
-                                                ⠀⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠘⠛⢱⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⠀⠀⠀⣸⠁⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⠀⠀⠀⠹⡆⠀⠀⠀⣷⣄⢠⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⠀⠀⠀⢸⠃⠀⡄⠀⠀⠺⠾⠃⠀⠀⠀⠀⠾⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⠀⣀⣀⡴⠋⠀⠛⠁⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠃⠀⢀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⢸⠁⠀⠀⠀⠀⣤⡄⠀⠀⠀⡴⠛⠲⡄⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⡇⠀⠀⠀⣀⠀⠘⠀⠀⣠⠞⠁⠀⠀⢣⠀⠀⠀⠀⠠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
-                                                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
-                $reset
-                The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
-                """.trimIndent()
-            )
+    private fun curseTick() {
+        if (cursedHero != null) {
+            if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
+                println("$cursedHero's curse ended.")
+                cursedHero = null
+            }
+            cursedHero!!.hp -= cursedHero!!.maxHp * 0.1
             println()
-            Thread.sleep(400)
-            golemAttack()
-            println()
-            if (gameOverCheck()) {
-                return
-            }
+            println("                                           $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${yellow1}cursed$reset and loses $yellow2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
+            Thread.sleep(200)
         }
+    }
 
-        if (warrior.isTaunting) {
-            warrior.tauntTimer--
-        }
+    private fun golemTurn() {
+        println(
+            """
+                                                    ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⡏⠀⠀⠀⡼⠉⠉⠁⢀⡴⠋⠀⠀⠤⢄⡀⠀⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⡇⠀⠀⠀⢧⡀⠀⢠⠎⠀⢠⣤⡞⠒⠲⡌⠃⠀⠀⠀⠱⢤⡀⠀⢀⣀⣀⣀⠀⠀
+                                                    ⠀⣧⠀⠀⠀⠀⠙⠲⠏⠀⢀⡀⠙⣇⠀⠀⢘⡶⠆⣤⠤⠔⢲⣯⡖⠉⠀⠀⠈⢧⠀
+                                                    ⠀⢺⣦⡀⠀⠂⠀⠀⠀⠀⠀⢠⣄⠼⣗⠒⠋⠀⠀⠹⣄⣠⣿⡋⡀⢠⣤⡆⠀⢸⠀
+                                                    ⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠈⠦⣠⠴⣄⢀⣠⣄⣸⠇⠀⣳⣿⣧⠈⢹⠁
+                                                    ⠀⠀⠀⠘⠶⡆⠀⠆⢶⣴⠀⢾⠀⠀⠀⠀⠀⠀⠈⠉⡼⡭⣭⡴⠖⠼⠛⣿⣿⠏⠀
+                                                    ⠀⠀⠀⠀⠀⢻⠀⠀⠀⠁⠀⠘⡄⠀⣠⢤⣀⡤⡄⢸⣿⣿⠋⠀⠀⠀ ⠀⠙⠁⠀⠀
+                                                    ⠀⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠘⠛⢱⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⠀⠀⠀⣸⠁⠀⠀⠸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⠀⠀⠀⠹⡆⠀⠀⠀⣷⣄⢠⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⠀⠀⠀⢸⠃⠀⡄⠀⠀⠺⠾⠃⠀⠀⠀⠀⠾⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⠀⣀⣀⡴⠋⠀⠛⠁⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠃⠀⢀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⢸⠁⠀⠀⠀⠀⣤⡄⠀⠀⠀⡴⠛⠲⡄⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⡇⠀⠀⠀⣀⠀⠘⠀⠀⣠⠞⠁⠀⠀⢣⠀⠀⠀⠀⠠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                    ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
+                    $reset
+                    The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
+                    """.trimIndent()
+        )
+        println()
+        Thread.sleep(400)
+        golemAttack()
+        println()
+    }
 
-        if (warrior.tauntTimer == 0) {
-            warrior.isTaunting = false
-        }
-
-        if (golem != null && golem!!.isTaunting) {
-            golem!!.tauntTimer--
-        }
-
-        if (golem != null && golem!!.tauntTimer == 0) {
-            golem!!.isTaunting = false
-        }
-
-        heroes.forEach {
-            if (it.cantHeal) {
-                it.cantHealTimer--
-            }
-        }
-
-        heroes.forEach {
-            if (it.cantHealTimer == 0) {
-                it.cantHeal = false
-            }
-        }
-
-        inventoryUsed = false
+    private fun necroTurn() {
+        println(
+            """
+                                                     $red1$bold.                                                      .
+                                                   .n                   .                 .                  n.
+                                             .   .dP                  dP                   9b                 9b.    .
+                                            4    qXb         .       dX                     Xb       .        dXp     t
+                                           dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
+                                           9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
+                                            9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+                                             `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
+                                               `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'
+                                                   ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
+                                                                   )b.  .dbo.dP'`v'`9b.odb.  .dX(
+                                                                 ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
+                                                                dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
+                                                               dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
+                                                               9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
+                                                                `'      9XXXXXX(   )XXXXXXP      `'
+                                                                         XXXX X.`v'.X XXXX
+                                                                         XP^X'`b   d'`X^XX
+                                                                         X. 9  `   '  P )X
+                                                                         `b  `       '  d'
+                                                                          `             '
+                    $reset
+                    $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
+                    """.trimIndent()
+        )
+        println()
+        Thread.sleep(400)
+        necroAttack()
         println()
     }
 

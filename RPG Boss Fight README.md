@@ -1,4 +1,5 @@
 <h1 align="center">RPG Boss Fight</h1>
+<h3 align="center">by ManuS</h3>
 <h2 align="center">Grundlagen der Programmierung</h2>
 <h3 align="center">Abschlussaufgabe RPG</h3>
 <br>
