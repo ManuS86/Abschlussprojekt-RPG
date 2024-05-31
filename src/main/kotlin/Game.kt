@@ -99,6 +99,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
+                println("$cursedHero's curse ended.")
                 cursedHero = null
             }
             cursedHero!!.hp -= cursedHero!!.maxHp * 0.1
