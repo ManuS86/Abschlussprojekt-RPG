@@ -78,7 +78,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             [1] $bold${green2}Yes$reset
             [2] $bold${red2}No$reset
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again$reset."
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
         when (select(prompt, errMsg, 2)) {
             1 -> {
                 Thread.sleep(600)
@@ -127,7 +127,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 $attackers
                 Select an attacker ${blue2}[1, 2, ..]$reset:
                 """.trimIndent()
-            val errMsg = "${red1}Invalid Input. Please try again:$reset"
+            val errMsg = "${red1}!Invalid Input. Please try again!$reset"
 
             Thread.sleep(400)
             if (attackers.size > 1) {
@@ -397,7 +397,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $white[4] $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
             $white[5] $bold${blue1}Use Item$reset
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -441,7 +441,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}You have already used your inventory this round, try something else.$reset")
+                    println("${red1}!You have already used your inventory this round, try something else!$reset")
                     warriorAttack()
                 }
             }
@@ -467,7 +467,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $white[4] $bold${blue1}Searing Touch$reset (Deal ${yellow2}${(30 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset and burn them for an additional ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset ${green2}each turn$reset.)
             $white[5] $bold${blue1}Use Item$reset
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
@@ -526,7 +526,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}You have already used your inventory this round, try something else.$reset")
+                    println("${red1}!You have already used your inventory this round, try something else!$reset")
                     mageAttack()
                 }
             }
@@ -559,14 +559,14 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             $white[4] $bold${blue1}Cripple$reset (Reduce $bold${red2}an enemy's$reset dmg dealt by ${yellow2}10%$reset.)
             $white[5] $bold${blue1}Use Item$reset
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
 
         when (select(prompt, errMsg, 5)) {
             1 -> {
                 Thread.sleep(400)
                 val target = targetHero()
                 if (target.cantHeal) {
-                    println("${yellow2}The target is grievously wounded and can't be healed currently. Try another action.$reset")
+                    println("${yellow2}!The target is grievously wounded and can't be healed currently. Try another action!$reset")
                     clericAttack()
                 } else {
                     cleric.healingHands(target)
@@ -612,7 +612,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}You have already used your inventory this round, try something else.$reset")
+                    println("${red1}!You have already used your inventory this round, try something else!$reset")
                     clericAttack()
                 }
             }
@@ -628,7 +628,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             [2] $bold${green1}Elixir$reset
             Select an item to use:
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
         when (select(prompt, errMsg, 2)) {
             1 -> {
                 Thread.sleep(400)
@@ -652,7 +652,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             ${enemies.filter { it.hp > 0 }}
             Select a target ${red2}[1, 2, ..]$reset:
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
         val target =
             enemies.filter { it.hp > 0 }[select(prompt, errMsg, enemies.filter { it.hp > 0 }.size) - 1]
         return target
@@ -665,7 +665,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             ${heroes.filter { it.hp > 0 }}
             Select a target ${blue2}[1, 2, ..]$reset:
             """.trimIndent()
-        val errMsg = "${red1}Invalid Input. Please try again:$reset"
+        val errMsg = "${red1}!Invalid Input. Please try again!$reset"
         val target =
             heroes.filter { it.hp > 0 }[select(prompt, errMsg, heroes.filter { it.hp > 0 }.size) - 1]
         return target
