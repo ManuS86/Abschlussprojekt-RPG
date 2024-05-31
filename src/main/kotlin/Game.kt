@@ -54,32 +54,23 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
     }
 
-    private fun round(nr: Int) {
-        beginningOfTurn(nr)
+    private fun newGame() {
+        val prompt =
+            """
+            Do you want to play again?
+            [1] $bold${green2}Yes$reset
+            [2] $bold${red2}No$reset
+            """.trimIndent()
+        when (select(prompt, 2)) {
+            1 -> {
+                Thread.sleep(600)
+                main()
+            }
 
-        heroesAttack()
-
-        Thread.sleep(600)
-
-        if (necro.hp > 0) {
-            necroAttack()
-
-            if (gameOverCheck()) {
-                return
+            2 -> {
+                exitProcess(0)
             }
         }
-
-        Thread.sleep(600)
-
-        if (golem != null && golem!!.hp > 0) {
-            golemAttack()
-
-            if (gameOverCheck()) {
-                return
-            }
-        }
-
-        endOfTurnEffects()
     }
 
     private fun gameOver(nr: Int) {
@@ -106,47 +97,56 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun newGame() {
-        val prompt =
-            """
-            Do you want to play again?
-            [1] $bold${green2}Yes$reset
-            [2] $bold${red2}No$reset
-            """.trimIndent()
-        when (select(prompt, 2)) {
-            1 -> {
-                Thread.sleep(600)
-                main()
-            }
-
-            2 -> {
-                exitProcess(0)
-            }
-        }
-    }
-
     private fun gameOverCheck(): Boolean {
         return enemies.all { it.hp <= 0 } || heroes.all { it.hp <= 0 }
     }
 
-    private fun beginningOfTurn(nr: Int) {
-        println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
-        curseTick()
-        burnTick()
+    private fun round(nr: Int) {
+        beginningOfRound(nr)
+
+        heroesTurn()
+
+        Thread.sleep(600)
+
+        if (necro.hp > 0) {
+            necroAttack()
+
+            if (gameOverCheck()) {
+                return
+            }
+        }
+
+        Thread.sleep(600)
+
+        if (golem != null && golem!!.hp > 0) {
+            golemAttack()
+
+            if (gameOverCheck()) {
+                return
+            }
+        }
+
+        endOfRound()
     }
 
-    private fun endOfTurnEffects() {
-        warriorTauntTimerAdjustment()
+    private fun beginningOfRound(nr: Int) {
+        println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
+        curseTracker()
+        burnTracker()
+    }
 
-        golemTauntTimerAdjustment()
+    private fun endOfRound() {
+        warriorTauntTracker()
 
-        heroesCantHealTimerAdjustments()
+        golemTauntTracker()
+
+        cantHealTracker()
 
         inventoryUsed = false
         println()
     }
 
-    private fun heroesCantHealTimerAdjustments() {
+    private fun cantHealTracker() {
         heroes.forEach {
             if (it.cantHeal) {
                 it.cantHealTimer--
@@ -160,7 +160,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun golemTauntTimerAdjustment() {
+    private fun golemTauntTracker() {
         if (golem != null && golem!!.isTaunting) {
             golem!!.tauntTimer--
         }
@@ -170,7 +170,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun warriorTauntTimerAdjustment() {
+    private fun warriorTauntTracker() {
         if (warrior.isTaunting) {
             warrior.tauntTimer--
         }
@@ -180,7 +180,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun heroesAttack() {
+    private fun heroesTurn() {
         println()
         println("Your party of ${heroes.filter { it.hp > 0 }} attacks ${enemies.filter { it.hp > 0 }}.")
 
@@ -227,7 +227,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun burnTick() {
+    private fun burnTracker() {
         enemies.forEach {
             if (it.burning) {
                 it.hp -= 15 * mage.skillMod
@@ -238,7 +238,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
     }
 
-    private fun curseTick() {
+    private fun curseTracker() {
         if (cursedHero != null) {
             if (cursedHero!!.hp <= cursedHero!!.maxHp * 0.2) {
                 println("$cursedHero's curse ended.")
