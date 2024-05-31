@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Cleric(name: String, maxHp: Double = 90.0) : Hero(name, maxHp) {
+class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
 
     fun healingHands(target: Hero) {
         val healAmnt = (35..45).random() * skillMod

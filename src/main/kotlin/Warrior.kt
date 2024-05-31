@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Warrior(name: String, maxHp: Double = 100.0) : Hero(name, maxHp) {
+class Warrior(name: String = "Haarkon", maxHp: Double = 100.0) : Hero(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
 

@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Necromancer(name: String, maxHp: Double = 500.0) : Enemy(name, maxHp) {
+class Necromancer(name: String = "Acheron", maxHp: Double = 500.0) : Enemy(name, maxHp) {
 
     fun deathWave(targets: List<Hero>) {
         targets.forEach { it.hp -= 40 * dmgMod / it.tenacity }
@@ -60,7 +60,7 @@ class Necromancer(name: String, maxHp: Double = 500.0) : Enemy(name, maxHp) {
     }
 
     fun summonGolem(enemies: MutableList<Enemy>) {
-        val golem = Golem("Golem")
+        val golem = Golem()
         enemies.add(golem)
         println("                                      $white>>>$reset $bold$red2$name$reset has summoned a $bold$red2$golem$reset $white<<<$reset")
     }

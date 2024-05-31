@@ -1,12 +1,12 @@
 fun main() {
     val game = Game(
         listOf(
-            Cleric("Elara"),
-            Mage("Keros"),
-            Warrior("Haarkon")
+            Cleric(),
+            Mage(),
+            Warrior()
         ),
         mutableListOf(
-            Necromancer("Acheron")
+            Necromancer()
         ),
         Inventory()
     )

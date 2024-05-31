@@ -1,6 +1,6 @@
 import kotlin.math.roundToInt
 
-class Mage(name: String, maxHp: Double = 80.0) : Hero(name, maxHp) {
+class Mage(name: String = "Keros", maxHp: Double = 80.0) : Hero(name, maxHp) {
 
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= (35..45).random() * skillMod }
