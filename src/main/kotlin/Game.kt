@@ -715,7 +715,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         return target
     }
 
-    private fun select(prompt: String, max: Int, errMsg: String = "${red1}!Invalid Input. Please try again!$reset"): Int {
+    private fun select(prompt: String, max: Int): Int {
         println()
         println(prompt)
         while (true) {
@@ -725,7 +725,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (input != null && input in (1..max)) {
                 return input
             }
-            println(errMsg)
+            println("${red1}!Invalid Input. Please try again!$reset")
         }
     }
 }
