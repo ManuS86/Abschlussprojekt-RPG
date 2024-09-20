@@ -1,8 +1,8 @@
 package game.enemies
 
-import game.heroes.Hero
 import blue2
 import bold
+import game.heroes.Hero
 import reset
 import white
 import kotlin.math.min

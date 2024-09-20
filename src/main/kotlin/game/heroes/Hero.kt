@@ -1,7 +1,7 @@
 package game.heroes
 
-import game.enemies.Enemy
 import bold
+import game.enemies.Enemy
 import red2
 import reset
 import white

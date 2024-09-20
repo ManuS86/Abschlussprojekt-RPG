@@ -1,8 +1,8 @@
 package game.enemies
 
-import game.heroes.Hero
 import blue2
 import bold
+import game.heroes.Hero
 import green2
 import red1
 import red2

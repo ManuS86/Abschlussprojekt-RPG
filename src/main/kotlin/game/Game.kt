@@ -10,9 +10,9 @@ import game.enemies.Necromancer
 import game.heroes.Cleric
 import game.heroes.Hero
 import game.heroes.Mage
+import game.heroes.Warrior
 import green1
 import green2
-import game.heroes.Warrior
 import main
 import red1
 import red2

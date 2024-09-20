@@ -1,7 +1,7 @@
 package game.consumables
 
-import game.heroes.Hero
 import bold
+import game.heroes.Hero
 import reset
 import white
 import yellow1

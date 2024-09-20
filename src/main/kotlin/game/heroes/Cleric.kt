@@ -1,9 +1,9 @@
 package game.heroes
 
-import game.enemies.Enemy
 import blue1
 import blue2
 import bold
+import game.enemies.Enemy
 import green2
 import red2
 import reset
