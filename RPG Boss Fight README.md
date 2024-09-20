@@ -26,7 +26,7 @@ The inventory contains multiple items with different abilities:
 * The Necromancer abilities:
     * Death Wave: Deals damage to each hero. 
     * Curse: Can only affect one hero at a time **reduces the HP of the target by 10% of their max HP every turn until they reach 20% of their max HP**.
-    * Vampiric Touch: Drains a heros HP and heals the boss for the amount of damage dealt
+    * Vampiric Touch: Drains a heroes HP and heals the boss for the amount of damage dealt
     * Grievous Wounds: deals damage to a hero and prevents them from healing for one turn
     * Blight: Deals a lot of damage to a hero
     * Summon Golem: Summons a **Golem** once per game, when the boss drops **below 50% max HP**. It has less HP than the Necromancer and only 3 attacks. It attacks after the Necromancer each turn.
