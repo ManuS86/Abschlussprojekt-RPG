@@ -1,3 +1,11 @@
+package game.consumables
+
+import game.heroes.Hero
+import bold
+import reset
+import white
+import yellow1
+
 class Inventory(
     private val content: MutableList<Potion> = mutableListOf(
         HealthPotion(),
@@ -38,6 +46,6 @@ class Inventory(
     }
 
     override fun toString(): String {
-        return "$white${bold}Inventory$reset: $content"
+        return "$white${bold}Consumables.Inventory$reset: $content"
     }
 }

@@ -1,3 +1,14 @@
+package game.heroes
+
+import game.enemies.Enemy
+import blue1
+import blue2
+import bold
+import green2
+import red2
+import reset
+import white
+import yellow2
 import kotlin.math.roundToInt
 
 class Warrior(name: String = "Haarkon", maxHp: Double = 100.0) : Hero(name, maxHp) {
@@ -41,6 +52,6 @@ class Warrior(name: String = "Haarkon", maxHp: Double = 100.0) : Hero(name, maxH
     }
 
     override fun toString(): String {
-        return "$bold$blue2$name$reset $white($reset${blue1}Warrior$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
+        return "$bold$blue2$name$reset $white($reset${blue1}Heroes.Warrior$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
     }
 }

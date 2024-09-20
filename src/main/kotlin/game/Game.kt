@@ -1,3 +1,25 @@
+package game
+
+import blue1
+import blue2
+import bold
+import game.consumables.Inventory
+import game.enemies.Enemy
+import game.enemies.Golem
+import game.enemies.Necromancer
+import game.heroes.Cleric
+import game.heroes.Hero
+import game.heroes.Mage
+import green1
+import green2
+import game.heroes.Warrior
+import main
+import red1
+import red2
+import reset
+import white
+import yellow1
+import yellow2
 import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
@@ -669,8 +691,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             """
             
                 >>> $inventory <<<
-            [1] $bold${green1}Health Potion$reset
-            [2] $bold${green1}Elixir$reset
+            [1] $bold${green1}Health Consumables.Potion$reset
+            [2] $bold${green1}Consumables.Elixir$reset
             Select an item to use:
             """.trimIndent()
 

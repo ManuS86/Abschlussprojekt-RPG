@@ -1,26 +1,31 @@
+package game.enemies
+
+import game.heroes.Hero
+import blue2
+import bold
+import reset
+import white
 import kotlin.math.min
 
-abstract class Hero(val name: String, val maxHp: Double) {
+abstract class Enemy(var name: String, val maxHp: Double) {
     var hp = maxHp
-    var skillMod = 1.0
-    var tenacity = 1.0
-    var cantHeal = false
-    var cantHealTimer = 0
+    var dmgMod = 1.0
+    var burning = false
 
     fun heal(healAmount: Double) {
         hp = min(hp + healAmount, maxHp)
     }
 
-    fun deathCheck(target: Enemy) {
+    fun deathCheck(target: Hero) {
         if (target.hp <= 0) {
-            println("                 $white>>>$reset $bold$red2${target.name}$reset is dead. $white<<<$reset")
+            println("                     $white>>>$reset $bold$blue2${target.name}$reset is dead. $white<<<$reset")
         }
     }
 
-    fun deathCheckAoe(targets: MutableList<Enemy>) {
+    fun deathCheckAoe(targets: List<Hero>) {
         if (targets.any { it.hp <= 0 }) {
             println(
-                "                $white>>>$reset $bold$red2${
+                "            $white>>>$reset $bold${blue2}2${
                     targets.filter { it.hp <= 0 }.map { it.name }
                 }$reset ${
                     if (targets.filter { it.hp <= 0 }.size == 1) {
