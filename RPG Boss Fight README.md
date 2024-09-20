@@ -3,25 +3,17 @@
 <h2 align="center">Grundlagen der Programmierung</h2>
 <h3 align="center">Abschlussaufgabe RPG</h3>
 <br>
-
 <p align="center">
   <img src="img/img1.png" width="512" alt="">
 </p>
 
 ## 1. Scenario
-
 You control a party of three heroes: A Cleric, a Mage and a Warrior and have to defeat the Necromancer boss and his Golem.
 
-
 ## 2. Details
-
 Each hero attacks in the order of your choice and then the enemies attack a random target with a random ability until one side is defeated.
 
-
 ### Information about the heroes:
-
-
-
 * The hero party consists of three heroes of three different classes: Cleric, Mage and Warrior
 * The heroes have each have 4 different abilities
 * The heroes have an item Inventory. \
@@ -29,11 +21,7 @@ The inventory contains multiple items with different abilities:
     * 3x Health Potion: Heals 50% of a heroes max. HP
     * 1x Elixir: Increases a heroes ability effects permanently by 10%
 
-
 ### Information about the Boss and the Golem:
-
-
-
 * The boss is a Necromancer who can summon a Golem when he drops below 50% max. HP
 * The Necromancer abilities:
     * Death Wave: Deals damage to each hero. 
