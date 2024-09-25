@@ -11,7 +11,7 @@ import white
 import yellow2
 import kotlin.math.roundToInt
 
-class Golem(name: String = "Enemies.Golem", maxHp: Double = 250.0) : Enemy(name, maxHp) {
+class Golem(name: String = "Golem", maxHp: Double = 250.0) : Enemy(name, maxHp) {
     var isTaunting = false
     var tauntTimer = 0
 

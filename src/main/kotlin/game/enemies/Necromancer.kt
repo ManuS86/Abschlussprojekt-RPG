@@ -65,7 +65,7 @@ class Necromancer(name: String = "Acheron", maxHp: Double = 500.0) : Enemy(name,
     fun bestowCurse(target: Hero) {
         if (target.hp > (target.maxHp * 0.2)) {
             target.hp -= target.maxHp * 0.1
-            println("              $white>>>$reset $bold$red2$name$reset casts $bold${red1}Bestow Curse$reset on $blue2$bold$target$reset and they lose ${yellow2}10%$reset ($yellow2${(target.maxHp * 0.1).roundToInt()}$reset) of their max. health  $white<<<$reset")
+            println("              $white>>>$reset $bold$red2$name$reset casts $bold${red1}Bestow Curse$reset on $blue2$bold${target.name}$reset and they lose ${yellow2}10%$reset ($yellow2${(target.maxHp * 0.1).roundToInt()}$reset) of their max. health  $white<<<$reset")
             Thread.sleep(200)
             println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
         }
