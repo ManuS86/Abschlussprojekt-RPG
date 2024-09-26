@@ -1,26 +1,26 @@
 package game.consumables
 
-import blue2
-import bold
+import BLUE2
+import BOLD
 import game.heroes.Hero
-import green1
-import green2
-import reset
-import white
+import GREEN1
+import GREEN2
+import RESET
+import WHITE
 import kotlin.math.roundToInt
 
 class HealthPotion : Potion() {
 
     override fun use(target: Hero) {
-        val healAmount = target.maxHp * 0.5
+        val healAmnt = target.maxHp * 0.5
         val preHealHp = target.hp
-        target.heal(healAmount)
-        val amountHealed = target.hp - preHealHp
-        println("   $white>>>$reset $bold$blue2${target.name}$reset drinks a $bold${green1}Health Consumables.Potion$reset to heal for $green2${amountHealed.roundToInt()} hp$reset. $white<<<$reset")
-        println("               $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        target.heal(healAmnt)
+        val amntHealed = target.hp - preHealHp
+        println("   $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET drinks a $BOLD${GREEN1}Health Potion$RESET to heal for $GREEN2${amntHealed.roundToInt()} hp$RESET. $WHITE<<<$RESET")
+        println("               $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
     }
 
     override fun toString(): String {
-        return "$bold${green1}Health Consumables.Potion$reset"
+        return "$BOLD${GREEN1}Health Potion$RESET"
     }
 }

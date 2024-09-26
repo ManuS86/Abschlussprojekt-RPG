@@ -1,10 +1,10 @@
 package game.enemies
 
-import blue2
-import bold
+import BLUE2
+import BOLD
 import game.heroes.Hero
-import reset
-import white
+import RESET
+import WHITE
 import kotlin.math.min
 
 abstract class Enemy(var name: String, val maxHp: Double) {
@@ -18,22 +18,22 @@ abstract class Enemy(var name: String, val maxHp: Double) {
 
     fun deathCheck(target: Hero) {
         if (target.hp <= 0) {
-            println("                     $white>>>$reset $bold$blue2${target.name}$reset is dead. $white<<<$reset")
+            println("                     $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET is dead. $WHITE<<<$RESET")
         }
     }
 
-    fun deathCheckAoe(targets: List<Hero>) {
+    fun deathCheckAoE(targets: List<Hero>) {
         if (targets.any { it.hp <= 0 }) {
             println(
-                "            $white>>>$reset $bold${blue2}2${
+                "            $WHITE>>>$RESET $BOLD${BLUE2}2${
                     targets.filter { it.hp <= 0 }.map { it.name }
-                }$reset ${
+                }$RESET ${
                     if (targets.filter { it.hp <= 0 }.size == 1) {
                         "is"
                     } else {
                         "are"
                     }
-                } dead. $white<<<$reset"
+                } dead. $WHITE<<<$RESET"
             )
         }
     }

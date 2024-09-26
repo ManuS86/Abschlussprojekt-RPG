@@ -1,39 +1,39 @@
 package game.heroes
 
-import blue1
-import blue2
-import bold
+import BLUE1
+import BLUE2
+import BOLD
 import game.enemies.Enemy
-import green2
-import red2
-import reset
-import white
-import yellow2
+import GREEN2
+import RED2
+import RESET
+import WHITE
+import YELLOW2
 import kotlin.math.roundToInt
 
 class Mage(name: String = "Keros", maxHp: Double = 80.0) : Hero(name, maxHp) {
 
     fun fireball(targets: MutableList<Enemy>) {
         targets.forEach { it.hp -= (35..45).random() * skillMod }
-        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${(30 * skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset with $bold${blue1}Fireball$reset $white<<<$reset")
+        println("    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET deals $YELLOW2${(30 * skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}each enemy$RESET with $BOLD${BLUE1}Fireball$RESET $WHITE<<<$RESET")
         println(
-            "            $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
+            "            $WHITE>>>$RESET $BOLD$RED2${targets.map { it.name }}$RESET now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
+            } $GREEN2${targets.map { it.hp.roundToInt() }} hp$RESET $WHITE<<<$RESET"
         )
-        deathCheckAoe(targets)
+        deathCheckAoE(targets)
     }
 
     fun lightningBolt(target: Enemy) {
         val dmgAmnt = (50..60).random() * skillMod
         target.hp -= dmgAmnt
-        println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $bold$red2${target.name}$reset with $bold${blue1}Lightning Bolt$reset $white<<<$reset")
+        println("    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET deals $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET to $BOLD$RED2${target.name}$RESET with $BOLD${BLUE1}Lightning Bolt$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("               $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("               $WHITE>>>$RESET $BOLD$RED2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         deathCheck(target)
     }
 
@@ -48,25 +48,25 @@ class Mage(name: String = "Keros", maxHp: Double = 80.0) : Hero(name, maxHp) {
             target2.hp -= dmgAmnt2
         }
         println(
-            "    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt1.roundToInt()} dmg$reset to $red2$bold${target1.name}$reset ${
+            "    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET deals $YELLOW2${dmgAmnt1.roundToInt()} dmg$RESET to $RED2$BOLD${target1.name}$RESET ${
                 if (target2 != null) {
-                    "and $yellow2${dmgAmnt2.roundToInt()} dmg$reset to $red2$bold${target2.name}$reset"
+                    "and $YELLOW2${dmgAmnt2.roundToInt()} dmg$RESET to $RED2$BOLD${target2.name}$RESET"
                 } else {
                     ""
                 }
-            } with $blue1${bold}Magic Missiles$reset $white<<<$reset"
+            } with $BLUE1${BOLD}Magic Missiles$RESET $WHITE<<<$RESET"
         )
         Thread.sleep(200)
         println(
-            "                $white>>>$reset $bold$red2${targets.map { it.name }}$reset now ${
+            "                $WHITE>>>$RESET $BOLD$RED2${targets.map { it.name }}$RESET now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
+            } $GREEN2${targets.map { it.hp.roundToInt() }} hp$RESET $WHITE<<<$RESET"
         )
-        deathCheckAoe(targets)
+        deathCheckAoE(targets)
     }
 
     fun searingTouch(target: Enemy) {
@@ -74,14 +74,14 @@ class Mage(name: String = "Keros", maxHp: Double = 80.0) : Hero(name, maxHp) {
             val dmgAmnt = 30 * skillMod
             target.hp -= dmgAmnt
             target.burning = true
-            println("    $white>>>$reset $bold$blue2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $red2$bold${target.name}$reset with $bold${blue1}Searing Touch$reset and sets them on fire $white<<<$reset")
+            println("    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET deals $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET to $RED2$BOLD${target.name}$RESET with $BOLD${BLUE1}Searing Touch$RESET and sets them on fire $WHITE<<<$RESET")
             Thread.sleep(200)
-            println("              $white>>>$reset $bold$red2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+            println("              $WHITE>>>$RESET $BOLD$RED2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
             deathCheck(target)
         }
     }
 
     override fun toString(): String {
-        return "$bold$blue2$name$reset $white($reset${blue1}Heroes.Mage$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
+        return "$BOLD$BLUE2$name$RESET $WHITE($RESET${BLUE1}Mage$RESET, $GREEN2${hp.roundToInt()} hp$RESET$WHITE)$RESET"
     }
 }

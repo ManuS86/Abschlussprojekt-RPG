@@ -1,14 +1,14 @@
 package game.enemies
 
-import blue2
-import bold
+import BLUE2
+import BOLD
 import game.heroes.Hero
-import green2
-import red1
-import red2
-import reset
-import white
-import yellow2
+import GREEN2
+import RED1
+import RED2
+import RESET
+import WHITE
+import YELLOW2
 import kotlin.math.roundToInt
 
 class Golem(name: String = "Golem", maxHp: Double = 250.0) : Enemy(name, maxHp) {
@@ -18,35 +18,35 @@ class Golem(name: String = "Golem", maxHp: Double = 250.0) : Enemy(name, maxHp) 
     fun smash(target: Hero) {
         val dmgAmnt = 50 * dmgMod / target.tenacity
         target.hp -= dmgAmnt
-        println("                         $white>>>$reset $bold$red2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $blue2$bold${target.name}$reset with $bold${red1}Smash$reset $white<<<$reset")
+        println("                         $WHITE>>>$RESET $BOLD$RED2$name$RESET deals $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET to $BLUE2$BOLD${target.name}$RESET with $BOLD${RED1}Smash$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("                                 $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("                                 $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         deathCheck(target)
     }
 
     fun groundSlam(targets: List<Hero>) {
         targets.forEach { it.hp -= 30 * dmgMod / it.tenacity }
-        println("                 $white>>>$reset $bold$red2$name$reset deals $yellow2${targets.map { (20 * dmgMod / it.tenacity).roundToInt() }} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${red1}Ground Slam$reset $white<<<$reset")
+        println("                 $WHITE>>>$RESET $BOLD$RED2$name$RESET deals $YELLOW2${targets.map { (20 * dmgMod / it.tenacity).roundToInt() }} dmg$RESET to the heroes $BOLD${BLUE2}${targets.map { it.name }}$RESET with $BOLD${RED1}Ground Slam$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
         println(
-            "                                $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
+            "                                $WHITE>>>$RESET $BOLD$BLUE2${targets.map { it.name }}$RESET now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
+            } $GREEN2${targets.map { it.hp.roundToInt() }} hp$RESET $WHITE<<<$RESET"
         )
-        deathCheckAoe(targets)
+        deathCheckAoE(targets)
     }
 
     fun taunt() {
         isTaunting = true
         tauntTimer = 3
-        println("           $white>>>$reset The $bold$red2$name$reset is $bold${red1}taunting$reset the $bold${blue2}heroes$reset, forcing them to attack $bold${red2}him$reset for the next ${green2}2 turns$reset $white<<<$reset")
+        println("           $WHITE>>>$RESET The $BOLD$RED2$name$RESET is $BOLD${RED1}taunting$RESET the $BOLD${BLUE2}heroes$RESET, forcing them to attack $BOLD${RED2}him$RESET for the next ${GREEN2}2 turns$RESET $WHITE<<<$RESET")
     }
 
     override fun toString(): String {
-        return "$bold$red2$name$reset $white($reset$green2${hp.roundToInt()} hp$reset$white)$reset"
+        return "$BOLD$RED2$name$RESET $WHITE($RESET$GREEN2${hp.roundToInt()} hp$RESET$WHITE)$RESET"
     }
 }

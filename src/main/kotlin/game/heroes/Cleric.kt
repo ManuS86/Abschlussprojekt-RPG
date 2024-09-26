@@ -1,15 +1,15 @@
 package game.heroes
 
-import blue1
-import blue2
-import bold
+import BLUE1
+import BLUE2
+import BOLD
 import game.enemies.Enemy
-import green2
-import red2
-import reset
-import white
-import yellow1
-import yellow2
+import GREEN2
+import RED2
+import RESET
+import WHITE
+import YELLOW1
+import YELLOW2
 import kotlin.math.roundToInt
 
 class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
@@ -20,16 +20,16 @@ class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
         target.heal(healAmnt)
         val amntHealed = hp - preHealHp
         println(
-            "    $white>>>$reset $bold$blue2$name$reset heals $bold$blue2${
+            "    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET heals $BOLD$BLUE2${
                 if (target.name == name) {
                     "herself"
                 } else {
                     target.name
                 }
-            }$reset for $green2${amntHealed.roundToInt()} hp$reset with $bold${blue1}Healing Hands$reset $white<<<$reset"
+            }$RESET for $GREEN2${amntHealed.roundToInt()} hp$RESET with $BOLD${BLUE1}Healing Hands$RESET $WHITE<<<$RESET"
         )
         Thread.sleep(200)
-        println("               $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("               $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
     }
 
     fun healingWave(targets: List<Hero>) {
@@ -38,22 +38,22 @@ class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
         targets.forEach { if (!it.cantHeal) it.heal(healAmnt) }
         val postHealHp = targets.map { it.hp }
         val amntsHealed = (preHealHp zip postHealHp).map { (it.second - it.first).roundToInt() }
-        println("   $white>>>$reset $bold$blue2$name$reset heals all allies $bold$blue2${targets.map { it.name }}$reset for $green2$amntsHealed hp$reset with $bold${blue1}Healing Wave$reset $white<<<$reset")
+        println("   $WHITE>>>$RESET $BOLD$BLUE2$name$RESET heals all allies $BOLD$BLUE2${targets.map { it.name }}$RESET for $GREEN2$amntsHealed hp$RESET with $BOLD${BLUE1}Healing Wave$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("                   $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now have $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset")
+        println("                   $WHITE>>>$RESET $BOLD$BLUE2${targets.map { it.name }}$RESET now have $GREEN2${targets.map { it.hp.roundToInt() }} hp$RESET $WHITE<<<$RESET")
     }
 
     fun dispel(target: Hero) {
         target.cantHeal = false
         target.cantHealTimer = 0
         println(
-            "    $white>>>$reset $bold$blue2$name$reset removed all of $bold$blue2${
+            "    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET removed all of $BOLD$BLUE2${
                 if (target.name == name) {
                     "her"
                 } else {
                     "${target.name}'s"
                 }
-            }$reset ${yellow1}negative effects$reset with $bold${blue1}Dispel$reset $white<<<$reset"
+            }$RESET ${YELLOW1}negative effects$RESET with $BOLD${BLUE1}Dispel$RESET $WHITE<<<$RESET"
         )
     }
 
@@ -61,10 +61,10 @@ class Cleric(name: String = "Elara", maxHp: Double = 90.0) : Hero(name, maxHp) {
         if (target.dmgMod > 0.1) {
             target.dmgMod -= 0.1
         }
-        println("    $white>>>$reset $bold$blue2$name$reset reduced $red2$bold${target.name}'s$reset dmg by ${yellow2}10%$reset with $bold${blue1}Cripple$reset $white<<<$reset")
+        println("    $WHITE>>>$RESET $BOLD$BLUE2$name$RESET reduced $RED2$BOLD${target.name}'s$RESET dmg by ${YELLOW2}10%$RESET with $BOLD${BLUE1}Cripple$RESET $WHITE<<<$RESET")
     }
 
     override fun toString(): String {
-        return "$bold$blue2$name$reset $white($reset${blue1}Heroes.Cleric$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
+        return "$BOLD$BLUE2$name$RESET $WHITE($RESET${BLUE1}Cleric$RESET, $GREEN2${hp.roundToInt()} hp$RESET$WHITE)$RESET"
     }
 }

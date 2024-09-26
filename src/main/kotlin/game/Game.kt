@@ -1,8 +1,8 @@
 package game
 
-import blue1
-import blue2
-import bold
+import BLUE1
+import BLUE2
+import BOLD
 import game.consumables.Inventory
 import game.enemies.Enemy
 import game.enemies.Golem
@@ -11,15 +11,15 @@ import game.heroes.Cleric
 import game.heroes.Hero
 import game.heroes.Mage
 import game.heroes.Warrior
-import green1
-import green2
+import GREEN1
+import GREEN2
 import main
-import red1
-import red2
-import reset
-import white
-import yellow1
-import yellow2
+import RED1
+import RED2
+import RESET
+import WHITE
+import YELLOW1
+import YELLOW2
 import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
@@ -34,9 +34,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     fun gameLoop() {
         gameIntro()
-
         var nr = 1
-
         Thread.sleep(600)
 
         while (!gameOverCheck()) {
@@ -45,15 +43,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         }
 
         gameOver(nr - 1)
-
         Thread.sleep(600)
-
         newGame()
     }
 
     private fun gameIntro() {
         println(
-            "$bold$white\n" +
+            "$BOLD$WHITE\n" +
                     "      _______   _______    ______         _______                                      ________  __            __          __     \n" +
                     "     /       \\ /       \\  /      \\       /       \\                                    /        |/  |          /  |        /  |    \n" +
                     "     \$\$\$\$\$\$\$  |\$\$\$\$\$\$\$  |/\$\$\$\$\$\$  |      \$\$\$\$\$\$\$  |  ______    _______  _______       \$\$\$\$\$\$\$\$/ \$\$/   ______  \$\$ |____   _\$\$ |_   \n" +
@@ -65,7 +61,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                     "     \$\$/   \$\$/ \$\$/        \$\$\$\$\$\$/        \$\$\$\$\$\$\$/   \$\$\$\$\$\$/  \$\$\$\$\$\$\$/ \$\$\$\$\$\$\$/        \$\$/       \$\$/  \$\$\$\$\$\$\$ |\$\$/   \$\$/    \$\$\$\$/  \n" +
                     "                                                                                                    /  \\__\$\$ |                    \n" +
                     "                                                                                                    \$\$    \$\$/                     \n" +
-                    "                                                                                                     \$\$\$\$\$\$/                      \n$reset"
+                    "                                                                                                     \$\$\$\$\$\$/                      \n$RESET"
         )
         Thread.sleep(600)
         println()
@@ -80,9 +76,10 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         val prompt =
             """
             Do you want to play again?
-            [1] $bold${green2}Yes$reset
-            [2] $bold${red2}No$reset
+            [1] $BOLD${GREEN2}Yes$RESET
+            [2] $BOLD${RED2}No$RESET
             """.trimIndent()
+
         when (select(prompt, 2)) {
             1 -> {
                 Thread.sleep(600)
@@ -98,24 +95,24 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun gameOver(nr: Int) {
         //println("$bold$white                  ---------------------------------------- GAME OVER ----------------------------------------$reset")
         println(
-            "$bold$white                               ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \n" +
+            "$BOLD$WHITE                               ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \n" +
                     "                              ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗\n" +
                     "                              ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝\n" +
                     "                              ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗\n" +
                     "                              ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║\n" +
-                    "                               ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝\n$reset"
+                    "                               ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝\n$RESET"
         )
         if (heroes.all { it.hp <= 0 }) {
             Thread.sleep(200)
-            println("                                                $white>>> The fight lasted $nr rounds <<<$reset")
+            println("                                                $WHITE>>> The fight lasted $nr rounds <<<$RESET")
             println()
-            println("                                            $white>>>$reset $yellow2${bold}All your ${blue2}heroes$reset$yellow2${bold} are dead. You lost!$reset $white<<<$reset")
+            println("                                            $WHITE>>>$RESET $YELLOW2${BOLD}All your ${BLUE2}heroes$RESET$YELLOW2${BOLD} are dead. You lost!$RESET $WHITE<<<$RESET")
         } else {
             Thread.sleep(200)
             println()
-            println("                                                $white>>> The fight lasted $nr rounds <<<$reset")
+            println("                                                $WHITE>>> The fight lasted $nr rounds <<<$RESET")
             println()
-            println("                                            $white>>>$reset $green2${bold}All ${red2}enemies$reset$green2${bold} are defeated. You won!$reset $white<<<$reset")
+            println("                                            $WHITE>>>$RESET $GREEN2${BOLD}All ${RED2}enemies$RESET$GREEN2${BOLD} are defeated. You won!$RESET $WHITE<<<$RESET")
         }
     }
 
@@ -125,9 +122,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
 
     private fun round(nr: Int) {
         beginningOfRound(nr)
-
         heroesTurn()
-
         Thread.sleep(600)
 
         if (necro.hp > 0) {
@@ -152,18 +147,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     }
 
     private fun beginningOfRound(nr: Int) {
-        println("$bold$white               ------------------------------------------- ROUND $nr -------------------------------------------$reset")
+        println("$BOLD$WHITE               ------------------------------------------- ROUND $nr -------------------------------------------$RESET")
         curseTracker()
         burnTracker()
     }
 
     private fun endOfRound() {
         warriorTauntTracker()
-
         golemTauntTracker()
-
         cantHealTracker()
-
         inventoryUsed = false
         println()
     }
@@ -205,14 +197,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun heroesTurn() {
         println()
         println("Your party of ${heroes.filter { it.hp > 0 }} attacks ${enemies.filter { it.hp > 0 }}.")
-
         val attackers = heroes.filter { it.hp > 0 }.toMutableList()
 
         while (!gameOverCheck() && attackers.size > 0) {
             val prompt =
                 """
                     $attackers
-                    Select an attacker ${blue2}[1, 2, ..]$reset:
+                    Select an attacker ${BLUE2}[1, 2, ..]$RESET:
                     """.trimIndent()
 
             Thread.sleep(400)
@@ -254,7 +245,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             if (it.burning) {
                 it.hp -= 15 * mage.skillMod
                 println()
-                println("                                         $white>>>$reset $red2$bold${it.name}$reset is ${yellow1}burning$reset and takes ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset $white<<<$reset")
+                println("                                         $WHITE>>>$RESET $RED2$BOLD${it.name}$RESET is ${YELLOW1}burning$RESET and takes ${YELLOW2}${(15 * mage.skillMod).roundToInt()} dmg$RESET $WHITE<<<$RESET")
                 Thread.sleep(200)
             }
         }
@@ -268,7 +259,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             }
             cursedHero!!.hp -= cursedHero!!.maxHp * 0.1
             println()
-            println("                                           $white>>>$reset $blue2$bold${cursedHero!!.name}$reset is ${yellow1}cursed$reset and loses $yellow2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$reset $white<<<$reset")
+            println("                                           $WHITE>>>$RESET $BLUE2$BOLD${cursedHero!!.name}$RESET is ${YELLOW1}cursed$RESET and loses $YELLOW2${(cursedHero!!.maxHp * 0.1).roundToInt()} hp$RESET $WHITE<<<$RESET")
             Thread.sleep(200)
         }
     }
@@ -322,7 +313,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun golemLogo() {
         println(
             """
-                                                        ⠀⠀⠀⠀$red1$bold⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                                                        ⠀⠀⠀⠀$RED1$BOLD⢶⡆⠀⠀⣴⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                         ⠀⠀⠀⢠⣾⣿⣦⣤⣭⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                         ⠀⠀⣰⠏⠀⢹⣻⣭⣭⡧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                         ⠀⢠⠏⠀⠴⠚⣷⣿⣿⠀⠀⢀⡤⠖⠛⠹⠶⠤⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -345,7 +336,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                                         ⠘⠒⠒⠶⠁⠉⠉⠉⠉⠀⠀⠀⠀⡞⠀⠀⠰⠇⠐⠛⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                             ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣼⠁⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀
                                                             ⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠈⠉⠙⠷⠤⠤⠤⠤⠿⠉⠁
-                        $reset
+                        $RESET
                         The $golem attacks your party of ${heroes.filter { it.hp > 0 }}.
                         """.trimIndent()
         )
@@ -415,7 +406,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun necroLogo() {
         println(
             """
-                                                         $red1$bold.                                                      .
+                                                         $RED1$BOLD.                                                      .
                                                        .n                   .                 .                  n.
                                                  .   .dP                  dP                   9b                 9b.    .
                                                 4    qXb         .       dX                     Xb       .        dXp     t
@@ -436,7 +427,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                                                              X. 9  `   '  P )X
                                                                              `b  `       '  d'
                                                                               `             '
-                        $reset
+                        $RESET
                         $necro attacks your party of ${heroes.filter { it.hp > 0 }}.
                         """.trimIndent()
         )
@@ -447,7 +438,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun warriorAttack() {
         val prompt =
             """
-                                 $bold$blue1/}
+                                 $BOLD$BLUE1/}
                                 //
                                /{     />
                 ,_____________///----/{_______________________________________________
@@ -457,15 +448,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                \{     \>
                                 \\
                                  \}
-            $reset
-                $white>>>$reset It's $warrior$blue2$bold's$reset turn $white<<<$reset
+            $RESET
+                $WHITE>>>$RESET It's $warrior$BLUE2$BOLD's$RESET turn $WHITE<<<$RESET
 
             Choose which ability to use:
-            $white[1] $bold${blue1}Stab$reset (Deal ${yellow2}${(50 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
-            $white[2] $bold${blue1}Cleave$reset (Deal ${yellow2}${(30 * warrior.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
-            $white[3] $bold${blue1}Taunt$reset (Force $bold${red2}enemies$reset to target $bold$blue2${warrior.name}$reset for ${green2}3 turns$reset.)
-            $white[4] $bold${blue1}Battle Shout$reset (Increase $bold${blue2}your$reset tenacity by ${green2}10%$reset.)
-            $white[5] $bold${blue1}Use Item$reset
+            $WHITE[1] $BOLD${BLUE1}Stab$RESET (Deal ${YELLOW2}${(50 * warrior.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}an enemy$RESET.)
+            $WHITE[2] $BOLD${BLUE1}Cleave$RESET (Deal ${YELLOW2}${(30 * warrior.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}each enemy$RESET.)
+            $WHITE[3] $BOLD${BLUE1}Taunt$RESET (Force $BOLD${RED2}enemies$RESET to target $BOLD$BLUE2${warrior.name}$RESET for ${GREEN2}3 turns$RESET.)
+            $WHITE[4] $BOLD${BLUE1}Battle Shout$RESET (Increase $BOLD${BLUE2}your$RESET tenacity by ${GREEN2}10%$RESET.)
+            $WHITE[5] $BOLD${BLUE1}Use Item$RESET
             """.trimIndent()
 
         when (select(prompt, 5)) {
@@ -510,7 +501,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}!You have already used your inventory this round, try something else!$reset")
+                    println("${RED1}!You have already used your inventory this round, try something else!$RESET")
                     warriorAttack()
                 }
             }
@@ -520,21 +511,21 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun mageAttack() {
         val prompt =
             """
-                    $blue1${bold}__...--~~~~~-._   _.-~~~~~--...__
+                    $BLUE1${BOLD}__...--~~~~~-._   _.-~~~~~--...__
                   //               `V'               \\ 
                  //                 |                 \\ 
                 //__...--~~~~~~-._  |  _.-~~~~~~--...__\\ 
                //__.....----~~~~._\ | /_.~~~~----.....__\\
               ====================\\|//====================
-            $reset
-                $white>>>$reset It's $mage$blue2$bold's$reset turn $white<<<$reset
+            $RESET
+                $WHITE>>>$RESET It's $mage$BLUE2$BOLD's$RESET turn $WHITE<<<$RESET
 
             Choose which ability to use:
-            $white[1] $bold${blue1}Fireball$reset (Deal ${yellow2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}each enemy$reset.)
-            $white[2] $bold${blue1}Lightning Bolt$reset (Deal ${yellow2}${(50 * mage.skillMod).roundToInt()}-${(60 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset.)
-            $white[3] $bold${blue1}Magic Missiles$reset (Deal ${yellow2}${(20 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}a random enemy$reset, then repeat $bold${blue1}this$reset.)
-            $white[4] $bold${blue1}Searing Touch$reset (Deal ${yellow2}${(30 * mage.skillMod).roundToInt()} dmg$reset to $bold${red2}an enemy$reset and burn them for an additional ${yellow2}${(15 * mage.skillMod).roundToInt()} dmg$reset ${green2}each turn$reset.)
-            $white[5] $bold${blue1}Use Item$reset
+            $WHITE[1] $BOLD${BLUE1}Fireball$RESET (Deal ${YELLOW2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}each enemy$RESET.)
+            $WHITE[2] $BOLD${BLUE1}Lightning Bolt$RESET (Deal ${YELLOW2}${(50 * mage.skillMod).roundToInt()}-${(60 * mage.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}an enemy$RESET.)
+            $WHITE[3] $BOLD${BLUE1}Magic Missiles$RESET (Deal ${YELLOW2}${(20 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}a random enemy$RESET, then repeat $BOLD${BLUE1}this$RESET.)
+            $WHITE[4] $BOLD${BLUE1}Searing Touch$RESET (Deal ${YELLOW2}${(30 * mage.skillMod).roundToInt()} dmg$RESET to $BOLD${RED2}an enemy$RESET and burn them for an additional ${YELLOW2}${(15 * mage.skillMod).roundToInt()} dmg$RESET ${GREEN2}each turn$RESET.)
+            $WHITE[5] $BOLD${BLUE1}Use Item$RESET
             """.trimIndent()
 
         when (select(prompt, 5)) {
@@ -594,7 +585,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}!You have already used your inventory this round, try something else!$reset")
+                    println("${RED1}!You have already used your inventory this round, try something else!$RESET")
                     mageAttack()
                 }
             }
@@ -604,7 +595,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
     private fun clericAttack() {
         val prompt =
             """
-                                    $blue1$bold.-.
+                                    $BLUE1$BOLD.-.
                               ___  (   )  ___
                          ,_.-'   `'-| |-'`   '-._,
                           '.      .-| |-.      .'
@@ -617,15 +608,15 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                                    ('.|
                                     |._)
                                     '-'
-            $reset
-                $white>>>$reset It's $cleric$blue2$bold's$reset turn $white<<<$reset
+            $RESET
+                $WHITE>>>$RESET It's $cleric$BLUE2$BOLD's$RESET turn $WHITE<<<$RESET
             
             Choose which ability to use:
-            $white[1] $bold${blue1}Healing Hands$reset (Heal $bold${blue2}an ally$reset for ${green2}${(35 * mage.skillMod).roundToInt()}-${(45 * mage.skillMod).roundToInt()} hp$reset.)
-            $white[2] $bold${blue1}Healing Wave$reset (Heal $bold${blue2}each ally$reset for ${green2}${(25 * mage.skillMod).roundToInt()}-${(35 * mage.skillMod).roundToInt()} hp$reset.)
-            $white[3] $bold${blue1}Dispel$reset (Dispel $bold${blue2}an ally's$reset debuff.)
-            $white[4] $bold${blue1}Cripple$reset (Reduce $bold${red2}an enemy's$reset dmg dealt by ${yellow2}10%$reset.)
-            $white[5] $bold${blue1}Use Item$reset
+            $WHITE[1] $BOLD${BLUE1}Healing Hands$RESET (Heal $BOLD${BLUE2}an ally$RESET for ${GREEN2}${(35 * cleric.skillMod).roundToInt()}-${(45 * cleric.skillMod).roundToInt()} hp$RESET.)
+            $WHITE[2] $BOLD${BLUE1}Healing Wave$RESET (Heal $BOLD${BLUE2}each ally$RESET for ${GREEN2}${(25 * cleric.skillMod).roundToInt()}-${(35 * cleric.skillMod).roundToInt()} hp$RESET.)
+            $WHITE[3] $BOLD${BLUE1}Dispel$RESET (Dispel $BOLD${BLUE2}an ally's$RESET debuff.)
+            $WHITE[4] $BOLD${BLUE1}Cripple$RESET (Reduce $BOLD${RED2}an enemy's$RESET dmg dealt by ${YELLOW2}10%$RESET.)
+            $WHITE[5] $BOLD${BLUE1}Use Item$RESET
             """.trimIndent()
 
         when (select(prompt, 5)) {
@@ -633,7 +624,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                 Thread.sleep(400)
                 val target = targetHero()
                 if (target.cantHeal) {
-                    println("${yellow2}!The target is grievously wounded and can't be healed currently. Try another action!$reset")
+                    println("${YELLOW2}!The target is grievously wounded and can't be healed currently. Try another action!$RESET")
                     clericAttack()
                 } else {
                     cleric.healingHands(target)
@@ -679,7 +670,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
                         inventoryUsed = true
                     }
                 } else {
-                    println("${red1}!You have already used your inventory this round, try something else!$reset")
+                    println("${RED1}!You have already used your inventory this round, try something else!$RESET")
                     clericAttack()
                 }
             }
@@ -691,8 +682,8 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             """
             
                 >>> $inventory <<<
-            [1] $bold${green1}Health Consumables.Potion$reset
-            [2] $bold${green1}Consumables.Elixir$reset
+            [1] $BOLD${GREEN1}Health Potion$RESET
+            [2] $BOLD${GREEN1}Elixir$RESET
             Select an item to use:
             """.trimIndent()
 
@@ -717,7 +708,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             """
             
             ${enemies.filter { it.hp > 0 }}
-            Select a target ${red2}[1, 2, ..]$reset:
+            Select a target ${RED2}[1, 2, ..]$RESET:
             """.trimIndent()
 
         val target =
@@ -730,7 +721,7 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
             """
             
             ${heroes.filter { it.hp > 0 }}
-            Select a target ${blue2}[1, 2, ..]$reset:
+            Select a target ${BLUE2}[1, 2, ..]$RESET:
             """.trimIndent()
         val target =
             heroes.filter { it.hp > 0 }[select(prompt, heroes.filter { it.hp > 0 }.size) - 1]
@@ -741,13 +732,13 @@ class Game(private val heroes: List<Hero>, private val enemies: MutableList<Enem
         println()
         println(prompt)
         while (true) {
-            print("$white>$reset ")
+            print("$WHITE>$RESET ")
             val input = readln().toIntOrNull()
             println()
             if (input != null && input in (1..max)) {
                 return input
             }
-            println("${red1}!Invalid Input. Please try again!$reset")
+            println("${RED1}!Invalid Input. Please try again!$RESET")
         }
     }
 }

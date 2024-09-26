@@ -1,41 +1,41 @@
 package game.enemies
 
-import blue2
-import bold
+import BLUE2
+import BOLD
 import game.heroes.Hero
-import green2
-import red1
-import red2
-import reset
-import white
-import yellow1
-import yellow2
+import GREEN2
+import RED1
+import RED2
+import RESET
+import WHITE
+import YELLOW1
+import YELLOW2
 import kotlin.math.roundToInt
 
 class Necromancer(name: String = "Acheron", maxHp: Double = 500.0) : Enemy(name, maxHp) {
 
     fun deathWave(targets: List<Hero>) {
         targets.forEach { it.hp -= 40 * dmgMod / it.tenacity }
-        println("                     $white>>>$reset $bold$red2$name$reset deals $yellow2${(40 * dmgMod).roundToInt()} dmg$reset to the heroes $bold${blue2}${targets.map { it.name }}$reset with $bold${red1}Death Wave$reset $white<<<$reset")
+        println("                     $WHITE>>>$RESET $BOLD$RED2$name$RESET deals $YELLOW2${(40 * dmgMod).roundToInt()} dmg$RESET to the heroes $BOLD${BLUE2}${targets.map { it.name }}$RESET with $BOLD${RED1}Death Wave$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
         println(
-            "                                  $white>>>$reset $bold$blue2${targets.map { it.name }}$reset now ${
+            "                                  $WHITE>>>$RESET $BOLD$BLUE2${targets.map { it.name }}$RESET now ${
                 if (targets.size == 1) {
                     "has"
                 } else {
                     "have"
                 }
-            } $green2${targets.map { it.hp.roundToInt() }} hp$reset $white<<<$reset"
+            } $GREEN2${targets.map { it.hp.roundToInt() }} hp$RESET $WHITE<<<$RESET"
         )
-        deathCheckAoe(targets)
+        deathCheckAoE(targets)
     }
 
     fun blight(target: Hero) {
         val dmgAmnt = 60 * dmgMod / target.tenacity
         target.hp -= dmgAmnt
-        println("                                     $white>>>$reset $bold$red2$name$reset deals $yellow2${dmgAmnt.roundToInt()} dmg$reset to $bold$blue2${target.name}$reset with $bold${red1}Blight$reset $white<<<$reset")
+        println("                                     $WHITE>>>$RESET $BOLD$RED2$name$RESET deals $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET to $BOLD$BLUE2${target.name}$RESET with $BOLD${RED1}Blight$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("                                                $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         deathCheck(target)
     }
 
@@ -45,9 +45,9 @@ class Necromancer(name: String = "Acheron", maxHp: Double = 500.0) : Enemy(name,
         val preHealHp = hp
         heal(dmgAmnt)
         val amntHealed = hp - preHealHp
-        println("                      $white>>>$reset $bold$red2$name$reset drains $bold$blue2${target.name}$reset for $yellow2${dmgAmnt.roundToInt()} dmg$reset and heals $bold${red2}himself$reset for $green2${amntHealed.roundToInt()} hp$reset with $bold${red1}Vampiric Touch$reset $white<<<$reset")
+        println("                      $WHITE>>>$RESET $BOLD$RED2$name$RESET drains $BOLD$BLUE2${target.name}$RESET for $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET and heals $BOLD${RED2}himself$RESET for $GREEN2${amntHealed.roundToInt()} hp$RESET with $BOLD${RED1}Vampiric Touch$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("                                      $white>>>$reset $bold$red2$name$reset now has $green2$hp hp$reset and $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("                                      $WHITE>>>$RESET $BOLD$RED2$name$RESET now has $GREEN2$hp hp$RESET and $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         deathCheck(target)
     }
 
@@ -56,28 +56,28 @@ class Necromancer(name: String = "Acheron", maxHp: Double = 500.0) : Enemy(name,
         target.hp -= dmgAmnt
         target.cantHeal = true
         target.cantHealTimer = 2
-        println("                 $white>>>$reset $bold$red2$name$reset wounds $bold$blue2${target.name}$reset (${yellow1}can't heal for 1 turn$reset) and deals $yellow2${dmgAmnt.roundToInt()} dmg$reset with $bold${red1}Grievous Wounds$reset $white<<<$reset")
+        println("                 $WHITE>>>$RESET $BOLD$RED2$name$RESET wounds $BOLD$BLUE2${target.name}$RESET (${YELLOW1}can't heal for 1 turn$RESET) and deals $YELLOW2${dmgAmnt.roundToInt()} dmg$RESET with $BOLD${RED1}Grievous Wounds$RESET $WHITE<<<$RESET")
         Thread.sleep(200)
-        println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+        println("                                                $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         deathCheck(target)
     }
 
     fun bestowCurse(target: Hero) {
         if (target.hp > (target.maxHp * 0.2)) {
             target.hp -= target.maxHp * 0.1
-            println("              $white>>>$reset $bold$red2$name$reset casts $bold${red1}Bestow Curse$reset on $blue2$bold${target.name}$reset and they lose ${yellow2}10%$reset ($yellow2${(target.maxHp * 0.1).roundToInt()}$reset) of their max. health  $white<<<$reset")
+            println("              $WHITE>>>$RESET $BOLD$RED2$name$RESET casts $BOLD${RED1}Bestow Curse$RESET on $BLUE2$BOLD${target.name}$RESET and they lose ${YELLOW2}10%$RESET ($YELLOW2${(target.maxHp * 0.1).roundToInt()}$RESET) of their max. health  $WHITE<<<$RESET")
             Thread.sleep(200)
-            println("                                                $white>>>$reset $bold$blue2${target.name}$reset now has $green2${target.hp.roundToInt()} hp$reset $white<<<$reset")
+            println("                                                $WHITE>>>$RESET $BOLD$BLUE2${target.name}$RESET now has $GREEN2${target.hp.roundToInt()} hp$RESET $WHITE<<<$RESET")
         }
     }
 
     fun summonGolem(enemies: MutableList<Enemy>) {
         val golem = Golem()
         enemies.add(golem)
-        println("                                      $white>>>$reset $bold$red2$name$reset has summoned a $bold$red2$golem$reset $white<<<$reset")
+        println("                                      $WHITE>>>$RESET $BOLD$RED2$name$RESET has summoned a $BOLD$RED2$golem$RESET $WHITE<<<$RESET")
     }
 
     override fun toString(): String {
-        return "$bold$red2$name$reset $white($reset${red1}Enemies.Necromancer$reset, $green2${hp.roundToInt()} hp$reset$white)$reset"
+        return "$BOLD$RED2$name$RESET $WHITE($RESET${RED1}Enemies.Necromancer$RESET, $GREEN2${hp.roundToInt()} hp$RESET$WHITE)$RESET"
     }
 }
